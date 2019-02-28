@@ -25,7 +25,9 @@ class MyScene extends CGFscene {
         this.triangle = new MyTriangle(this);
         this.parallelogram = new MyParallelogram(this);
         this.triangleSmall = new MyTriangleSmall(this);
+        this.triangleSmall2 = new MyTriangleSmall(this);
         this.triangleBig = new MyTriangleBig(this);
+        this.triangleBig2 = new MyTriangleBig(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -33,7 +35,9 @@ class MyScene extends CGFscene {
         this.displayTriangle = true;
         this.displayParallelogram = true;
         this.displayTriangleSmall = true;
+        this.displayTriangleSmall2 = true;
         this.displayTriangleBig = true;
+        this.displayTriangleBig2 = true;
         this.scaleFactor = 1;
     }
     initLights() {
@@ -117,6 +121,22 @@ class MyScene extends CGFscene {
         if (this.displayTriangleBig) {
             this.pushMatrix();
             this.translate(0,-2,0);            
+            this.triangleBig.display();
+            this.popMatrix();
+        }
+
+        if (this.displayTriangleSmall2) {
+            this.pushMatrix();
+            this.translate(Math.sqrt(8), 0.7,0);
+            this.rotate(-Math.PI/2, 0, 0, 1)      
+            this.triangleSmall.display();
+            this.popMatrix();
+        }
+
+        if (this.displayTriangleBig2) {
+            this.pushMatrix();
+            this.rotate(-Math.PI/4, 0, 0, 1)      
+            this.translate(2,0,0);
             this.triangleBig.display();
             this.popMatrix();
         }
