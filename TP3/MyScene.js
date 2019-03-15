@@ -28,10 +28,10 @@ class MyScene extends CGFscene {
         this.tangram = new MyTangram(this);
         this.unitCube = new MyUnitCube(this);
         
-        this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.unitCube];
+        this.objects = [this.plane, this.pyramid, this.cone, this.unitCube, this.tangram];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'unitCube': 4};
+        this.objectIDs = { 'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'UnitCube': 3, 'Tangram': 4};
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -41,7 +41,7 @@ class MyScene extends CGFscene {
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
 
-        this.ambientLight = 0.5;
+        this.ambientLight = 0.3;
     }
     initLights() {
         this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
@@ -101,7 +101,6 @@ class MyScene extends CGFscene {
         this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
     }
 
-
     initMaterials() {
         // Red Ambient (no diffuse, no specular)
         this.material1 = new CGFappearance(this);
@@ -124,6 +123,62 @@ class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
+        // Wood Material (no ambient, no specular)
+        this.material4 = new CGFappearance(this);
+        this.material4.setAmbient(155/255, 78/255, 0/255, 1.0);
+        this.material4.setDiffuse(155/255, 78/255, 0/255, 1.0); 
+        this.material4.setSpecular(0/255, 0/255, 0/255, 1.0);
+        this.material4.setShininess(10.0);
+
+        // diamond green
+        this.material5 = new CGFappearance(this);
+        this.material5.setAmbient(0/255, 255/255, 79/255, 0.05);
+        this.material5.setDiffuse(0/255, 255/255, 79/255, 0.05);
+        this.material5.setSpecular(0/255, 255/255, 79/255, 1.0);
+        this.material5.setShininess(10.0);
+
+        // triangle pink
+        this.material6 = new CGFappearance(this);
+        this.material6.setAmbient(255/255, 153/255, 255/255, 0.05);
+        this.material6.setDiffuse(255/255, 153/255, 255/255, 0.05);
+        this.material6.setSpecular(255/255, 153/255, 255/255, 1.0);
+        this.material6.setShininess(10.0);
+
+        // parallelogram yellow
+        this.material7 = new CGFappearance(this);
+        this.material7.setAmbient(255/255, 255/255, 60/255, 0.05);
+        this.material7.setDiffuse(255/255, 255/255, 60/255, 0.05);
+        this.material7.setSpecular(255/255, 255/255, 60/255, 1.0);
+        this.material7.setShininess(10.0);
+
+        // triangleSmall purple
+        this.material8 = new CGFappearance(this);
+        this.material8.setAmbient(255/255, 0/255, 0/255, 0.05);
+        this.material8.setDiffuse(255/255, 0/255, 0/255, 0.05);
+        this.material8.setSpecular(255/255, 0/255, 0/255, 1.0);
+        this.material8.setShininess(10.0);
+
+        // triangleBig light blue
+        this.material9 = new CGFappearance(this);
+        this.material9.setAmbient(28/255, 109/255, 255/255, 0.05);
+        this.material9.setDiffuse(28/255, 109/255, 255/255, 0.05);
+        this.material9.setSpecular(28/255, 109/255, 255/255, 1.0);
+        this.material9.setShininess(10.0);
+
+        // triangleSmall red
+        this.material10 = new CGFappearance(this);
+        this.material10.setAmbient(134/255, 0/255, 163/255, 0.05);
+        this.material10.setDiffuse(134/255, 0/255, 163/255, 0.05);
+        this.material10.setSpecular(134/255, 0/255, 163/255, 1.0);
+        this.material10.setShininess(10.0);
+
+        // triangleBig orange
+        this.material11 = new CGFappearance(this);
+        this.material11.setAmbient(255/255, 160/255, 28/255, 0.05);
+        this.material11.setDiffuse(255/255, 160/255, 28/255, 0.05);
+        this.material11.setSpecular(255/255, 160/255, 28/255, 1.0);
+        this.material11.setShininess(10.0);
+
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -133,14 +188,15 @@ class MyScene extends CGFscene {
             'Specular': '#000000',
             'Shininess': 10
         }
+
         this.customMaterial = new CGFappearance(this);
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.material4, this.customMaterial, this.material5, this.material6, this.material7, this.material8, this.material9, this.material10, this.material11];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wood': 3 , 'Custom': 4};
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -157,14 +213,13 @@ class MyScene extends CGFscene {
         this.lights[1].update();
 
         // updating light
-        this.setGlobalAmbientLight(this.ambientLight);
+        this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1.0);
 
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
 
         // ---- BEGIN Primitive drawing section
-
         this.materials[this.selectedMaterial].apply();
 
         this.pushMatrix();
