@@ -45,15 +45,19 @@ class MyUnitCube extends CGFobject {
 		this.indices = [
 					//Front SIDE
 		0,1,2,	
+		2,1, 0,
 		0,2,3,
+		3, 2, 0,
 
 		//Left SIDE
 		6, 5, 4,
+		4, 5, 6,
 		7, 6, 4, 
+		4, 6,7,
 
 		//BACK SIDE
-		8, 9, 10,
-		11, 10, 9,
+		10, 9 , 8,
+		9, 10, 11,
 
 		//Right SIDE
 		12, 15, 13,
