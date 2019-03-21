@@ -12,39 +12,13 @@ class MyTangram extends CGFobject {
         this.triangle = new MyTriangle(this.scene);
 		this.triangle.initBuffers();
         this.parallelogram = new MyParallelogram(this.scene);
-        this.parallelogram.initBuffers();
-        
-        // ----- Triangle Small
-        this.TriangleSmallBluetexCoords = [
-
-        ];
-        this.triangleSmallBlue = new MyTriangleSmall(this.scene);
-        this.triangleSmallBlue.initBuffers();
-
-        this.TriangleSmallBluetexCoords = [
-
-        ];
-        this.triangleSmallBlue = new MyTriangleSmall(this.scene);
-        this.triangleSmallBlue.initBuffers();
-
-        // ----- Triangle Big
-        this.TriangleBigPinktexCoords = [
-			1, 1,	//0
-			0.5, 0.5,		//1
-			1, 0,		//2
-			//0.75, 0.75,	//3
-		];
-        this.triangleBigPink = new MyTriangleBig(this.scene, this.TriangleBigPinktexCoords);
-        this.triangleBigPink.initBuffers();
-
-        this.TriangleBigRedtexCoords = [
-			1, 0,	//0
-			0.5, 0.5,		//1
-			0, 0,		//2
-			//0.75, 0.75,	//3
-		];
-        this.triangleBigRed = new MyTriangleBig(this.scene, this.TriangleBigRedtexCoords);
-        this.triangleBigRed.initBuffers();
+		this.parallelogram.initBuffers();
+        this.triangleSmall = new MyTriangleSmall(this.scene);
+		this.triangleSmall.initBuffers();
+        this.triangleBig = new MyTriangleBig(this.scene);
+		this.triangleBig.initBuffers();
+		this.triangleBig1 = new MyTriangleBig1(this.scene);
+		this.triangleBig.initBuffers();
     }
     
     display() {
@@ -54,43 +28,48 @@ class MyTangram extends CGFobject {
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
             -1.0, 0.0, 0.0, 1.0];
-        this.scene.multMatrix(translate);
-        //this.translate(-1,1,0);
-        this.diamond.material.apply();
+            this.scene.multMatrix(translate);
+            //this.translate(-1,1,0);
+       // this.scene.materials[4].apply();
         this.diamond.display();
         this.scene.popMatrix();
         
         
         this.scene.pushMatrix();
+       // this.scene.materials[6].apply();
         this.scene.translate(-2,0,0);
-        this.scene.rotate(-Math.PI/2, 0,0,1);
-        this.triangle.material.apply();
+        this.scene.rotate(-Math.PI/2, 0,0,1)
         this.triangle.display();
         this.scene.popMatrix();
         
 
         this.scene.pushMatrix();
+       // this.scene.materials[7].apply();
         this.scene.translate(-3,1,0);
         this.scene.rotate(Math.PI/4, 0,0,1);
-        this.scene.scale(1,-1,1);
+        this.scene.scale(1,-1,1)
         this.parallelogram.display();
         this.scene.popMatrix();
         
 
         this.scene.pushMatrix();
+       // this.scene.materials[10].apply();
         this.scene.translate(-1,-2,0);
         this.scene.rotate(Math.PI/4,0, 0, 1);
         this.scene.translate(-0,-1,0);
         this.triangleSmall.display();
         this.scene.popMatrix();
         
+
         this.scene.pushMatrix();
+       // this.scene.materials[9].apply();
         this.scene.translate(0,-2,0);            
-        this.triangleBigPink.display();
+        this.triangleBig.display();
         this.scene.popMatrix();
         
 
         this.scene.pushMatrix();
+        //this.scene.materials[8].apply();
         this.scene.translate(Math.sqrt(8), 0.7,0);
         this.scene.rotate(-Math.PI/2, 0, 0, 1)      
         this.triangleSmall.display();
@@ -98,9 +77,10 @@ class MyTangram extends CGFobject {
         
 
         this.scene.pushMatrix();
+       // this.scene.materials[11].apply();
         this.scene.rotate(-Math.PI/4, 0, 0, 1)      
         this.scene.translate(2,0,0);
-        this.triangleBigRed.display();
+        this.triangleBig1.display();
         this.scene.popMatrix();
     }
 
@@ -110,7 +90,7 @@ class MyTangram extends CGFobject {
 		this.parallelogram.initBuffers();
 		this.triangleSmall.initBuffers();
         this.triangleBig.initBuffers();
-
+		this.triangleBig1.initBuffers();
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
     }
@@ -127,6 +107,7 @@ class MyTangram extends CGFobject {
 		this.parallelogram.enableNormalViz();
 		this.triangleSmall.enableNormalViz();
         this.triangleBig.enableNormalViz();
+        this.triangleBig1.enableNormalViz();
     }
 
     disableNormalViz() {
@@ -135,6 +116,6 @@ class MyTangram extends CGFobject {
 		this.parallelogram.disableNormalViz();
 		this.triangleSmall.disableNormalViz();
         this.triangleBig.disableNormalViz();
+        this.triangleBig1.disableNormalViz();
     }
 }
-

@@ -19,13 +19,6 @@ class MyInterface extends CGFinterface {
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
 
-        //Checkbox element for MyQuad
-        this.gui.add(this.scene, 'displayQuad').name('Display MyQuad');
-        this.gui.add(this.scene, 'displayQuadTex').name('Display MyQuadTex');
-
-        //Checkbox element for MyTangram
-        this.gui.add(this.scene, 'displayTangram').name('Display MyTangram');
-
         //Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateAppliedTexture.bind(this.scene));
         //Dropdown for wrapping (S)
