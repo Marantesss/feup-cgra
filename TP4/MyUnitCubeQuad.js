@@ -22,7 +22,7 @@ class MyUnitCubeQuad extends CGFobject {
                 this.mineBottom = new CGFtexture(this.scene, 'images/mineBottom.png');
 	}
 	display() {
-                this.unitCubeMaterial.setTexture(this.scene.mineTexture[1]);
+                this.unitCubeMaterial.setTexture(this.mineSide);
                 this.unitCubeMaterial.apply();
                 this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
                 // face frente
@@ -53,7 +53,7 @@ class MyUnitCubeQuad extends CGFobject {
                 this.quad.display();
                 this.scene.popMatrix(); 
                 
-                this.unitCubeMaterial.setTexture(this.scene.mineTexture[0]);
+                this.unitCubeMaterial.setTexture(this.mineTop);
                 this.unitCubeMaterial.apply();
                 this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);       
                 //face cima
@@ -63,7 +63,7 @@ class MyUnitCubeQuad extends CGFobject {
                 this.quad.display();
                 this.scene.popMatrix();
                         
-                this.unitCubeMaterial.setTexture(this.scene.mineTexture[2]);
+                this.unitCubeMaterial.setTexture(this.mineBottom);
                 this.unitCubeMaterial.apply();
                 this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
                 //face baixo

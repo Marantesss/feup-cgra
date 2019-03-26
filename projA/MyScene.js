@@ -23,7 +23,8 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
 
         //Objects connected to MyInterface
-        this.prism = new MyPrism(this, 6, 0);
+        this.tree = new MyTree(this, 3, 1, 3, 2, "", "");
+        this.treeGroup = new MyTreeGroupPatch(this, 3, 1, 3, 2, "", "");
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -59,8 +60,7 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.prism.display();
-        this.prism.enableNormalViz();
+        this.treeGroup.display();
 
         // ---- END Primitive drawing section
     }

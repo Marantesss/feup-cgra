@@ -35,23 +35,6 @@ class MyScene extends CGFscene {
         this.quadMaterial.setShininess(10.0);
         this.quadMaterial.loadTexture('images/default.png');
         this.quadMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        /* // we dont need this...
-        this.tangramMaterial = new CGFappearance(this);
-        this.tangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.tangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.tangramMaterial.setShininess(10.0);
-        this.tangramMaterial.loadTexture('images/default.png');
-        this.tangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        // or this...
-        this.unitCubeMaterial = new CGFappearance(this);
-        this.unitCubeMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.unitCubeMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.unitCubeMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.unitCubeMaterial.setShininess(10.0);
-        this.unitCubeMaterial.loadTexture('images/default.png');
-        this.unitCubeMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        */
         //------
 
         //------ Textures
@@ -59,11 +42,6 @@ class MyScene extends CGFscene {
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
         this.texture4 = new CGFtexture(this, 'images/tangram-pattern.jpg');
-        this.mineSide = new CGFtexture(this, 'images/mineSide.png');
-        this.mineTop = new CGFtexture(this, 'images/mineTop.png');
-        this.mineBottom = new CGFtexture(this, 'images/mineBottom.png');
-        /*
-        */
         //-------
 
         //-------Objects connected to MyInterface
