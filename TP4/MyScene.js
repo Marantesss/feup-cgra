@@ -43,8 +43,7 @@ class MyScene extends CGFscene {
         this.tangramMaterial.setShininess(10.0);
         this.tangramMaterial.loadTexture('images/default.png');
         this.tangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
-       */
-        // unitCube
+        // or this...
         this.unitCubeMaterial = new CGFappearance(this);
         this.unitCubeMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.unitCubeMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -52,6 +51,7 @@ class MyScene extends CGFscene {
         this.unitCubeMaterial.setShininess(10.0);
         this.unitCubeMaterial.loadTexture('images/default.png');
         this.unitCubeMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        */
         //------
 
         //------ Textures
