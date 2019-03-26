@@ -26,8 +26,8 @@ class MyTangram extends CGFobject {
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
             -1.0, 0.0, 0.0, 1.0];
-            this.scene.multMatrix(translate);
-            //this.translate(-1,1,0);
+        this.scene.multMatrix(translate);
+        //this.translate(-1,1,0);
         this.scene.materials[4].apply();
         this.diamond.display();
         this.scene.popMatrix();

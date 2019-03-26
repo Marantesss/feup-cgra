@@ -35,7 +35,7 @@ class MyScene extends CGFscene {
         this.quadMaterial.setShininess(10.0);
         this.quadMaterial.loadTexture('images/default.png');
         this.quadMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
+        /* // we dont need this...
         this.tangramMaterial = new CGFappearance(this);
         this.tangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -43,7 +43,15 @@ class MyScene extends CGFscene {
         this.tangramMaterial.setShininess(10.0);
         this.tangramMaterial.loadTexture('images/default.png');
         this.tangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
+       */
+        // unitCube
+        this.unitCubeMaterial = new CGFappearance(this);
+        this.unitCubeMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.unitCubeMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.unitCubeMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.unitCubeMaterial.setShininess(10.0);
+        this.unitCubeMaterial.loadTexture('images/default.png');
+        this.unitCubeMaterial.setTextureWrap('REPEAT', 'REPEAT');
         //------
 
         //------ Textures
@@ -51,9 +59,11 @@ class MyScene extends CGFscene {
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
         this.texture4 = new CGFtexture(this, 'images/tangram-pattern.jpg');
-     /*   this.texture5 = new CGFtexture(this, 'images/mineSide.png');
-        this.texture6 = new CGFtexture(this, 'images/mineTop.png');
-        this.texture7 = new CGFtexture(this, 'images/mineBottom.png');*/
+        this.mineSide = new CGFtexture(this, 'images/mineSide.png');
+        this.mineTop = new CGFtexture(this, 'images/mineTop.png');
+        this.mineBottom = new CGFtexture(this, 'images/mineBottom.png');
+        /*
+        */
         //-------
 
         //-------Objects connected to MyInterface
@@ -63,7 +73,14 @@ class MyScene extends CGFscene {
         this.wrapS = 0;
         this.wrapT = 0;
 
-        this.textures = [this.texture1, this.texture2, this.texture3, this.texture4 ];
+        this.displayQuad = false;
+        this.displayTangram = false;
+        this.displayUnitCubeQuad = true;
+
+        this.displayTex = true;
+
+        this.textures = [this.texture1, this.texture2, this.texture3, this.texture4];
+        this.mineTexture = [this.mineTop, this.mineSide, this.mineBottom];
         this.texCoords = [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0];
         this.wrappingMethods = ['REPEAT', 'CLAMP_TO_EDGE', 'MIRRORED_REPEAT'];
 
@@ -94,13 +111,13 @@ class MyScene extends CGFscene {
     //Function that resets selected texture in quadMaterial
     updateAppliedTexture() {
         this.quadMaterial.setTexture(this.textures[this.selectedTexture]);
-        this.tangramMaterial.setTexture(this.textures[this.selectedTexture]);
+        //this.tangramMaterial.setTexture(this.textures[this.selectedTexture]);
     }
 
     //Function that updates wrapping mode in quadMaterial
     updateTextureWrapping() {
         this.quadMaterial.setTextureWrap(this.wrappingMethods[this.wrapS], this.wrappingMethods[this.wrapT]);
-        this.tangramMaterial.setTextureWrap(this.wrappingMethods[this.wrapS], this.wrappingMethods[this.wrapT]);
+        //this.tangramMaterial.setTextureWrap(this.wrappingMethods[this.wrapS], this.wrappingMethods[this.wrapT]);
     }
 
     //Function that updates texture coordinates in MyQuad
@@ -131,18 +148,26 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-       // this.quadMaterial.apply();
-       // this.tangramMaterial.apply();
+        if (this.displayTex) {
+            this.quadMaterial.apply();
+        }
+
+        if (this.displayQuad) {
+            this.quad.display();
+        }
+
+        if (this.displayTangram) {
+            this.tangram.display();
+        }
+
+        if (this.displayUnitCubeQuad) {
+            this.unitCubeQuad.display();
+        }
 
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
-        
-        //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-
-        //this.quad.display();
-        //this.tangram.display();
-         this.unitCubeQuad.display();
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
         // ---- END Primitive drawing section
     }
 }

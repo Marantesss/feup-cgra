@@ -3,7 +3,7 @@
  * @constructor
  * @param scene - Reference to MyScene object
  */
-class MyTriangleSmall extends CGFobject {
+class MyTriangleSmall1 extends CGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
@@ -31,9 +31,9 @@ class MyTriangleSmall extends CGFobject {
         */
 
 		this.texCoords = [
-			0, 0,
-			0, (1/2),
-			(1/4), (1/4)
+			(1/2), (1/2),
+			(3/4), (1/4),
+			(3/4), (3/4)
 		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
