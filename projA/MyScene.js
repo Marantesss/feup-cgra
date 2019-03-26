@@ -60,8 +60,6 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.treeGroup.display();
-
         // ---- END Primitive drawing section
     }
 }
