@@ -14,21 +14,35 @@ class MyHouse extends CGFobject {
         this.pyramid.initBuffers();
         this.prism.initBuffers();
         this.prism1.initBuffers();
-        
+
+         this.house = new CGFappearance(this.scene);
+         this.house.setAmbient(0.1, 0.1, 0.1, 1);
+         this.house.setDiffuse(0.9, 0.9, 0.9, 1);
+         this.house.setSpecular(0.1, 0.1, 0.1, 1);
+         this.house.setShininess(10.0);
+          this.house.loadTexture('images/telhado.jpg');
+       
         this.roof = new CGFtexture(this.scene, 'images/telhado.jpg');
-		
+       		
 	}
 	display() {
-
+		
+                     
+     /*   this.pyramid.setTexture(this.roof);  
+		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);*/
+		
 		this.scene.pushMatrix();
 		this.scene.translate(0,0.5,0);
 		this.unitCubeQuad.display();
         this.scene.popMatrix();
+ 		
+		
 
 		this.scene.pushMatrix();
         this.scene.translate(0, 0.9 ,0);
         this.scene.rotate(Math.PI/180*45, 0, 1, 0);
         this.scene.scale(1.5,1.2,1.5);
+       // this.pyramid.apply();
 		this.pyramid.display();
         this.scene.popMatrix();  
        
@@ -61,4 +75,5 @@ class MyHouse extends CGFobject {
        
 	}
 
+	
 }

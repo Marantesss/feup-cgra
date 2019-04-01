@@ -14,6 +14,8 @@ class MyScene extends CGFscene {
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
+         this.enableTextures(true);
+
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
@@ -25,6 +27,12 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.tree = new MyTree(this, 3, 1, 3, 2, "", "");
         this.treeGroup = new MyTreeGroupPatch(this, 3, 1, 3, 2, "", "");
+        this.unitCubeQuad = new MyUnitCubeQuad(this);
+        this.quad = new MyQuad(this);
+        this.house = new MyHouse(this);
+        this.voxelHill = new MyVoxelHill(this,5,  4);
+        this.voxelHill = new MyVoxelHill(this,-15,  3);
+        
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -59,7 +67,11 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        //this.house.display();
+        this.voxelHill.display();
 
+
+    
         // ---- END Primitive drawing section
     }
 }
