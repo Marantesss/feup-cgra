@@ -32,7 +32,18 @@ class MyScene extends CGFscene {
         this.quad = new MyQuad(this);
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this,5,  4);
-        this.voxelHill = new MyVoxelHill(this,-15,  3);
+        this.voxelHill1 = new MyVoxelHill(this,-15,  3);
+        this.cubeMap = new MyCubeMap(this);
+
+         //------ Applied Material
+        this.cubeMapMaterial = new CGFappearance(this);
+        this.cubeMapMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeMapMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMapMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMapMaterial.setShininess(10.0);
+        this.cubeMapMaterial.loadTexture('images/imagem.png');
+
+        //------
         
     }
     initLights() {
@@ -70,10 +81,13 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         //this.tree.display();
         //this.house.display();
-        this.treeGroup.display();
+        //this.treeGroup.display();
         //this.treeRow.display();
-        this.voxelHill.display();
-    
+        //this.voxelHill.display();
+        //this.voxelHill1.display();
+        this.cubeMapMaterial.apply();
+        this.cubeMap.display()
+
         // ---- END Primitive drawing section
     }
 }
