@@ -15,12 +15,12 @@ class MyHouse extends CGFobject {
         this.prism.initBuffers();
         this.prism1.initBuffers();
 
-         this.house = new CGFappearance(this.scene);
-         this.house.setAmbient(0.1, 0.1, 0.1, 1);
-         this.house.setDiffuse(0.9, 0.9, 0.9, 1);
-         this.house.setSpecular(0.1, 0.1, 0.1, 1);
-         this.house.setShininess(10.0);
-          this.house.loadTexture('images/telhado.jpg');
+        this.house = new CGFappearance(this.scene);
+        this.house.setAmbient(0.1, 0.1, 0.1, 1);
+        this.house.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.house.setSpecular(0.1, 0.1, 0.1, 1);
+        this.house.setShininess(10.0);
+        this.house.loadTexture('images/telhado.jpg');
        
         this.roof = new CGFtexture(this.scene, 'images/telhado.jpg');
        		

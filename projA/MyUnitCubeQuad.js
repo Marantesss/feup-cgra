@@ -14,7 +14,6 @@ class MyUnitCubeQuad extends CGFobject {
                 this.unitCubeMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
                 this.unitCubeMaterial.setSpecular(0.1, 0.1, 0.1, 1);
                 this.unitCubeMaterial.setShininess(10.0);
-                this.unitCubeMaterial.loadTexture('images/default.png');
                 this.unitCubeMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
                 this.mineSide = new CGFtexture(this.scene, 'images/mineSide.png');

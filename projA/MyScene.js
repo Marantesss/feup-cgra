@@ -27,6 +27,7 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.tree = new MyTree(this, 3, 1, 3, 2, "", "");
         this.treeGroup = new MyTreeGroupPatch(this, 3, 1, 3, 2, "", "");
+        this.treeRow = new MyTreeRowPatch(this, 3, 1, 3, 2, "", "");
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.quad = new MyQuad(this);
         this.house = new MyHouse(this);
@@ -67,10 +68,11 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        //this.tree.display();
         //this.house.display();
+        //this.treeGroup.display();
+        //this.treeRow.display();
         this.voxelHill.display();
-
-
     
         // ---- END Primitive drawing section
     }
