@@ -43,7 +43,20 @@ class MyScene extends CGFscene {
         this.cubeMapMaterial.setShininess(10.0);
         this.cubeMapMaterial.loadTexture('images/imagem.png');
 
-        //------
+        // Red Diffuse (no ambient, no specular)
+        this.cubeMapMaterial1 = new CGFappearance(this);
+        this.cubeMapMaterial1.setAmbient(0.8, 0.8, 0.8, 1.0);
+        this.cubeMapMaterial1.setDiffuse(0.2, 0.2, 0.2, 1.0);
+        this.cubeMapMaterial1.setSpecular(0, 0, 0, 1.0);
+        this.cubeMapMaterial1.setShininess(10.0);
+        this.cubeMapMaterial1.loadTexture('images/imagem.png');
+
+        this.selectedMaterial = 0;
+        
+         this.materials = [this.cubeMapMaterial, this.cubeMapMaterial1];
+
+       // Labels and ID's for object selection on MyInterface
+        this.materialIDs  = { 'Day': 0, 'Night': 1};
         
     }
     initLights() {
@@ -61,6 +74,7 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -85,7 +99,7 @@ class MyScene extends CGFscene {
         //this.treeRow.display();
         //this.voxelHill.display();
         //this.voxelHill1.display();
-        this.cubeMapMaterial.apply();
+        this.materials[this.selectedMaterial].apply();       
         this.cubeMap.display()
 
         // ---- END Primitive drawing section
