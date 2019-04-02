@@ -7,7 +7,7 @@ class MyUnitCubeQuad extends CGFobject {
 	constructor(scene, coords) {
 		super(scene);
 		this.quad = new MyQuad(this.scene);
-                this.quad.initBuffers();
+        this.quad.initBuffers();
 
                 this.unitCubeMaterial = new CGFappearance(this.scene);
                 this.unitCubeMaterial.setAmbient(0.1, 0.1, 0.1, 1);
