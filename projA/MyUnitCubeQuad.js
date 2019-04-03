@@ -13,7 +13,7 @@ class MyUnitCubeQuad extends CGFobject {
 	constructor(scene, cubeType) {
 		super(scene);
 		this.quad = new MyQuad(this.scene);
-                this.quad.initBuffers();
+        this.quad.initBuffers();
 
                 this.cubeType = cubeType;
 
