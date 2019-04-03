@@ -20,8 +20,8 @@ class MyTree extends CGFobject {
         this.treeTopTexture = treeTopTexture;
 
         // ---- create objects to build a tree
-        this.trunkCylinder = new MyCylinder(this.scene, 10, 0);
-        this.leavesCone = new MyCone(this.scene, 10, 0);
+        this.trunkCylinder = new MyCylinder(this.scene, 6, 0);
+        this.leavesCone = new MyCone(this.scene, 6, 0);
 
         // ---- create material for applying textures
         this.treeMaterial = new CGFappearance(this.scene);
@@ -30,11 +30,14 @@ class MyTree extends CGFobject {
         this.treeMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.treeMaterial.setShininess(10.0);
         this.treeMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.treeLeaves = new CGFtexture(this.scene, this.treeTopTexture);
+        this.treeTrunk = new CGFtexture(this.scene, this.trunkTexture);
     }
 
     display() {
         // ---- displaying the trunk
-        this.treeMaterial.setTexture(this.trunkTexture);
+        this.treeMaterial.setTexture(this.treeTrunk);
         this.treeMaterial.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         
@@ -45,7 +48,7 @@ class MyTree extends CGFobject {
         // ----
 
         // ---- displaying the Leaves
-        this.treeMaterial.setTexture(this.treeTopTexture);
+        this.treeMaterial.setTexture(this.treeLeaves);
         this.treeMaterial.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         

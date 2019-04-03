@@ -20,41 +20,39 @@ class MyHouse extends CGFobject {
         this.prism.initBuffers();
         this.prism1.initBuffers();
 
-        this.house = new CGFappearance(this.scene);
-        this.house.setAmbient(0.1, 0.1, 0.1, 1);
-        this.house.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.house.setSpecular(0.1, 0.1, 0.1, 1);
-        this.house.setShininess(10.0);
-        this.house.loadTexture('images/telhado.jpg');
+        this.houseMaterial = new CGFappearance(this.scene);
+        this.houseMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.houseMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houseMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.houseMaterial.setShininess(10.0);
        
-        this.roof = new CGFtexture(this.scene, 'images/telhado.jpg');
-       		
+        this.roofTexture = new CGFtexture(this.scene, 'images/wood.jpg');
+        this.pillarTexture = new CGFtexture(this.scene, 'images/brick_pillar.jpg');       		
 	}
 	display() {
-		
-                     
-     /*   this.pyramid.setTexture(this.roof);  
-		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);*/
-		
+        // ---- displaying houseMaterial body
 		this.scene.pushMatrix();
 		this.scene.translate(0,0.5,0);
 		this.unitCubeQuad.display();
         this.scene.popMatrix();
  		
-		
-        this.house.setTexture(this.roof);
-        this.house.apply();
+		// ---- displaying houseMaterial roof
+        this.houseMaterial.setTexture(this.roofTexture);
+        this.houseMaterial.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         
-		this.scene.pushMatrix();
+        this.scene.pushMatrix();
         this.scene.translate(0, 0.9 ,0);
         this.scene.rotate(Math.PI/180*45, 0, 1, 0);
         this.scene.scale(1.5,1.2,1.5);
-       // this.pyramid.apply();
 		this.pyramid.display();
         this.scene.popMatrix();  
        
-           
+        // ---- displaying pillars
+        this.houseMaterial.setTexture(this.pillarTexture);
+        this.houseMaterial.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+
         this.scene.pushMatrix();
         this.scene.translate(0.7,0,0.7);
         this.scene.scale(0.2,1,0.2);
@@ -74,14 +72,9 @@ class MyHouse extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-       this.scene.translate(-0.7,0,0.7);
+        this.scene.translate(-0.7,0,0.7);
         this.scene.scale(0.2,1,0.2);
         this.prism1.display();
         this.scene.popMatrix();
-		       
-
-       
 	}
-
-	
 }

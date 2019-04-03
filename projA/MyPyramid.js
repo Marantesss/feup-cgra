@@ -34,7 +34,7 @@ class MyPyramid extends CGFobject {
 
             // ---- texCoords will always be a triangle
             this.texCoords.push(0.5, 0);
-            this.texCoords.push(0, 0);
+            this.texCoords.push(0, 1);
             this.texCoords.push(1, 1);
             
             // triangle normal computed by cross product of two edges

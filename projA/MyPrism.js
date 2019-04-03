@@ -33,7 +33,7 @@ class MyPrism extends CGFobject {
             this.vertices.push(ca, 0, -sa);
             this.vertices.push(caa, 0, -saa);
 
-            this.texCoords.push(0, 0, 0, 1, 1, 1, 1, 0);
+            this.texCoords.push(1, 0, 0, 0, 0, 1, 1, 1);
 
             // triangle normal computed by cross product of two edges
             var normal= [

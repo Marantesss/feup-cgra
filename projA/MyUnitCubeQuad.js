@@ -10,7 +10,7 @@ var UnitCubeEnum = {
  * @param cubeType - Can be either a minecraft cube or a house
  */
 class MyUnitCubeQuad extends CGFobject {
-	constructor(scene, cubeType) {
+        constructor(scene, cubeType) {
 		super(scene);
 		this.quad = new MyQuad(this.scene);
         this.quad.initBuffers();
@@ -33,7 +33,7 @@ class MyUnitCubeQuad extends CGFobject {
                                 this.mineBottom = new CGFtexture(this.scene, 'images/mineBottom.png');
                                 break;
                         case UnitCubeEnum.HOUSE:
-                                this.cubeSide = new CGFtexture(this.scene, 'images/stoneHouse.jpg');
+                                this.cubeSide = new CGFtexture(this.scene, 'images/brick.jpg');
                 }
 	}
 	display() {

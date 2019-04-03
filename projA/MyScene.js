@@ -24,45 +24,35 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
 
-
-        this.housetex = new CGFappearance(this);
-        this.housetex.setAmbient(0.1, 0.1, 0.1, 1);
-        this.housetex.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.housetex.setSpecular(0.1, 0.1, 0.1, 1);
-        this.housetex.setShininess(10.0);
-        this.housetex.loadTexture('images/telhado.jpg');
-
         //Objects connected to MyInterface
-        this.cylinder = new MyCylinder(this, 10, 1);
-        this.tree = new MyTree(this, 3, 1, 3, 2, "", "");
-        this.treeGroup = new MyTreeGroupPatch(this, 3, 1, 3, 2, "", "");
-        this.treeRow = new MyTreeRowPatch(this, 3, 1, 3, 2, "", "");
+        this.tree = new MyTree(this, 2, 0.5, 3, 1, "images/tree_trunk.jpg", "images/leaves.jpg");
+        this.treeGroup = new MyTreeGroupPatch(this, 2, 0.5, 3, 1, "images/tree_trunk.jpg", "images/leaves.jpg");
+        this.treeRow = new MyTreeRowPatch(this, 2, 0.5, 3, 1, "images/tree_trunk.jpg", "images/leaves.jpg");
         this.unitCubeQuad = new MyUnitCubeQuad(this);
-        this.quad = new MyQuad(this);
         this.house = new MyHouse(this);
-        this.voxelHill = new MyVoxelHill(this,5,  4);
-        this.voxelHill1 = new MyVoxelHill(this,-15,  3);
+        this.voxelHill = new MyVoxelHill(this, 5,  4);
+        this.voxelHill1 = new MyVoxelHill(this, -15,  3);
         this.cubeMap = new MyCubeMap(this);
 
-         //------ Applied Material
-        this.cubeMapMaterial = new CGFappearance(this);
-        this.cubeMapMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.cubeMapMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.cubeMapMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.cubeMapMaterial.setShininess(10.0);
-        this.cubeMapMaterial.loadTexture('images/imagem.png');
+        // ---- Applied Material
+        this.cubeMapMaterialDay = new CGFappearance(this);
+        this.cubeMapMaterialDay.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeMapMaterialDay.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMapMaterialDay.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMapMaterialDay.setShininess(10.0);
+        this.cubeMapMaterialDay.loadTexture('images/imagem.png');
 
         // Red Diffuse (no ambient, no specular)
-        this.cubeMapMaterial1 = new CGFappearance(this);
-        this.cubeMapMaterial1.setAmbient(0.8, 0.8, 0.8, 1.0);
-        this.cubeMapMaterial1.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.cubeMapMaterial1.setSpecular(0, 0, 0, 1.0);
-        this.cubeMapMaterial1.setShininess(10.0);
-        this.cubeMapMaterial1.loadTexture('images/imagem.png');
+        this.cubeMapMaterialNight = new CGFappearance(this);
+        this.cubeMapMaterialNight.setAmbient(0.8, 0.8, 0.8, 1.0);
+        this.cubeMapMaterialNight.setDiffuse(0.2, 0.2, 0.2, 1.0);
+        this.cubeMapMaterialNight.setSpecular(0, 0, 0, 1.0);
+        this.cubeMapMaterialNight.setShininess(10.0);
+        this.cubeMapMaterialNight.loadTexture('images/imagem.png');
 
         this.selectedMaterial = 0;
         
-         this.materials = [this.cubeMapMaterial, this.cubeMapMaterial1];
+        this.materials = [this.cubeMapMaterialDay, this.cubeMapMaterialNight];
 
        // Labels and ID's for object selection on MyInterface
         this.materialIDs  = { 'Day': 0, 'Night': 1};
@@ -96,26 +86,23 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        //this.axis.display();
+        this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
-        //this.tree.display();
         //this.house.display();
         //this.treeGroup.display();
         //this.treeRow.display();
-        /*
-        this.housetex.apply();
-        this.cylinder.enableNormalViz();
-        this.cylinder.display();
-        */
-        //this.voxelHill.display();
-        //this.voxelHill1.display();
+
+        //this.tree.display();
+ 
+        this.voxelHill.display();
+        this.voxelHill1.display();
         this.materials[this.selectedMaterial].apply();       
-        this.cubeMap.display()
+        //this.cubeMap.display()
 
         // ---- END Primitive drawing section
     }
