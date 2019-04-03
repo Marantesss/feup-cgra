@@ -16,6 +16,9 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
+        //Dropdown for environment
+        this.gui.add(this.scene, 'selectedMode', this.scene.modeIds).name('Selected Mode').onChange(this.scene.updateAppliedMode.bind(this.scene));
+
         return true;
     }
 }

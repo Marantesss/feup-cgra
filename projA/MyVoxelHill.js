@@ -9,12 +9,13 @@ var UnitCubeEnum = {
  * @param scene - Reference to MyScene object
  */
 class MyVoxelHill extends CGFobject {
-	constructor(scene, coords, levels) {
+	constructor(scene, coordx, coordy, levels) {
 
 		super(scene);
 		this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.MINECRAFT);
 		this.unitCubeQuad.initBuffers();
-		this.coords = coords;
+		this.coordx = coordx;
+		this.coordy = coordy;
 		this.levels = levels;
 
 		
@@ -25,8 +26,8 @@ class MyVoxelHill extends CGFobject {
         var coory = 0.5 ;
 
 	   for(var i = this.levels; i > 1; i--){
-      	coorx = this.coords -(i/2);
-      	coorz = this.coords -(i/2);
+      	coorx = this.coordx -(i/2);
+      	coorz = this.coordy -(i/2);
       	for(var j = 0; j < (i +1); j++){
       	 	for(var w = 0; w < (i +1); w++){   	 	
        			this.scene.pushMatrix();
@@ -36,7 +37,7 @@ class MyVoxelHill extends CGFobject {
         		coorx += 1;
 
       		}
-      		coorx = this.coords -(i/2);
+      		coorx = this.coordx -(i/2);
       		coorz += 1;
       	}
       	coory += 1;
@@ -44,7 +45,7 @@ class MyVoxelHill extends CGFobject {
 
 		}
        this.scene.pushMatrix();
-			this.scene.translate(this.coords,coory, this.coords);
+			this.scene.translate(this.coordx,coory, this.coordy);
 			this.unitCubeQuad.display();
         	this.scene.popMatrix();
         	

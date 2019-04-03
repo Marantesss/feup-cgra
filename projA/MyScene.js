@@ -30,9 +30,10 @@ class MyScene extends CGFscene {
         this.treeRow = new MyTreeRowPatch(this, 2, 0.5, 3, 1, "images/tree_trunk.jpg", "images/leaves.jpg");
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.house = new MyHouse(this);
-        this.voxelHill = new MyVoxelHill(this, 5,  4);
-        this.voxelHill1 = new MyVoxelHill(this, -15,  3);
+        this.voxelHill = new MyVoxelHill(this, - 5, 3,  4);
+        this.voxelHill1 = new MyVoxelHill(this,5, -15,  3);
         this.cubeMap = new MyCubeMap(this);
+        this.quad = new MyQuad(this);
 
         // ---- Applied Material
         this.cubeMapMaterialDay = new CGFappearance(this);
@@ -49,13 +50,12 @@ class MyScene extends CGFscene {
         this.cubeMapMaterialNight.setSpecular(0, 0, 0, 1.0);
         this.cubeMapMaterialNight.setShininess(10.0);
         this.cubeMapMaterialNight.loadTexture('images/imagem.png');
-
-        this.selectedMaterial = 0;
-        
-        this.materials = [this.cubeMapMaterialDay, this.cubeMapMaterialNight];
-
-       // Labels and ID's for object selection on MyInterface
-        this.materialIDs  = { 'Day': 0, 'Night': 1};
+  
+        this.selectedMode = 1;
+        this.modes = [this.cubeMapMaterialNight, this.cubeMapMaterialDay];   
+   
+       // Labels and ID's for object selection on
+        this.modeIds = { 'Night': 0, 'Day': 1 }; 
         
     }
     initLights() {
@@ -72,6 +72,12 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
+    }
+
+     //Function that resets selected mode in the cubeMap
+     updateAppliedMode() {
+        this.cubeMap.setMode(this.modes[this.selectedMode]);
+        
     }
 
     display() {
@@ -93,16 +99,15 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        //this.house.display();
-        //this.treeGroup.display();
-        //this.treeRow.display();
-
-        //this.tree.display();
- 
+        this.house.display();
+        this.treeGroup.display();
+        this.treeRow.display();
+        this.tree.display();
         this.voxelHill.display();
-        this.voxelHill1.display();
-        this.materials[this.selectedMaterial].apply();       
-        //this.cubeMap.display()
+        this.voxelHill1.display();  
+        this.quad.display();     
+        this.modes[this.selectedMode].apply();
+        this.cubeMap.display()
 
         // ---- END Primitive drawing section
     }
