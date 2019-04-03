@@ -1,3 +1,8 @@
+var UnitCubeEnum = {
+    MINECRAFT: 1,
+    HOUSE: 2,
+   };
+
 /**
  * MyHouse
  * @constructor
@@ -6,7 +11,7 @@
 class MyHouse extends CGFobject {
 	constructor(scene, coords) {
 		super(scene);
-        this.unitCubeQuad = new MyUnitCubeQuad(this.scene);
+        this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.HOUSE);
         this.pyramid = new MyPyramid(this.scene, 4, 1);
         this.prism = new MyPrism(this.scene, 5, 5);
         this.prism1 = new MyPrism(this.scene , 10, 5);
@@ -37,7 +42,10 @@ class MyHouse extends CGFobject {
         this.scene.popMatrix();
  		
 		
-
+        this.house.setTexture(this.roof);
+        this.house.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+        
 		this.scene.pushMatrix();
         this.scene.translate(0, 0.9 ,0);
         this.scene.rotate(Math.PI/180*45, 0, 1, 0);

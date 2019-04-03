@@ -1,3 +1,8 @@
+var UnitCubeEnum = {
+    MINECRAFT: 1,
+    HOUSE: 2,
+   };
+
 /**
  * MyVoxelHill
  * @constructor
@@ -7,7 +12,7 @@ class MyVoxelHill extends CGFobject {
 	constructor(scene, coords, levels) {
 
 		super(scene);
-		this.unitCubeQuad = new MyUnitCubeQuad(this.scene);
+		this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.MINECRAFT);
 		this.unitCubeQuad.initBuffers();
 		this.coords = coords;
 		this.levels = levels;

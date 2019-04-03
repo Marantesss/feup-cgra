@@ -24,7 +24,16 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
 
+
+        this.housetex = new CGFappearance(this);
+        this.housetex.setAmbient(0.1, 0.1, 0.1, 1);
+        this.housetex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.housetex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.housetex.setShininess(10.0);
+        this.housetex.loadTexture('images/telhado.jpg');
+
         //Objects connected to MyInterface
+        this.cylinder = new MyCylinder(this, 10, 1);
         this.tree = new MyTree(this, 3, 1, 3, 2, "", "");
         this.treeGroup = new MyTreeGroupPatch(this, 3, 1, 3, 2, "", "");
         this.treeRow = new MyTreeRowPatch(this, 3, 1, 3, 2, "", "");
@@ -62,18 +71,23 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        //this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+
         //this.tree.display();
         //this.house.display();
-        this.treeGroup.display();
+        //this.treeGroup.display();
         //this.treeRow.display();
         this.voxelHill.display();
-    
+        /*
+        this.housetex.apply();
+        this.cylinder.enableNormalViz();
+        this.cylinder.display();
+        */
         // ---- END Primitive drawing section
     }
 }
