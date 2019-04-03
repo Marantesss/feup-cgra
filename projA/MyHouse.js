@@ -9,8 +9,10 @@ var UnitCubeEnum = {
  * @param scene - Reference to MyScene object
  */
 class MyHouse extends CGFobject {
-	constructor(scene, coords) {
-		super(scene);
+	constructor(scene, coordx, coordz) {
+        super(scene);
+        this.coordx = coordx;
+        this.coordz = coordz;
         this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.HOUSE);
         this.pyramid = new MyPyramid(this.scene, 4, 1);
         this.prism = new MyPrism(this.scene, 5, 5);
@@ -30,9 +32,10 @@ class MyHouse extends CGFobject {
         this.pillarTexture = new CGFtexture(this.scene, 'images/brick_pillar.jpg');       		
 	}
 	display() {
+ 
         // ---- displaying houseMaterial body
 		this.scene.pushMatrix();
-		this.scene.translate(0,0.5,0);
+		this.scene.translate(0 + this.coordx,0.5,0 + this.coordz);
 		this.unitCubeQuad.display();
         this.scene.popMatrix();
  		
@@ -42,7 +45,7 @@ class MyHouse extends CGFobject {
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         
         this.scene.pushMatrix();
-        this.scene.translate(0, 0.9 ,0);
+        this.scene.translate(0 + this.coordx, 0.9 ,0 + this.coordz);
         this.scene.rotate(Math.PI/180*45, 0, 1, 0);
         this.scene.scale(1.5,1.2,1.5);
 		this.pyramid.display();
@@ -54,27 +57,29 @@ class MyHouse extends CGFobject {
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 
         this.scene.pushMatrix();
-        this.scene.translate(0.7,0,0.7);
+        this.scene.translate(0.7 + this.coordx,0,0.7 + this.coordz);
         this.scene.scale(0.2,1,0.2);
         this.prism.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0.7,0,-0.7);
+        this.scene.translate(0.7 + this.coordx,0,-0.7 + this.coordz);
         this.scene.scale(0.2,1,0.2);
         this.prism.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.7,0,-0.7);
+        this.scene.translate(-0.7 + this.coordx,0,-0.7 + this.coordz);
         this.scene.scale(0.2,1,0.2);
         this.prism1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.7,0,0.7);
+        this.scene.translate(-0.7 + this.coordx,0,0.7 + this.coordz);
         this.scene.scale(0.2,1,0.2);
         this.prism1.display();
         this.scene.popMatrix();
+
+      
 	}
 }

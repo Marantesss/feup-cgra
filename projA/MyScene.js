@@ -29,11 +29,11 @@ class MyScene extends CGFscene {
         this.treeGroup = new MyTreeGroupPatch(this, 2, 0.5, 3, 1, "images/tree_trunk.jpg", "images/leaves.jpg");
         this.treeRow = new MyTreeRowPatch(this, 2, 0.5, 3, 1, "images/tree_trunk.jpg", "images/leaves.jpg");
         this.unitCubeQuad = new MyUnitCubeQuad(this);
-        this.house = new MyHouse(this);
-        this.voxelHill = new MyVoxelHill(this, - 5, 3,  4);
+        this.house = new MyHouse(this, -15, -13);
+        this.voxelHill = new MyVoxelHill(this, - 5, 13,  4);
         this.voxelHill1 = new MyVoxelHill(this,5, -15,  3);
         this.cubeMap = new MyCubeMap(this);
-        this.quad = new MyQuad(this);
+        this.quad = new MyQuad(this, 'images/relva.jpg');
 
         // ---- Applied Material
         this.cubeMapMaterialDay = new CGFappearance(this);
@@ -51,7 +51,7 @@ class MyScene extends CGFscene {
         this.cubeMapMaterialNight.setShininess(10.0);
         this.cubeMapMaterialNight.loadTexture('images/imagem.png');
   
-        this.selectedMode = 1;
+        this.selectedMode = 1; //
         this.modes = [this.cubeMapMaterialNight, this.cubeMapMaterialDay];   
    
        // Labels and ID's for object selection on
@@ -105,7 +105,7 @@ class MyScene extends CGFscene {
         this.tree.display();
         this.voxelHill.display();
         this.voxelHill1.display();  
-        this.quad.display();     
+        //this.quad.display();     
         this.modes[this.selectedMode].apply();
         this.cubeMap.display()
 
