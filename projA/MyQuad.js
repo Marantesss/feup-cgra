@@ -44,10 +44,10 @@ class MyQuad extends CGFobject {
         */
 
 		this.texCoords = [
-			0, 1,
-			1, 1,
-			0, 0,
-			1, 0
+			0, 1, // bottom left
+			1, 1, // botom right
+			0, 0, // top left
+			1, 0  // top right
 		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();

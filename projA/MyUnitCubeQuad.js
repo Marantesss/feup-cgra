@@ -11,11 +11,10 @@ var UnitCubeEnum = {
  */
 class MyUnitCubeQuad extends CGFobject {
         constructor(scene, cubeType) {
-		super(scene);
+                super(scene);
+                
 		this.quad = new MyQuad(this.scene);
-        this.quad.initBuffers();
-
-                this.cubeType = cubeType;
+                this.quad.initBuffers();
 
                 this.unitCubeMaterial = new CGFappearance(this.scene);
                 this.unitCubeMaterial.setAmbient(0.1, 0.1, 0.1, 1);
@@ -26,16 +25,19 @@ class MyUnitCubeQuad extends CGFobject {
 
                 this.cubeSide;
                 // ---- selecting cube type
-                switch(this.cubeType) {
+                switch(cubeType) {
                         case UnitCubeEnum.MINECRAFT:
-                                this.cubeSide = new CGFtexture(this.scene, 'images/mineSide.png');
-                                this.mineTop = new CGFtexture(this.scene, 'images/mineTop.png');
-                                this.mineBottom = new CGFtexture(this.scene, 'images/mineBottom.png');
+                                this.cubeSide = new CGFtexture(this.scene, 'images/Tiles/dirt_grass.png');
+                                this.mineTop = new CGFtexture(this.scene, 'images/Tiles/grass_top.png');
+                                this.mineBottom = new CGFtexture(this.scene, 'images/Tiles/dirt.png');
                                 break;
                         case UnitCubeEnum.HOUSE:
-                                this.cubeSide = new CGFtexture(this.scene, 'images/brick.jpg');
+                                this.quad.updateTexCoords([0,1, 4,1, 0,-3, 4,-3]); // 4 x 4
+                                this.cubeSide = new CGFtexture(this.scene, 'images/Tiles/brick_red.png');
+                                break;
                 }
-	}
+        }
+        
 	display() {
                 this.unitCubeMaterial.setTexture(this.cubeSide);
                 this.unitCubeMaterial.apply();

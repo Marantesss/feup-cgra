@@ -25,6 +25,7 @@ class MyHouse extends CGFobject {
         this.houseMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.houseMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.houseMaterial.setShininess(10.0);
+        this.houseMaterial.setTextureWrap('REAPEAT', 'REPEAT');
        
         this.roofTexture = new CGFtexture(this.scene, 'images/wood.jpg');
         this.pillarTexture = new CGFtexture(this.scene, 'images/brick_pillar.jpg');       		
