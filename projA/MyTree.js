@@ -57,6 +57,18 @@ class MyTree extends CGFobject {
         this.scene.scale(this.treeTopRadius, this.treeTopHeight, this.treeTopRadius);
         this.leavesCone.display();
         this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, this.trunkHeight * 1.5, 0);
+        this.scene.scale(this.treeTopRadius/1.2, this.treeTopHeight/1.2, this.treeTopRadius/1.2);
+        this.leavesCone.display();
+        this.scene.popMatrix();
+        
+        this.scene.pushMatrix();
+        this.scene.translate(0, this.trunkHeight * 2, 0);
+        this.scene.scale(this.treeTopRadius/1.5, this.treeTopHeight/1.5, this.treeTopRadius/1.5);
+        this.leavesCone.display();
+        this.scene.popMatrix();
         // ----
     }
 

@@ -35,7 +35,7 @@ class MyScene extends CGFscene {
         
         // ---- houses
         this.unitCubeQuad = new MyUnitCubeQuad(this);
-        this.house = new MyHouse(this);
+        this.house = new MyHouse(this, -15, -13);
 
         // ---- hills
         this.voxelHill = new MyVoxelHill(this, 5, 4);
@@ -43,6 +43,7 @@ class MyScene extends CGFscene {
 
         // ---- CubeMap
         this.cubeMap = new MyCubeMap(this);
+        this.quad = new MyQuad(this, 'images/relva.jpg');
 
         /* **** MATERIALS **** */
         // ---- Applied Material
@@ -58,11 +59,11 @@ class MyScene extends CGFscene {
         this.cubeMapMaterialNight.setSpecular(0, 0, 0, 1.0);
         this.cubeMapMaterialNight.setShininess(10.0);
 
-        this.selectedMaterial = 0;
-        this.materials = [this.cubeMapMaterialDay, this.cubeMapMaterialNight];
+        this.selectedMode = 0;
+        this.modes = [this.cubeMapMaterialDay, this.cubeMapMaterialNight];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs  = { 'Day': 0, 'Night': 1};
+        this.modeIds  = { 'Day': 0, 'Night': 1};
 
         /* **** TEXTURES **** */
         this.grassFloor = new CGFtexture(this, 'images/Tiles/grass_top.png');
@@ -85,6 +86,12 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
+    }
+
+     //Function that resets selected mode in the cubeMap
+     updateAppliedMode() {
+        this.cubeMap.setMode(this.modes[this.selectedMode]);
+        
     }
 
     display() {
@@ -121,8 +128,8 @@ class MyScene extends CGFscene {
     }
 
     displayFloor() {
-        this.materials[this.selectedMaterial].setTexture(this.grassFloor);
-        this.materials[this.selectedMaterial].apply();
+        this.modes[this.selectedMode].setTexture(this.grassFloor);
+        this.modes[this.selectedMode].apply();
 
         this.pushMatrix();
         this.scale(50,50,50);
@@ -172,8 +179,8 @@ class MyScene extends CGFscene {
     }
 
     displayCubeMap() {
-        this.materials[this.selectedMaterial].setTexture(this.cubeMapTextureDay);
-        this.materials[this.selectedMaterial].apply();     
+        this.modes[this.selectedMode].setTexture(this.cubeMapTextureDay);
+        this.modes[this.selectedMode].apply();     
         this.cubeMap.display()
     }
 }
