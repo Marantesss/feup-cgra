@@ -38,12 +38,15 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, -15, -13);
 
         // ---- hills
-        this.voxelHill = new MyVoxelHill(this, 5, 4);
-        this.voxelHill1 = new MyVoxelHill(this, -15, 3);
+        this.voxelHill = new MyVoxelHill(this, 5, 4, 3);
+        this.voxelHill1 = new MyVoxelHill(this, -15, 3, 2);
 
         // ---- CubeMap
         this.cubeMap = new MyCubeMap(this);
-        this.quad = new MyQuad(this, 'images/relva.jpg');
+        this.quad = new MyQuad(this);
+
+        // -- fire
+        this.fire = new MyFire(this);
 
         /* **** MATERIALS **** */
         // ---- Applied Material
@@ -119,10 +122,11 @@ class MyScene extends CGFscene {
 
         this.displayTrees();
 
-        this.displayHills();
+        //this.displayHills();
 
-        //this.house.display();
+        this.house.display();
         
+        this.fire.display();
 
         // ---- END Primitive drawing section
     }
@@ -183,4 +187,5 @@ class MyScene extends CGFscene {
         this.modes[this.selectedMode].apply();     
         this.cubeMap.display()
     }
+    
 }
