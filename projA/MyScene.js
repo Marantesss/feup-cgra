@@ -7,6 +7,8 @@ class MyScene extends CGFscene {
         super();
     }
     init(application) {
+        
+        this.selectedMode = 0;
         super.init(application);
         this.initCameras();
         this.initLights();
@@ -62,7 +64,6 @@ class MyScene extends CGFscene {
         this.cubeMapMaterialNight.setSpecular(0, 0, 0, 1.0);
         this.cubeMapMaterialNight.setShininess(10.0);
 
-        this.selectedMode = 0;
         this.modes = [this.cubeMapMaterialDay, this.cubeMapMaterialNight];
 
         // Labels and ID's for object selection on MyInterface
@@ -78,10 +79,31 @@ class MyScene extends CGFscene {
         
     }
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        //-- Day Light
+        this.lights[0].setPosition(20, 100, 50, 1); //Y elevado
+        this.lights[0].setDiffuse(1.0, 0.2, 0.2, 1.0);
+        this.lights[0].setLinearAttenuation(0.0001);
         this.lights[0].enable();
         this.lights[0].update();
+
+        //-- Night Light
+        this.lights[1].setPosition(20, 100, 50, 1); //Y elevado
+        this.lights[1].setDiffuse(0.2, 0.2, 1.0, 1.0);
+        this.lights[1].setLinearAttenuation(0.01);
+        this.lights[1].update();
+
+        // camp fire
+        this.lights[2].setPosition(15, 0, 5, 1); //coords os fire
+        this.lights[2].setDiffuse(1.0, 0, 0, 1.0);
+        this.lights[2].setLinearAttenuation(1);
+ 
+        this.lights[2].update();
+
+        // flashlight
+        this.lights[3].setPosition(1, 2, 5, 1);
+        this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[3].setLinearAttenuation(1);
+        this.lights[3].update();
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -93,9 +115,9 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    //Function that resets selected mode in the cubeMap
-    updateAppliedMode() {
-        this.cubeMap.setMode(this.modes[this.selectedMode]);
+     //Function that resets selected mode in the cubeMap
+     updateAppliedMode() {
+        this.displayCubeMap() ;
         
     }
 
@@ -122,9 +144,9 @@ class MyScene extends CGFscene {
         this.displayFloor();
         
         this.displayTrees();
-        
+
         this.displayHills();
-        
+
         this.house.display();
         
         //this.fire.display();
@@ -184,7 +206,22 @@ class MyScene extends CGFscene {
 
     displayCubeMap() {
         this.modes[this.selectedMode].setTexture(this.cubeMapTextureDay);
-        this.modes[this.selectedMode].apply();     
+        this.modes[this.selectedMode].apply(); 
+        switch(this.selectedMode){
+            case 0:  
+             this.lights[0].enable();
+             this.lights[1].disable();
+             this.lights[2].disable();
+             this.lights[3].disable();
+               break;
+            case 1:
+              this.lights[0].disable();
+              this.lights[1].enable();
+              this.lights[2].enable();
+              this.lights[3].enable();
+              break;
+        }
+            
         this.cubeMap.display()
     }
     
