@@ -5,8 +5,10 @@
  *
  */
 class MyFire extends CGFobject {
-    constructor (scene) {
+    constructor (scene, coordx, coordz) {
         super(scene);
+        this.coordx = coordx;
+        this.coordz = coordz;
         this.cylinder = new MyCylinder(this.scene, 20, 20);
         this.cone = new MyCone(this.scene, 20 , 20);     
         this.cylinder.initBuffers();
@@ -17,21 +19,21 @@ class MyFire extends CGFobject {
 
         // ---- displaying wood      
         this.scene.pushMatrix();
-        this.scene.translate(0, 0.5, 0);
+        this.scene.translate(this.coordx, 0.5, this.coordz);
        	this.scene.rotate(Math.PI/180*90, 1, 0, 0);
         this.scene.scale(0.5, 2.5, 0.5);
         this.cylinder.display();
         this.scene.popMatrix();
 
 		this.scene.pushMatrix();
-		this.scene.translate(1, 0.5, 0);
+		this.scene.translate(this.coordx+1, 0.5, this.coordz);
        	this.scene.rotate(-Math.PI/180*90, 1, 0, 0);
         this.scene.scale(0.5, 2.5, 0.5);
         this.cylinder.display();
         this.scene.popMatrix();
 
 		this.scene.pushMatrix();
-		this.scene.translate(1, 0.5, -1);
+		this.scene.translate(this.coordx+1, 0.5, this.coordz-1);
 		this.scene.rotate(Math.PI/180*40, 0, 1, 0);
        	this.scene.rotate(Math.PI/180*90, 1, 0, 0);
         this.scene.scale(0.5, 2.5, 0.5);
@@ -39,55 +41,55 @@ class MyFire extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-		this.scene.translate(-2, 0.5, -1);
+		this.scene.translate(this.coordx-2, 0.5, this.coordz-1);
        	this.scene.rotate(Math.PI/180*90, 1, 0, 0);
         this.scene.scale(0.5, 2.5, 0.5);
         this.cylinder.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-		this.scene.translate(0, 0.5, -1);
+		this.scene.translate(this.coordx, 0.5, this.coordz-1);
        	this.scene.rotate(Math.PI/180*50, 1, 0, 0);
         this.scene.scale(0.5, 2.5, 0.5);
         this.cylinder.display();
         this.scene.popMatrix();
 		
 		this.scene.pushMatrix();
-		this.scene.translate(0, 1.5, 0);
+		this.scene.translate(this.coordx, 1.5, this.coordz);
         this.scene.scale(1.5, 2.5, 1.5);
         this.cone.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-		this.scene.translate(0, 1.5, 1);
+		this.scene.translate(this.coordx, 1.5, this.coordz +1);
 		this.scene.rotate(Math.PI/180*50, 1, 0, 0);
         this.scene.scale(1.5, 2.5, 1.5);
         this.cone.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-		this.scene.translate(0, 1.5, -1);
+		this.scene.translate(this.coordx, 1.5, this.coordz-1);
 		this.scene.rotate(-Math.PI/180*50, 1, 0, 0);
         this.scene.scale(1.5, 2.5, 1.5);
         this.cone.display();
         this.scene.popMatrix();
 
 		this.scene.pushMatrix();
-		this.scene.translate(-1, 1.5, 0);
+		this.scene.translate(this.coordx-1, 1.5, this.coordz);
 		this.scene.rotate(Math.PI/180*50, 0, 0, 1);
         this.scene.scale(1.5, 2.5, 1.5);
         this.cone.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-		this.scene.translate(1, 1.5, 0);
+		this.scene.translate(this.coordx+1, 1.5, this.coordz);
 		this.scene.rotate(-Math.PI/180*50, 0, 0, 1);
         this.scene.scale(1.5, 2.5, 1.5);
         this.cone.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-		this.scene.translate(1, 2.5, 0);
+		this.scene.translate(this.coordx+1, 2.5, this.coordz);
 		this.scene.rotate(-Math.PI/180*30, 0, 0, 1);
         this.scene.scale(0.5, 2.5, 0.5);
         this.cone.display();

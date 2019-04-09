@@ -46,7 +46,7 @@ class MyScene extends CGFscene {
         this.quad = new MyQuad(this);
 
         // -- fire
-        this.fire = new MyFire(this);
+        this.fire = new MyFire(this,0,0);
 
         /* **** MATERIALS **** */
         // ---- Applied Material
