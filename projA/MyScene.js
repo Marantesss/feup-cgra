@@ -40,7 +40,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, -15, -13);
 
         // ---- hills
-        this.voxelHill = new MyVoxelHill(this, 5, 4, 3);
+        this.voxelHill = new MyVoxelHill(this, 0, 0, 3);
         this.voxelHill1 = new MyVoxelHill(this, -15, 3, 2);
 
         // ---- CubeMap
@@ -49,6 +49,11 @@ class MyScene extends CGFscene {
 
         // -- fire
         this.fire = new MyFire(this,0,0);
+
+        //-- silo
+        this.silo = new MySilo(this,0 ,0);
+
+       
 
         /* **** MATERIALS **** */
         // ---- Applied Material
@@ -63,19 +68,21 @@ class MyScene extends CGFscene {
         this.cubeMapMaterialNight.setDiffuse(0.2, 0.2, 0.2, 1.0);
         this.cubeMapMaterialNight.setSpecular(0, 0, 0, 1.0);
         this.cubeMapMaterialNight.setShininess(10.0);
+        
+        /* **** TEXTURES **** */
+        this.grassFloor = new CGFtexture(this, 'images/Tiles/grass_top.png');
+        this.cubeMapTextureDay = new CGFtexture(this, 'images/skybox_day.png')
+        this.cubeMapTextureNight = new CGFtexture(this, 'images/skybox_night.jpg');
 
+        this.texture = new CGFtexture(this, 'images/aas.jpg');
+        /* ******* */
+        
         this.modes = [this.cubeMapMaterialDay, this.cubeMapMaterialNight];
 
         // Labels and ID's for object selection on MyInterface
         this.modeIds  = { 'Day': 0, 'Night': 1};
 
-        /* **** TEXTURES **** */
-        this.grassFloor = new CGFtexture(this, 'images/Tiles/grass_top.png');
-        this.cubeMapTextureDay = new CGFtexture(this, 'images/skybox_day.png')
-        this.cubeMapTextureNight = new CGFtexture(this, 'images/skybox_day.png');
-
-        this.texture = new CGFtexture(this, 'images/aas.jpg');
-        /* ******* */
+        
         
     }
     initLights() {
@@ -143,13 +150,15 @@ class MyScene extends CGFscene {
         
         this.displayFloor();
         
-        this.displayTrees();
+        //this.displayTrees();
 
         this.displayHills();
 
-        this.house.display();
+        //this.house.display();
         
         //this.fire.display();
+
+        //this.silo.display();
         // ---- END Primitive drawing section
     }
 
@@ -205,24 +214,31 @@ class MyScene extends CGFscene {
     }
 
     displayCubeMap() {
-        this.modes[this.selectedMode].setTexture(this.cubeMapTextureDay);
-        this.modes[this.selectedMode].apply(); 
+                 
+     
+         this.modes[this.selectedMode].setTexture(); 
+          this.modes[this.selectedMode].apply();  
         switch(this.selectedMode){
             case 0:  
              this.lights[0].enable();
              this.lights[1].disable();
              this.lights[2].disable();
              this.lights[3].disable();
+             //this.cubeMap.setTexture(this.cubeMapMaterialDay);         
                break;
             case 1:
               this.lights[0].disable();
               this.lights[1].enable();
               this.lights[2].enable();
               this.lights[3].enable();
+              //this.cubeMap.setTexture(this.cubeMapMaterialNight); 
               break;
         }
             
-        this.cubeMap.display()
+     //   this.cubeMap.apply(); 
+       // this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+    
+        this.cubeMap.display();
     }
     
 }

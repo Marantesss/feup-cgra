@@ -28,8 +28,8 @@ class MyVoxelHill extends CGFobject {
 	   for(var i = this.levels; i > 1; i--){
       	coorx = this.coordx -(i/2);
       	coorz = this.coordz -(i/2);
-      	for(var j = 0; j <( i +1); j++){
-      	 	for(var w = 0; w < (i +1); w++){   	 	
+      	for(var j = 0; j < ((2*i)-1); j++){
+      	 	for(var w = 0; w <( (2*i)-1); w++){   	 	
        			this.scene.pushMatrix();
 				this.scene.translate(coorx,coory,coorz);
 				this.unitCubeQuad.display();
