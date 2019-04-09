@@ -34,8 +34,12 @@ class MyPyramid extends CGFobject {
 
             // ---- texCoords will always be a triangle
             this.texCoords.push(0.5, 0);
-            this.texCoords.push(0, 1);
-            this.texCoords.push(1, 1);
+            // ---- for repeated textures per slice
+            //this.texCoords.push(0, 1);
+            //this.texCoords.push(1, 1);
+            // ---- for a single texture
+            this.texCoords.push(i/this.slices, 1);
+            this.texCoords.push((i+1)/this.slices, 1);
             
             // triangle normal computed by cross product of two edges
             var normal= [

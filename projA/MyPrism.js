@@ -33,7 +33,13 @@ class MyPrism extends CGFobject {
             this.vertices.push(ca, 0, -sa);
             this.vertices.push(caa, 0, -saa);
 
-            this.texCoords.push(1, 0, 0, 0, 0, 1, 1, 1);
+            // ---- for repeated textures per slice
+            //this.texCoords.push(1, 0, 0, 0, 0, 1, 1, 1);
+            // ---- for a single texture
+            this.texCoords.push((i+1)/this.slices, 0,
+                                i/this.slices, 0,
+                                i/this.slices, 1,
+                                (i+1)/this.slices, 1);
 
             // triangle normal computed by cross product of two edges
             var normal= [

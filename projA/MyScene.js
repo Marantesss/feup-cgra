@@ -71,7 +71,9 @@ class MyScene extends CGFscene {
         /* **** TEXTURES **** */
         this.grassFloor = new CGFtexture(this, 'images/Tiles/grass_top.png');
         this.cubeMapTextureDay = new CGFtexture(this, 'images/skybox_day.png')
-        this.cubeMapTextureNight = new CGFtexture(this, 'images/skybox_day.png')
+        this.cubeMapTextureNight = new CGFtexture(this, 'images/skybox_day.png');
+
+        this.texture = new CGFtexture(this, 'images/aas.jpg');
         /* ******* */
         
     }
@@ -91,8 +93,8 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-     //Function that resets selected mode in the cubeMap
-     updateAppliedMode() {
+    //Function that resets selected mode in the cubeMap
+    updateAppliedMode() {
         this.cubeMap.setMode(this.modes[this.selectedMode]);
         
     }
@@ -109,25 +111,23 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        //this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-
         this.displayCubeMap();
-
+        
         this.displayFloor();
-
+        
         this.displayTrees();
-
-        //this.displayHills();
-
+        
+        this.displayHills();
+        
         this.house.display();
         
-        this.fire.display();
-
+        //this.fire.display();
         // ---- END Primitive drawing section
     }
 
