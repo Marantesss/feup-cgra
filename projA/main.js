@@ -18,6 +18,7 @@ serialInclude(['../lib/CGF.js',
                 'MyVoxelHill.js',
                 'MyCubeMap.js ',
                 'MyFire.js' ,
+                'MyTin.js ',
             
 
 main=function()
