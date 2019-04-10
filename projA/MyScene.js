@@ -78,10 +78,11 @@ class MyScene extends CGFscene {
         /* ******* */
         
     }
+
     initLights() {
         //-- Day Light
         this.lights[0].setPosition(20, 100, 50, 1); //Y elevado
-        this.lights[0].setDiffuse(1.0, 0.2, 0.2, 1.0);
+        this.lights[0].setDiffuse(0.945, 0.855, 0.643, 1.0); // 94.5, 85.5, 64.3
         this.lights[0].setLinearAttenuation(0.0001);
         this.lights[0].enable();
         this.lights[0].update();
@@ -105,9 +106,11 @@ class MyScene extends CGFscene {
         this.lights[3].setLinearAttenuation(1);
         this.lights[3].update();
     }
+    
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -148,6 +151,8 @@ class MyScene extends CGFscene {
         this.displayHills();
 
         this.house.display();
+
+        this.fire.display();
         
         //this.fire.display();
         // ---- END Primitive drawing section

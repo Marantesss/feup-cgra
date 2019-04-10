@@ -9,15 +9,31 @@ class MyFire extends CGFobject {
         super(scene);
         this.coordx = coordx;
         this.coordz = coordz;
-        this.cylinder = new MyCylinder(this.scene, 20, 20);
-        this.cone = new MyCone(this.scene, 20 , 20);     
+        this.cylinder = new MyCylinder(this.scene, 10, 10);
+        this.cone = new MyCone(this.scene, 10 , 10);     
         this.cylinder.initBuffers();
         this.cone.initBuffers();
+
+        this.fireMaterial = new CGFappearance(this.scene);
+        this.fireMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.fireMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.fireMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.fireMaterial.setShininess(10.0);
+        this.fireMaterial.setTextureWrap('REAPEAT', 'REPEAT');
+       
+        this.fireTexture = new CGFtexture(this.scene, 'images/Inferno.jpg'); 
+        this.woodTexture = new CGFtexture(this.scene, 'images/wood.jpg');
     }
 
     display() {
+        this.scene.pushMatrix();
+        this.scene.scale(0.3, 0.3, 0.3);
 
-        // ---- displaying wood      
+        // ---- displaying wood
+        this.fireMaterial.setTexture(this.woodTexture);
+        this.fireMaterial.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+        
         this.scene.pushMatrix();
         this.scene.translate(this.coordx, 0.5, this.coordz);
        	this.scene.rotate(Math.PI/180*90, 1, 0, 0);
@@ -53,7 +69,12 @@ class MyFire extends CGFobject {
         this.scene.scale(0.5, 2.5, 0.5);
         this.cylinder.display();
         this.scene.popMatrix();
-		
+        
+        // ---- displaying fire
+        this.fireMaterial.setTexture(this.fireTexture);
+        this.fireMaterial.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+
 		this.scene.pushMatrix();
 		this.scene.translate(this.coordx, 1.5, this.coordz);
         this.scene.scale(1.5, 2.5, 1.5);
@@ -95,6 +116,7 @@ class MyFire extends CGFobject {
         this.cone.display();
         this.scene.popMatrix();
 
+        this.scene.popMatrix();
         // ----
     }
 
