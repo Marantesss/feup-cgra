@@ -13,9 +13,9 @@ class MyFarm extends CGFobject {
 
                 this.silo = new MySilo(this.scene, 0, 0);
                 this.fence = new MyFence(this.scene, 0, 0);
-                this.dirt = new MyQuad(this.scene);
+                this.dirt = new MyPlane(this.scene, 4, 0, 4, 0, 4); // 4x4
                 
-                this.dirt.initBuffers();
+                //this.dirt.initBuffers();
                 
                 // ---- create material for applying textures
                 this.dirtMaterial = new CGFappearance(this.scene);
@@ -24,10 +24,8 @@ class MyFarm extends CGFobject {
                 this.dirtMaterial.setSpecular(0.1, 0.1, 0.1, 1);
                 this.dirtMaterial.setShininess(10.0);
                 this.dirtMaterial.setTextureWrap('REPEAT', 'REPEAT');
-                this.dirtMaterial.loadTexture('images/Tiles/dirt.png')
-
-                this.dirt.updateTexCoords([0,1, 4,1, 0,-3, 4,-3]); // 4x4
-    }
+                this.dirtMaterial.loadTexture('images/Tiles/dirt.png');
+        }
     
         display() {
                 // ---- silo

@@ -28,7 +28,7 @@ class MyScene extends CGFscene {
 
         /* **** Objects connected to MyInterface **** */
         // ---- floor
-        this.quadFloor = new MyQuad(this, [0,1, 20,1, 0,-19, 20,-19]); // 20x20
+        this.planeFloor = new MyPlane(this, 20, 0, 20, 0, 20);
         
         // ---- trees
         this.tree = new MyTree(this, 2, 0.5, 3, 1, "images/tree_trunk.jpg", "images/leaves.jpg");
@@ -45,12 +45,11 @@ class MyScene extends CGFscene {
 
         // ---- CubeMap
         this.cubeMap = new MyCubeMap(this);
-        this.quad = new MyQuad(this);
 
         // -- fire
         this.fire = new MyFire(this, 15 , 3);
 
-        //-- silo
+        //-- farm
         this.farm = new MyFarm(this, 10, -10);
 
         /* **** MATERIALS **** */
@@ -84,13 +83,10 @@ class MyScene extends CGFscene {
 
         // Labels and ID's for object selection on MyInterface
         this.modeIds  = { 'Day': 0, 'Night': 1};  
-        
-
-         
     }
 
     initLights() {
-        //-- Day Light
+        // ---- Day Light
         this.lights[0].setPosition(20, 100, 50, 1); //Y elevado
         this.lights[0].setDiffuse(1, 1, 0.8, 1.0); //warm color
         this.lights[0].setLinearAttenuation(0.0001); //minimum atenuation
@@ -98,26 +94,26 @@ class MyScene extends CGFscene {
         this.lights[0].setVisible(true); // FOR TESTING
         this.lights[0].update();
 
-        //-- Night Light
+        // ---- Night Light
         this.lights[1].setPosition(20, 100, 50, 1); //Y elevado
         this.lights[1].setDiffuse(0.0, 0.8, 1.0, 1.0); //cold color
         this.lights[1].setLinearAttenuation(0.02);// little atenuation
         this.lights[1].setVisible(true); // FOR TESTING
         this.lights[1].update();
 
-        // camp fire somewhere :)
-        this.lights[2].setPosition(15, 0.5, 3, 1); //coords os fire
+        // ---- camp fire somewhere :)
+        this.lights[2].setPosition(15, 0.8, 3, 1); //coords os fire
         this.lights[2].setDiffuse(1.0, 0.5, 0, 1); //warm color
         this.lights[2].setLinearAttenuation(0.1); // a lot atenuation
         this.lights[2].setVisible(true); // FOR TESTING
         this.lights[2].update();
 
-        // flashlight near the house
+        // ---- flashlight near the house
         this.lights[3].setPosition(1, 2, 5, 1);
         this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0); //white
         this.lights[3].setLinearAttenuation(0.1); // a lot atenuation
-        this.lights[3].update();
         this.lights[3].setVisible(true); // FOR TESTING
+        this.lights[3].update();
     }
     
     initCameras() {
@@ -175,7 +171,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-
+        
         this.displayCubeMap();
         
         this.displayFloor();
@@ -187,11 +183,9 @@ class MyScene extends CGFscene {
         this.displayHouse();
 
         this.farm.display();
-
-        
         
         this.fire.display();
-
+        
         // ---- END Primitive drawing section
     }
 
@@ -201,7 +195,8 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.scale(50,50,50);
         this.rotate(-Math.PI/2, 1, 0, 0);
-        this.quadFloor.display();
+        //this.quadFloor.display();
+        this.planeFloor.display();
         this.popMatrix();
     }
 
@@ -234,7 +229,7 @@ class MyScene extends CGFscene {
 
     displayHouse(){
          this.pushMatrix();
-         this.scale(4,2,3);
+         this.scale(3,2,3);
          this.house.display();
          this.popMatrix();
     }
