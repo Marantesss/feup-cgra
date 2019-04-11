@@ -8,7 +8,7 @@ class MyScene extends CGFscene {
     }
     init(application) {
         
-        this.selectedMode = 0;
+        
         super.init(application);
         this.initCameras();
         this.initLights();
@@ -37,10 +37,10 @@ class MyScene extends CGFscene {
         
         // ---- houses
         this.unitCubeQuad = new MyUnitCubeQuad(this);
-        this.house = new MyHouse(this, -15, -13);
+        this.house = new MyHouse(this, -2, -3);
 
         // ---- hills
-        this.voxelHill = new MyVoxelHill(this, 3, 1, 5);
+        this.voxelHill = new MyVoxelHill(this, 8, 10, 4);
         this.voxelHill1 = new MyVoxelHill(this, -15, 3, 2);
 
         // ---- CubeMap
@@ -48,7 +48,7 @@ class MyScene extends CGFscene {
         this.quad = new MyQuad(this);
 
         // -- fire
-        this.fire = new MyFire(this, 15 , 5);
+        this.fire = new MyFire(this, 15 , 3);
 
         //-- silo
         this.farm = new MyFarm(this, 10, -10);
@@ -75,41 +75,47 @@ class MyScene extends CGFscene {
         this.grassMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.grassMaterial.setShininess(10.0);
         this.grassMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        this.grassMaterial.loadTexture('images/Tiles/grass_top.png')
+        this.grassMaterial.loadTexture('images/Tiles/grass_top.png');
+
+        this.selectedMode = 0;
+        this.displayTex = true;
         
         this.modes = [this.dayMaterial, this.NightMaterial];
 
         // Labels and ID's for object selection on MyInterface
-        this.modeIds  = { 'Day': 0, 'Night': 1};        
+        this.modeIds  = { 'Day': 0, 'Night': 1};  
+        
+
+         
     }
 
     initLights() {
         //-- Day Light
         this.lights[0].setPosition(20, 100, 50, 1); //Y elevado
-        this.lights[0].setDiffuse(1, 1, 0.8, 1.0);
-        this.lights[0].setLinearAttenuation(0.0001);
+        this.lights[0].setDiffuse(1, 1, 0.8, 1.0); //warm color
+        this.lights[0].setLinearAttenuation(0.0001); //minimum atenuation
         this.lights[0].enable();
         this.lights[0].setVisible(true); // FOR TESTING
         this.lights[0].update();
 
         //-- Night Light
         this.lights[1].setPosition(20, 100, 50, 1); //Y elevado
-        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[1].setLinearAttenuation(0.02);
+        this.lights[1].setDiffuse(0.0, 0.8, 1.0, 1.0); //cold color
+        this.lights[1].setLinearAttenuation(0.02);// little atenuation
         this.lights[1].setVisible(true); // FOR TESTING
         this.lights[1].update();
 
         // camp fire somewhere :)
-        this.lights[2].setPosition(15, 0.5, 5, 1); //coords os fire
-        this.lights[2].setDiffuse(1.0, 0.5, 0, 1);
-        this.lights[2].setLinearAttenuation(0.1);
+        this.lights[2].setPosition(15, 0.5, 3, 1); //coords os fire
+        this.lights[2].setDiffuse(1.0, 0.5, 0, 1); //warm color
+        this.lights[2].setLinearAttenuation(0.1); // a lot atenuation
         this.lights[2].setVisible(true); // FOR TESTING
         this.lights[2].update();
 
         // flashlight near the house
         this.lights[3].setPosition(1, 2, 5, 1);
-        this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[3].setLinearAttenuation(0.1);
+        this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0); //white
+        this.lights[3].setLinearAttenuation(0.1); // a lot atenuation
         this.lights[3].update();
         this.lights[3].setVisible(true); // FOR TESTING
     }
@@ -178,9 +184,11 @@ class MyScene extends CGFscene {
 
         this.displayHills();
 
+        this.displayHouse();
+
         this.farm.display();
 
-        this.house.display();
+        
         
         this.fire.display();
 
@@ -224,6 +232,13 @@ class MyScene extends CGFscene {
         }
     }
 
+    displayHouse(){
+         this.pushMatrix();
+         this.scale(4,2,3);
+         this.house.display();
+         this.popMatrix();
+    }
+    
     displayHills() {
         this.voxelHill.display();
         this.voxelHill1.display();
