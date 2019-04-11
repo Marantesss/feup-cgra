@@ -40,7 +40,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, -15, -13);
 
         // ---- hills
-        this.voxelHill = new MyVoxelHill(this, 0, 0, 3);
+        this.voxelHill = new MyVoxelHill(this, 3, 1, 5);
         this.voxelHill1 = new MyVoxelHill(this, -15, 3, 2);
 
         // ---- CubeMap

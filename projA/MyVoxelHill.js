@@ -26,8 +26,8 @@ class MyVoxelHill extends CGFobject {
         var coory = 0.5 ;
 
 	   for(var i = this.levels; i > 1; i--){
-      	coorx = this.coordx -(i/2);
-      	coorz = this.coordz -(i/2);
+      	coorx = this.coordx-i;
+      	coorz = this.coordz -i;
       	for(var j = 0; j < ((2*i)-1); j++){
       	 	for(var w = 0; w <( (2*i)-1); w++){   	 	
        			this.scene.pushMatrix();
@@ -37,15 +37,16 @@ class MyVoxelHill extends CGFobject {
         		coorx += 1;
 
       		}
-      		coorx = this.coordx -(i/2);
+      		coorx = this.coordx -i;
       		coorz += 1;
       	}
+      	
       	coory += 1;
 
-
 		}
-       	this.scene.pushMatrix();
-		this.scene.translate(this.coordx, coory, this.coordz);
+       	
+		this.scene.pushMatrix();
+		this.scene.translate(this.coordx- 1 , coory, this.coordz - 1);
 		this.unitCubeQuad.display();
         this.scene.popMatrix();
         	
