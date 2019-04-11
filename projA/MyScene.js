@@ -40,7 +40,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, -15, -13);
 
         // ---- hills
-        this.voxelHill = new MyVoxelHill(this, 5, 4, 3);
+        this.voxelHill = new MyVoxelHill(this, 0, 0, 3);
         this.voxelHill1 = new MyVoxelHill(this, -15, 3, 2);
 
         // ---- CubeMap
@@ -50,32 +50,37 @@ class MyScene extends CGFscene {
         // -- fire
         this.fire = new MyFire(this,0,0);
 
+        //-- silo
+        this.farm = new MyFarm(this, 0, 0);
+
         /* **** MATERIALS **** */
         // ---- Applied Material
-        this.cubeMapMaterialDay = new CGFappearance(this);
-        this.cubeMapMaterialDay.setAmbient(0.1, 0.1, 0.1, 1);
-        this.cubeMapMaterialDay.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.cubeMapMaterialDay.setSpecular(0.1, 0.1, 0.1, 1);
-        this.cubeMapMaterialDay.setShininess(10.0);
+        this.dayMaterial = new CGFappearance(this);
+        this.dayMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.dayMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.dayMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.dayMaterial.setShininess(10.0);
 
-        this.cubeMapMaterialNight = new CGFappearance(this);
-        this.cubeMapMaterialNight.setAmbient(0.8, 0.8, 0.8, 1.0);
-        this.cubeMapMaterialNight.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.cubeMapMaterialNight.setSpecular(0, 0, 0, 1.0);
-        this.cubeMapMaterialNight.setShininess(10.0);
-
-        this.modes = [this.cubeMapMaterialDay, this.cubeMapMaterialNight];
-
-        // Labels and ID's for object selection on MyInterface
-        this.modeIds  = { 'Day': 0, 'Night': 1};
+        this.NightMaterial = new CGFappearance(this);
+        this.NightMaterial.setAmbient(0.8, 0.8, 0.8, 1.0);
+        this.NightMaterial.setDiffuse(0.2, 0.2, 0.2, 1.0);
+        this.NightMaterial.setSpecular(0, 0, 0, 1.0);
+        this.NightMaterial.setShininess(10.0);
 
         /* **** TEXTURES **** */
         this.grassFloor = new CGFtexture(this, 'images/Tiles/grass_top.png');
         this.cubeMapTextureDay = new CGFtexture(this, 'images/skybox_day.png')
-        this.cubeMapTextureNight = new CGFtexture(this, 'images/skybox_day.png');
+        this.cubeMapTextureNight = new CGFtexture(this, 'images/skybox_night.jpg');
 
         this.texture = new CGFtexture(this, 'images/aas.jpg');
         /* ******* */
+        
+        this.modes = [this.dayMaterial, this.NightMaterial];
+
+        // Labels and ID's for object selection on MyInterface
+        this.modeIds  = { 'Day': 0, 'Night': 1};
+
+        
         
     }
 
@@ -118,10 +123,24 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-     //Function that resets selected mode in the cubeMap
-     updateAppliedMode() {
-        this.displayCubeMap() ;
-        
+    updateLights() {
+        if (this.selectedMode == 0) {
+            this.lights[0].enable();
+            this.lights[1].disable();
+            this.lights[2].disable();
+            this.lights[3].disable();
+        }
+        else {
+            this.lights[0].disable();
+            this.lights[1].enable();
+            this.lights[2].enable();
+            this.lights[3].enable();
+        }  
+    }
+
+    updateAppliedMode() {
+        this.modes[this.selectedMode].apply();
+        this.updateLights();
     }
 
     display() {
@@ -136,25 +155,27 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        //this.axis.display();
+        this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+
         this.displayCubeMap();
         
         this.displayFloor();
         
         this.displayTrees();
 
-        this.displayHills();
-
-        this.house.display();
-
-        this.fire.display();
+        //this.displayHills();
+        this.farm.display();
+        //this.fence.display();
+        //this.house.display();
         
         //this.fire.display();
+
+        //this.silo.display();
         // ---- END Primitive drawing section
     }
 
@@ -210,24 +231,14 @@ class MyScene extends CGFscene {
     }
 
     displayCubeMap() {
-        this.modes[this.selectedMode].setTexture(this.cubeMapTextureDay);
-        this.modes[this.selectedMode].apply(); 
-        switch(this.selectedMode){
-            case 0:  
-             this.lights[0].enable();
-             this.lights[1].disable();
-             this.lights[2].disable();
-             this.lights[3].disable();
-               break;
-            case 1:
-              this.lights[0].disable();
-              this.lights[1].enable();
-              this.lights[2].enable();
-              this.lights[3].enable();
-              break;
+        if (this.selectedMode == 0) {
+            this.modes[0].setTexture(this.cubeMapTextureDay);
+            this.modes[0].apply();
         }
-            
-        this.cubeMap.display()
+        else {
+            this.modes[1].setTexture(this.cubeMapTextureNight);
+            this.modes[1].apply();
+        }
+        this.cubeMap.display();
     }
-    
 }
