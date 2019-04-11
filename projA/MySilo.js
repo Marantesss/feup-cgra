@@ -20,9 +20,9 @@ class MySilo extends CGFobject {
         this.prism.initBuffers();
 
         this.siloMaterial = new CGFappearance(this.scene);
-        this.siloMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.siloMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.siloMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.siloMaterial.setAmbient(0.7, 0.7, 0.7, 1);
+        this.siloMaterial.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.siloMaterial.setSpecular(1.0, 1.0, 1.0, 1);
         this.siloMaterial.setShininess(10.0);
         this.siloMaterial.loadTexture('images/metal.jpg');     
     }

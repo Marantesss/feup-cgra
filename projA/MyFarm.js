@@ -7,46 +7,72 @@
  */
 class MyFarm extends CGFobject {
 	constructor(scene, coordx, coordz) {
-        super(scene);
-        this.coordx = coordx;
-        this.coordz = coordz;
+                super(scene);
+                this.coordx = coordx;
+                this.coordz = coordz;
 
-        this.silo = new MySilo(this.scene, 0, 0);
-        this.fence = new MyFence(this.scene, 0, 0);
-        this.dirt = new MyQuad(this.scene, [0,1, 20,1, 0,-19, 20,-19]); // 5x5
+                this.silo = new MySilo(this.scene, 0, 0);
+                this.fence = new MyFence(this.scene, 0, 0);
+                this.dirt = new MyQuad(this.scene);
+                
+                this.dirt.initBuffers();
+                
+                // ---- create material for applying textures
+                this.dirtMaterial = new CGFappearance(this.scene);
+                this.dirtMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+                this.dirtMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+                this.dirtMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+                this.dirtMaterial.setShininess(10.0);
+                this.dirtMaterial.setTextureWrap('REPEAT', 'REPEAT');
+                this.dirtMaterial.loadTexture('images/Tiles/dirt.png')
 
-        this.dirt.initBuffers();
-
-        // ---- create material for applying textures
-        this.dirtMaterial = new CGFappearance(this.scene);
-        this.dirtMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.dirtMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.dirtMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.dirtMaterial.setShininess(10.0);
-        this.dirtMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.dirtTexture = new CGFtexture(this.scene, 'images/Tiles/dirt.png'); 
+                this.dirt.updateTexCoords([0,1, 4,1, 0,-3, 4,-3]); // 4x4
     }
     
-	display() {
-        // ---- silo
-        this.scene.pushMatrix();
-        //this.silo.display();
-        this.scene.popMatrix();
+        display() {
+                // ---- silo
+                this.scene.pushMatrix();
+                this.scene.translate(this.coordx + 4.5, 0, this.coordz - 3);
+                this.silo.display();
+                this.scene.translate(0, 0, 6);
+                this.silo.display();
+                this.scene.popMatrix();
 
-        // ---- fence
-        this.scene.pushMatrix();
-        //this.fence.display();
-        this.scene.popMatrix();
+                // ---- fence
+                for (var i = -3; i < 3; i++) {
+                        // ---- Positive Blue/Z axis
+                        this.scene.pushMatrix();
+                        this.scene.translate(this.coordx+i, 0, this.coordz+3);
+                        this.fence.display();
+                        this.scene.popMatrix();
+                        // ---- Negative Blue/Z axis
+                        this.scene.pushMatrix();
+                        this.scene.translate(this.coordx+i, 0, this.coordz-3);
+                        this.fence.display();
+                        this.scene.popMatrix();
+                        // ---- Positive Red/X axis
+                        this.scene.pushMatrix();
+                        this.scene.translate(this.coordx+3, 0, this.coordz+i+1);
+                        this.scene.rotate(Math.PI/2, 0, 1, 0);
+                        this.fence.display();
+                        this.scene.popMatrix();
+                }
+                // ---- two back fences to make a gate
+                this.scene.pushMatrix();
+                this.scene.translate(this.coordx-3, 0, this.coordz+3);
+                this.scene.rotate(Math.PI/2, 0, 1, 0);
+                this.fence.display();
+                this.scene.translate(5, 0, 0);
+                this.fence.display()
+                this.scene.popMatrix();
 
-        this.dirtMaterial.setTexture(this.dirtTexture);
-        this.dirtMaterial.apply();
-        // ---- prism
-        this.scene.pushMatrix();
-        this.scene.scale(6, 0.1, 6);
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
-        //this.scene.translate(1, 0, 0);
-        this.dirt.display();
-        this.scene.popMatrix();
+                this.dirtMaterial.apply();
+                // ---- quad
+                this.scene.pushMatrix();
+                this.scene.translate(this.coordx, 0.05, this.coordz);
+                this.scene.scale(6, 1, 6);
+                this.scene.rotate(-Math.PI/2, 1, 0, 0);
+                this.dirt.display();
+                this.scene.popMatrix();
 	}
 }
