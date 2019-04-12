@@ -17,7 +17,7 @@ class MyFire extends CGFobject {
         this.fireMaterial = new CGFappearance(this.scene);
         this.fireMaterial.setAmbient(1.0, 1, 1, 1);
         this.fireMaterial.setDiffuse(1.0, 0.5, 0, 1);
-        this.fireMaterial.setSpecular(1.0, 0.5, 0, 0);
+        this.fireMaterial.setSpecular(0, 0, 0, 1);
         this.fireMaterial.setShininess(10.0);
         this.fireMaterial.loadTexture('images/Tiles/lava.png');
 

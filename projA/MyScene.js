@@ -37,7 +37,7 @@ class MyScene extends CGFscene {
         
         // ---- houses
         this.unitCubeQuad = new MyUnitCubeQuad(this);
-        this.house = new MyHouse(this, -2, -3);
+        this.house = new MyHouse(this, 0, 0);
 
         // ---- hills
         this.voxelHill = new MyVoxelHill(this, 8, 10, 4);
@@ -47,10 +47,10 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
 
         // -- fire
-        this.fire = new MyFire(this, 15 , 3);
+        this.fire = new MyFire(this, 0 , -12);
 
         //-- farm
-        this.farm = new MyFarm(this, 10, -10);
+        this.farm = new MyFarm(this, 6, -10);
 
         /* **** MATERIALS **** */
         // ---- Applied Material
@@ -64,7 +64,7 @@ class MyScene extends CGFscene {
         this.NightMaterial = new CGFappearance(this);
         this.NightMaterial.setAmbient(0.8, 0.8, 0.8, 1.0);
         this.NightMaterial.setDiffuse(0.9, 0.9, 0.9, 1.0);
-        this.NightMaterial.setSpecular(0, 0, 0, 1.0);
+        this.NightMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.NightMaterial.setShininess(10.0);
         this.NightMaterial.loadTexture('images/skybox_night.jpg');
 
@@ -102,14 +102,14 @@ class MyScene extends CGFscene {
         this.lights[1].update();
 
         // ---- camp fire somewhere :)
-        this.lights[2].setPosition(15, 0.8, 3, 1); //coords os fire
+        this.lights[2].setPosition(0, 0.8, -12, 1); //coords os fire
         this.lights[2].setDiffuse(1.0, 0.5, 0, 1); //warm color
         this.lights[2].setLinearAttenuation(0.1); // a lot atenuation
         this.lights[2].setVisible(true); // FOR TESTING
         this.lights[2].update();
 
         // ---- flashlight near the house
-        this.lights[3].setPosition(1, 2, 5, 1);
+        this.lights[3].setPosition(0, 1.5, 2.5, 1);
         this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0); //white
         this.lights[3].setLinearAttenuation(0.1); // a lot atenuation
         this.lights[3].setVisible(true); // FOR TESTING
@@ -117,7 +117,7 @@ class MyScene extends CGFscene {
     }
     
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 50, 50), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
@@ -171,6 +171,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        this.enableTextures(this.displayTex);
         
         this.displayCubeMap();
         
@@ -182,7 +183,10 @@ class MyScene extends CGFscene {
 
         this.displayHouse();
 
+        this.pushMatrix();
+        this.rotate(Math.PI/2, 0, 1, 0);
         this.farm.display();
+        this.popMatrix();
         
         this.fire.display();
         
@@ -225,6 +229,16 @@ class MyScene extends CGFscene {
             this.treeRow.display();
             this.popMatrix();
         }
+
+        this.pushMatrix();
+        this.translate(15, 0, -15);
+        this.treeGroup.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-15, 0, 12);
+        this.treeGroup.display();
+        this.popMatrix();
     }
 
     displayHouse(){

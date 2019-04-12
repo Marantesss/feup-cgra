@@ -20,7 +20,7 @@ class MyFarm extends CGFobject {
                 // ---- create material for applying textures
                 this.dirtMaterial = new CGFappearance(this.scene);
                 this.dirtMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-                this.dirtMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+                this.dirtMaterial.setDiffuse(0.9, 0.9, 0.9, 1);         // material altamente difuso
                 this.dirtMaterial.setSpecular(0.1, 0.1, 0.1, 1);
                 this.dirtMaterial.setShininess(10.0);
                 this.dirtMaterial.setTextureWrap('REPEAT', 'REPEAT');

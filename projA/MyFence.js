@@ -17,7 +17,7 @@ class MyFence extends CGFobject {
 
         this.woodMaterial = new CGFappearance(this.scene);
         this.woodMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.woodMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.woodMaterial.setDiffuse(0.9, 0.9, 0.9, 1);     // Material altamente difuso
         this.woodMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.woodMaterial.setShininess(10.0);
         this.woodMaterial.loadTexture('images/wood.jpg');

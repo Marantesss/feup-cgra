@@ -21,8 +21,8 @@ class MySilo extends CGFobject {
 
         this.siloMaterial = new CGFappearance(this.scene);
         this.siloMaterial.setAmbient(0.7, 0.7, 0.7, 1);
-        this.siloMaterial.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.siloMaterial.setSpecular(1.0, 1.0, 1.0, 1);
+        this.siloMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
+        this.siloMaterial.setSpecular(1.0, 1.0, 1.0, 1);    // Material altamente especular
         this.siloMaterial.setShininess(10.0);
         this.siloMaterial.loadTexture('images/metal.jpg');     
     }
