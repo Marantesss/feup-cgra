@@ -51,14 +51,22 @@ class ShaderScene extends CGFscene {
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
 
-		this.texture = new CGFtexture(this, "textures/texture.jpg");
+		this.texture = new CGFtexture(this, "textures/waterTex.jpg");
 		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
+		this.texture2 = new CGFtexture(this, "textures/waterMap.jpg");
+
+		/*
+		// for exercise 2 (water effect)
+		this.waterTexture = new CGFtexture(this, "textures/waterTex.jpg");
+		this.appearance.setTexture(this.texture);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+		this.waterMap = new CGFtexture(this, "textures/waterMap.jpg");
+		*/
 
 		// shaders initialization
-
 		this.testShaders = [
 			new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag"),
 			new CGFshader(this.gl, "shaders/uScale.vert", "shaders/uScale.frag"),
@@ -70,7 +78,9 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl, "shaders/ex1_1.vert", "shaders/ex1_1.frag"),
-			new CGFshader(this.gl, "shaders/ex1_2.vert", "shaders/ex1_2.frag")
+			new CGFshader(this.gl, "shaders/ex1_2.vert", "shaders/ex1_2.frag"),
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/ex1_3.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag"),
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -80,10 +90,10 @@ class ShaderScene extends CGFscene {
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
 		this.testShaders[10].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[10].setUniformsValues({ timeFactor: 0 });
-
+		this.testShaders[12].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[12].setUniformsValues({ timeFactor: 0 });
 
 		// Shaders interface variables
-
 		this.shadersList = {
 			'Flat Shading': 0,
 			'Passing a scale as uniform': 1,
@@ -95,7 +105,9 @@ class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'ex 1.1': 9,
-			'ex 1.2': 10
+			'ex 1.2': 10,
+			'ex 1.3': 11,
+			'water (ex 2)':12
 		};
 
 		// shader code panels references
@@ -104,15 +116,12 @@ class ShaderScene extends CGFscene {
 		this.fShaderDiv = document.getElementById("fshader");
 
 		// force initial setup of shader code panels
-
 		this.onShaderCodeVizChanged(this.showShaderCode);
 		this.onSelectedShaderChanged(this.selectedExampleShader);
-
 
 		// set the scene update period 
 		// (to invoke the update() method every 50ms or as close as possible to that )
 		this.setUpdatePeriod(50);
-
 	};
 
 	// configure cameras
@@ -178,6 +187,8 @@ class ShaderScene extends CGFscene {
 		// only shader 6 is using time factor
 		if (this.selectedExampleShader == 6)
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		else if (this.selectedExampleShader == 10)
+			this.testShaders[10].setUniformsValues({ timeFactor: t / 100 % 1000 });
 	}
 
 	// main display function
