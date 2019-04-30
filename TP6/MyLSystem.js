@@ -24,7 +24,7 @@ class MyLSystem extends CGFobject {
     }
 
 
-    // gera o sistema L com os parâmetros atuais da cena
+    // gera o sistema L com os parï¿½metros atuais da cena
     generate(_axiom, _productions, _angle, _iterations, _scale){
         // copia o axioma da cena para iniciar a sequÃªncia de desenvolvimento
         this.axiom = _axiom;
@@ -64,7 +64,9 @@ class MyLSystem extends CGFobject {
                     newString += axiomProductions[0];
                 } else {
                     // sistema estocastico - varias producoes sao aplicaveis - seleciona aleatoriamente
-                    newString += axiomProductions[Math.floor(Math.random() * axiomProductions.length)];                    
+                    random = Math.random();
+                    newString += axiomProductions[Math.floor(random * axiomProductions.length)];
+                    console.log(random);                 
                 }
             }
 
