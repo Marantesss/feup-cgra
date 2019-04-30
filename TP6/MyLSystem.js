@@ -106,6 +106,25 @@ class MyLSystem extends CGFobject {
                     // pop
                     this.scene.popMatrix();
                     break;
+		case "\\" :
+                    // roda no sentido positivo sobre o eixo dos XX
+                    this.scene.rotate(this.angle, 1, 0, 0 );
+                    break;
+                    
+                case "/" :
+                    // roda no sentido negativo sobre o eixo dos XX
+                    this.scene.rotate(-this.angle, 1, 0, 0 );
+                    break;
+
+                case "^" :
+                    // roda no sentido positivo sobre o eixo dos YY;
+                    this.scene.rotate(this.angle, 0, 1, 0 );
+                    break;
+                
+                case "&" :
+                    // roda no sentido negativo sobre o eixo dos YY;
+                    this.scene.rotate(-this.angle, 0, 1, 0 );
+                    break;
 
                 // processa primitiva definida na gramatica, se existir
                 default:
