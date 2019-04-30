@@ -64,9 +64,7 @@ class MyLSystem extends CGFobject {
                     newString += axiomProductions[0];
                 } else {
                     // sistema estocastico - varias producoes sao aplicaveis - seleciona aleatoriamente
-                    random = Math.random();
-                    newString += axiomProductions[Math.floor(random * axiomProductions.length)];
-                    console.log(random);                 
+                    newString += axiomProductions[Math.floor(Math.random() * axiomProductions.length)];
                 }
             }
 
@@ -106,7 +104,7 @@ class MyLSystem extends CGFobject {
                     // pop
                     this.scene.popMatrix();
                     break;
-		case "\\" :
+		        case "\\" :
                     // roda no sentido positivo sobre o eixo dos XX
                     this.scene.rotate(this.angle, 1, 0, 0 );
                     break;

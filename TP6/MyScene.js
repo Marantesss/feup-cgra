@@ -34,9 +34,16 @@ class MyScene extends CGFscene {
                 this.axiom,
                 {
                     "F": [ "FF" ],
-                    "X": [ "F[-X][X]F[-X]+X" ],
-                    "X": [ "F[-X][x]+X" ],
-                    "X": [ "F[+X]-X" ]
+                    "X": [ "F[-X][X]F[-X]+X",
+                        "F[-X][x]+X",
+                        "F[+X]-X",
+                        "F[/X][X]F[\\\\X]+X",
+                        "F[\\X][X]/X",
+                        "F[/X]\\X",
+                        "F[^X][X]F[&X]^X",
+                        "F[^X]&X",
+                        "F[&X]^X"
+                     ]
                 },
                 this.angle,
                 this.iterations,
