@@ -31,7 +31,40 @@ class MyScene extends CGFscene {
          // ---- house
         this.house = new MyHouse(this, 4, 4);
 
+        // --- Bird
+        this.bird = new MyBird(this);
+
+         /* **** MATERIALS **** */
+        // ---- Applied Material
+        this.dayMaterial = new CGFappearance(this);
+        this.dayMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.dayMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.dayMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.dayMaterial.setShininess(10.0);
+        this.dayMaterial.loadTexture('images/skybox_day.png');
+
+        this.NightMaterial = new CGFappearance(this);
+        this.NightMaterial.setAmbient(0.8, 0.8, 0.8, 1.0);
+        this.NightMaterial.setDiffuse(0.9, 0.9, 0.9, 1.0);
+        this.NightMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
+        this.NightMaterial.setShininess(10.0);
+        this.NightMaterial.loadTexture('images/skybox_night.jpg');
+
+        this.grassMaterial = new CGFappearance(this);
+        this.grassMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassMaterial.setShininess(10.0);
+        this.grassMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        this.grassMaterial.loadTexture('images/Tiles/grass_top.png');
+
         //Objects connected to MyInterface
+         this.selectedMode = 0;
+        
+        this.modes = [this.dayMaterial, this.NightMaterial];
+
+        // Labels and ID's for object selection on MyInterface
+        this.modeIds  = { 'Day': 0, 'Night': 1};  
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -50,6 +83,24 @@ class MyScene extends CGFscene {
     }
     update(t){
 
+    }
+     updateAppliedMode() {
+        this.modes[this.selectedMode].apply();
+        this.updateLights();
+    }
+    updateLights() {
+        if (this.selectedMode == 0) {
+            this.lights[0].enable();
+            this.lights[1].disable();
+            this.lights[2].disable();
+            this.lights[3].disable();
+        }
+        else {
+            this.lights[0].disable();
+            this.lights[1].enable();
+            this.lights[2].enable();
+            this.lights[3].enable();
+        }
     }
 
     display() {
@@ -77,10 +128,22 @@ class MyScene extends CGFscene {
         this.plane.display();
         this.popMatrix();
 
-        this.cubeMap.display();
-
         this.house.display();
 
+        this.displayCubeMap();
+
+        this.bird.display();
+
         // ---- END Primitive drawing section
+    }
+
+    displayCubeMap() {
+        if (this.selectedMode == 0) {
+            this.modes[0].apply();
+        }
+        else {
+            this.modes[1].apply();
+        }
+        this.cubeMap.display();
     }
 }
