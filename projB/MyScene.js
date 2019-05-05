@@ -128,7 +128,7 @@ class MyScene extends CGFscene {
         this.plane.display();
         this.popMatrix();
 
-        this.house.display();
+        this.displayHouse();
 
         this.displayCubeMap();
 
@@ -145,5 +145,12 @@ class MyScene extends CGFscene {
             this.modes[1].apply();
         }
         this.cubeMap.display();
+    }
+    
+    displayHouse(){
+         this.pushMatrix();
+         this.scale(2,2,2);
+         this.house.display();
+         this.popMatrix();
     }
 }
