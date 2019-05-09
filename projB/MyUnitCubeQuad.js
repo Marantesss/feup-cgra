@@ -1,6 +1,7 @@
 var UnitCubeEnum = {
  MINECRAFT: 1,
  HOUSE: 2,
+ BIRD: 3
 };
 
 /**
@@ -34,6 +35,10 @@ class MyUnitCubeQuad extends CGFobject {
                         case UnitCubeEnum.HOUSE:
                                 this.quad.updateTexCoords([0,1, 4,1, 0,-3, 4,-3]); // 4 x 4
                                 this.cubeSide = new CGFtexture(this.scene, 'images/Tiles/brick_red.png');
+                                break;
+                        case UnitCubeEnum.BIRD:
+                                this.quad.updateTexCoords([0,1, 4,1, 0,-3, 4,-3]); // 4 x 4
+                                this.cubeSide = new CGFtexture(this.scene, 'images/bird.jpg');
                                 break;
                 }
         }

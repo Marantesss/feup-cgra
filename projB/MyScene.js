@@ -34,6 +34,7 @@ class MyScene extends CGFscene {
         // --- Bird
         this.bird = new MyBird(this);
 
+
          /* **** MATERIALS **** */
         // ---- Applied Material
         this.dayMaterial = new CGFappearance(this);
@@ -133,6 +134,7 @@ class MyScene extends CGFscene {
         this.displayCubeMap();
 
         this.bird.display();
+   
 
         // ---- END Primitive drawing section
     }
