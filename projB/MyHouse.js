@@ -14,6 +14,7 @@ class MyHouse extends CGFobject {
         this.coordx = coordx;
         this.coordz = coordz;
         this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.HOUSE);
+        this.unitCubeQuad1 = new MyUnitCubeQuad(this.scene, UnitCubeEnum.WINDOW);
         this.pyramid = new MyPyramid(this.scene, 4, 1);
         this.prism = new MyPrism(this.scene, 5, 5);
         this.prism1 = new MyPrism(this.scene , 10, 5);
@@ -30,7 +31,8 @@ class MyHouse extends CGFobject {
         this.houseMaterial.setTextureWrap('REAPEAT', 'REPEAT');
        
         this.roofTexture = new CGFtexture(this.scene, 'images/wood.jpg');
-        this.pillarTexture = new CGFtexture(this.scene, 'images/brick_pillar.jpg');       		
+        this.pillarTexture = new CGFtexture(this.scene, 'images/brick_pillar.jpg');  
+             		
 	}
 	display() {
  
@@ -51,6 +53,24 @@ class MyHouse extends CGFobject {
         this.scene.scale(1.5,1.2,1.5);
 		this.pyramid.display();
         this.scene.popMatrix();  
+
+        // ---- displaying windows
+        this.houseMaterial.setTexture(this.roofTexture);
+        this.houseMaterial.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+        
+        this.scene.pushMatrix();
+        this.scene.translate(0.5 + this.coordx, 1.5 ,0 + this.coordz);
+        this.scene.rotate(Math.PI/180*45, 0, 1, 0);
+        this.scene.scale(0.7,0.5,0.7);
+		this.pyramid.display();
+        this.scene.popMatrix(); 
+
+        this.scene.pushMatrix();
+		this.scene.translate(0.5 + this.coordx,1.3,0 + this.coordz);
+		this.scene.scale(0.7,0.5,0.7);
+		this.unitCubeQuad1.display();
+        this.scene.popMatrix();
        
         // ---- displaying pillars
         this.houseMaterial.setTexture(this.pillarTexture);

@@ -7,9 +7,11 @@ class MyBird extends CGFobject {
 	constructor(scene) {
         super(scene);
         this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.BIRD);
-        this.pyramid = new MyPyramid(this.scene, 4, 4);    		
+        this.pyramid = new MyPyramid(this.scene, 4, 4);  
+        this.prism = new MyPrism(this.scene, 3, 3);  		
         this.wing = new MyWing(this.scene);
         this.triangle = new MyTriangle(this.scene);
+        this.paw = new MyPaw(this.scene);
 	}
 	display() {
  
@@ -17,6 +19,15 @@ class MyBird extends CGFobject {
 		this.scene.pushMatrix();
 		this.scene.translate(0,0.5,0);
 		this.unitCubeQuad.display();
+        this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(0.6,1.3,-0.5);
+		this.scene.rotate(Math.PI/180*90, 0, 1, 0);
+		this.scene.rotate(Math.PI/180*120, 1, 0, 0);
+		this.scene.rotate(Math.PI/180*90, 0, 0, 1);	
+		this.scene.scale(0.5,1,0.5);
+		this.prism.display();
         this.scene.popMatrix();
 
         // ---- displaying face
@@ -88,6 +99,23 @@ class MyBird extends CGFobject {
 		this.scene.rotate(Math.PI/180*90, 1, 0, 0);
 		this.scene.scale(1,0.5,0.5);
 		this.wing.display();
+        this.scene.popMatrix();
+
+    //  --- displaying paw
+    	this.scene.pushMatrix();
+		this.scene.translate(0.5,0,0.2);
+		this.scene.rotate(Math.PI/180*90, 1, 0, 0);
+		this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
+		this.scene.scale(0.3,0.3,0.2);
+		this.paw.display();
+        this.scene.popMatrix();
+
+    	this.scene.pushMatrix();
+		this.scene.translate(0.5,0,-0.2);
+		this.scene.rotate(Math.PI/180*90, 1, 0, 0);
+		this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
+		this.scene.scale(0.3,0.3,0.2);
+		this.paw.display();
         this.scene.popMatrix();
 
 	}
