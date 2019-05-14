@@ -4,8 +4,13 @@
  * @param scene - Reference to MyScene object
  */
 class MyBird extends CGFobject {
-	constructor(scene) {
+	constructor(scene, orientation, Bspeed, positionX, positionY, positionZ ) {
         super(scene);
+        this.orientation = orientation;
+        this.speed = Bspeed;
+        this.X = positionX;
+        this.Y = positionY;
+        this.Z = positionZ;
         this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.BIRD);
         this.pyramid = new MyPyramid(this.scene, 4, 4);  
         this.prism = new MyPrism(this.scene, 3, 3);  		
