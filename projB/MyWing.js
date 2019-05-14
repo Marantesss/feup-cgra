@@ -12,8 +12,11 @@ class MyWing extends CGFobject {
 
 		this.square = new MySquare(this.scene);
 		this.triangle = new MyTriangle(this.scene);
+
 	}
 	display() {
+		
+		
 	 // ---- displaying first part of the wing
 		this.scene.pushMatrix();
 		this.scene.translate(0,0.5,0.7);

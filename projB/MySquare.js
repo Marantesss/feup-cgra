@@ -16,15 +16,19 @@ class MySquare extends CGFobject {
 			-0.5, -0.5, 0,	//0
 			0.5, -0.5, 0,	//1
 			-0.5, 0.5, 0,	//2
-			0.5, 0.5, 0		//3
+			0.5, 0.5, 0,	//3
+			-0.5, -0.5, 0,	//4
+			0.5, -0.5, 0,	//5
+			-0.5, 0.5, 0,	//6
+			0.5, 0.5, 0		//7
 		];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
 			0, 1, 2,
-			2, 1, 0,
 			1, 3, 2,
-			2, 3, 1,
+			6, 5, 4,			
+			6, 7, 5
 		];
 
 		//Facing Z positive
@@ -32,7 +36,11 @@ class MySquare extends CGFobject {
 			0, 0, 1,
 			0, 0, 1,
 			0, 0, 1,
-			0, 0, 1
+			0, 0, 1, 
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, -1
 		];
 		
 		/*
@@ -49,7 +57,11 @@ class MySquare extends CGFobject {
 			0, 1, // bottom left
 			1, 1, // botom right
 			0, 0, // top left
-			1, 0  // top right
+			1, 0,  // top right		
+			0, 1, // bottom left
+			1, 1, // botom right
+			0, 0, // top left
+			1, 0  // top right	
 		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
