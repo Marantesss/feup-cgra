@@ -12,55 +12,22 @@ class MySphere extends CGFobject {
 	}
 	
 	initBuffers() {
-		this.vertices = [
-			-0.5, -0.5, 0,	//0
-			0.5, -0.5, 0,	//1
-			-0.5, 0.5, 0,	//2
-			0.5, 0.5, 0		//3
-		];
+		for(var direction = 1; direction >= -1; direction -= 2) {
+  			for(var beta = 0.17; beta < 1.445; beta += 0.17) {
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-			1, 3, 2,
-		];
+    			var radius = Math.cos(beta) * this.radius;
+     			var fixedY = Math.sin(beta) * this.radius * direction;
 
-		//Facing Z positive
-		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
-		];
-		
-		/*
-		Texture coords (s,t)
-		+----------> s
-        |
-        |
-		|
-		v
-        t
-        */
+     		for(var alpha = 0; alpha < 6.28; alpha += 0.17) {
+       			p = 50
+       			p.x = Math.cos(alpha) * radius;
+       			p.y = fixedY;
+       			p.z = Math.sin(alpha) * radius;
 
-		this.texCoords = [
-			0, 1, // bottom left
-			1, 1, // botom right
-			0, 0, // top left
-			1, 0  // top right
-		]
-		this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initGLBuffers();
-	}
-
-	/**
-	 * @method updateTexCoords
-	 * Updates the list of texture coordinates of the quad
-	 * @param {Array} coords - Array of texture coordinates
-	 */
-	updateTexCoords(coords) {
-		this.texCoords = [...coords];
-		this.updateTexCoordsGLBuffers();
-	}
+      		 this.numberOfVertexes++;
+     	}
+   }
+		}
+}
 }
 

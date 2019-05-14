@@ -5,11 +5,14 @@
 class MyScene extends CGFscene {
     constructor() {
         super();
+       
     }
     init(application) {
         super.init(application);
         this.initCameras();
         this.initLights();
+
+        var FPS = 20;
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -19,7 +22,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(1000/FPS);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);

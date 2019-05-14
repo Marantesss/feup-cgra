@@ -1,0 +1,5 @@
+update(t)
+this.lostTime = t || 0;
+this.deltaTime = t - this.lostTime;
+this.lostTime = t;
+this.bird.update(this.deltaTime);

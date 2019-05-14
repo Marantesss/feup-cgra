@@ -9,60 +9,28 @@ class MyWing extends CGFobject {
 		this.initBuffers();
 		if (coords != undefined)
 			this.updateTexCoords(coords);
+
+		this.square = new MySquare(this.scene);
+		this.triangle = new MyTriangle(this.scene);
 	}
+	display() {
+	 // ---- displaying first part of the wing
+		this.scene.pushMatrix();
+		this.scene.translate(0,0.5,0.7);
+		this.scene.rotate(Math.PI/180*60, 1, 0, 0);
+		this.scene.rotate(Math.PI/180*90, 0, 0, 1);
+		this.square.display();
+        this.scene.popMatrix();
+
+	// --- displaying second part of the wing
+		this.scene.pushMatrix();
+		this.scene.translate(0,0.5,1.55);
+		this.scene.rotate(Math.PI/180*120, 1, 0, 0);
+		this.scene.rotate(Math.PI/180*90, 0, 0, 1);
+		this.scene.scale(0.5,0.5,0.5);
+		this.triangle.display();
+        this.scene.popMatrix();
 	
-	initBuffers() {
-		this.vertices = [
-			-0.5, -0.5, 0,	//0
-			0.5, -0.5, 0,	//1
-			-0.5, 0.5, 0,	//2
-			0.5, 0.5, 0		//3
-		];
-
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-			2, 1, 0,
-			1, 3, 2,
-			2, 3, 1,
-		];
-
-		//Facing Z positive
-		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
-		];
-		
-		/*
-		Texture coords (s,t)
-		+----------> s
-        |
-        |
-		|
-		v
-        t
-        */
-
-		this.texCoords = [
-			0, 1, // bottom left
-			1, 1, // botom right
-			0, 0, // top left
-			1, 0  // top right
-		]
-		this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initGLBuffers();
-	}
-
-	/**
-	 * @method updateTexCoords
-	 * Updates the list of texture coordinates of the quad
-	 * @param {Array} coords - Array of texture coordinates
-	 */
-	updateTexCoords(coords) {
-		this.texCoords = [...coords];
-		this.updateTexCoordsGLBuffers();
 	}
 }
 
