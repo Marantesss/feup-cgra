@@ -5,7 +5,7 @@
 class MyScene extends CGFscene {
     constructor() {
         super();
-       
+
     }
     init(application) {
         super.init(application);
@@ -22,7 +22,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-        this.setUpdatePeriod(1000/FPS);
+        this.setUpdatePeriod(1000 / FPS);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -30,17 +30,17 @@ class MyScene extends CGFscene {
         // ---- mountains
         this.terrain = new MyTerrain(this);
 
-         // ---- CubeMap
+        // ---- CubeMap
         this.cubeMap = new MyCubeMap(this);
 
-         // ---- house
+        // ---- house
         this.house = new MyHouse(this, 4, 4);
 
         // --- Bird
         this.bird = new MyBird(this);
 
 
-         /* **** MATERIALS **** */
+        /* **** MATERIALS **** */
         // ---- Applied Material
         this.dayMaterial = new CGFappearance(this);
         this.dayMaterial.setAmbient(0.1, 0.1, 0.1, 1);
@@ -58,11 +58,11 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.selectedMode = 0;
-        
+
         this.modes = [this.dayMaterial, this.NightMaterial];
 
         // Labels and ID's for object selection on MyInterface
-        this.modeIds  = { 'Day': 0, 'Night': 1};  
+        this.modeIds = { 'Day': 0, 'Night': 1 };
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -79,10 +79,10 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    update(t){
-
+    update(t) {
+        checkKeys();
     }
-    
+
     updateAppliedMode() {
         this.modes[this.selectedMode].apply();
         this.updateLights();
@@ -102,6 +102,23 @@ class MyScene extends CGFscene {
         }
     }
 
+    checkKeys() {
+        var text = "Keys pressed: ";
+        var keysPressed = false;
+        // Check for key codes e.g. in https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+            text += " W ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text += " S ";
+            keysPressed = true;
+        }
+        if (keysPressed)
+            console.log(text);
+    }
+
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -118,16 +135,16 @@ class MyScene extends CGFscene {
 
         //Apply default appearence
         this.setDefaultAppearance();
-            
+
         // ---- BEGIN Primitive drawing section
-        this.terrain.display();
+        // this.terrain.display();
 
         this.displayHouse();
 
         this.displayCubeMap();
 
-        this.bird.display();
-   
+        this.displayBird();
+
         // ---- END Primitive drawing section
     }
 
@@ -141,11 +158,19 @@ class MyScene extends CGFscene {
         }
         this.cubeMap.display();
     }
-    
-    displayHouse(){
+
+    displayHouse() {
         this.pushMatrix();
-        this.scale(2,2,2);
+        this.scale(2, 2, 2);
         this.house.display();
         this.popMatrix();
     }
+
+    displayBird() {
+        this.pushMatrix();
+        this.translate(0, 3, 0); //3 unidades acima do chão.
+        this.bird.display();
+        this.popMatrix();
+    }
+
 }
