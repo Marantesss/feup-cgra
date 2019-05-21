@@ -12,7 +12,7 @@ class MyScene extends CGFscene {
         this.initCameras();
         this.initLights();
 
-        var FPS = 20;
+        var FPS = 20; //numero de frames por segundo
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -79,8 +79,13 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
     update(t) {
-        checkKeys();
+        this.lastTime = this.lastTime || 0;
+        this.deltaTime = t - this.lastTime;
+        this.lastTime = t;
+        this.bird.update(t, this.deltaTime);
+        checkKeys();     
     }
 
     updateAppliedMode() {
@@ -114,10 +119,28 @@ class MyScene extends CGFscene {
             text += " S ";
             keysPressed = true;
         }
+        if (this.gui.isKeyPressed("KeyA")) {
+            text += " A ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            text += " D ";
+            keysPressed = true;
+        }
         if (keysPressed)
             console.log(text);
     }
 
+    onSpeedFactorChanged(){
+        this.bird.accelerate(v);
+    }
+
+    onScaleFactorChanged(){
+        this.pushMatrix();
+            this.scale(2, 2, 2);
+            this.displayBird();
+        this.popMatrix();
+    }
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -161,15 +184,15 @@ class MyScene extends CGFscene {
 
     displayHouse() {
         this.pushMatrix();
-        this.scale(2, 2, 2);
-        this.house.display();
+            this.scale(2, 2, 2);
+            this.house.display();
         this.popMatrix();
     }
 
     displayBird() {
         this.pushMatrix();
-        this.translate(0, 3, 0); //3 unidades acima do chão.
-        this.bird.display();
+            this.translate(0, 3, 0); //3 unidades acima do chão.
+            this.bird.display();
         this.popMatrix();
     }
 
