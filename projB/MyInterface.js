@@ -6,7 +6,7 @@ class MyInterface extends CGFinterface {
     constructor() {
         super();
     }
-    initKeys() {
+  /*  initKeys() {
         // create reference from the scene to the GUI
         this.scene.gui=this;
 
@@ -31,7 +31,7 @@ class MyInterface extends CGFinterface {
      isKeyPressed(keyCode) {
         // returns true if a key is marked as pressed, false otherwise
         return this.activeKeys[keyCode] || false;
-      }
+      }*/
 
     init(application) {
         // call CGFinterface init

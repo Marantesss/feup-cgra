@@ -122,11 +122,11 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         this.terrain.display();
 
-        //this.displayHouse();
+        this.displayHouse();
 
-        //this.displayCubeMap();
+        this.displayCubeMap();
 
-        //this.bird.display();
+        this.bird.display();
    
         // ---- END Primitive drawing section
     }

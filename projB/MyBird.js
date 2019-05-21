@@ -14,7 +14,8 @@ class MyBird extends CGFobject {
         this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.BIRD);
         this.pyramid = new MyPyramid(this.scene, 4, 4);  
         this.prism = new MyPrism(this.scene, 3, 3);  		
-        this.wing = new MyWing(this.scene);
+        this.leftWing = new MyLeftWing(this.scene);
+        this.rigthWing = new MyRigthWing(this.scene);
         this.square = new MySquare(this.scene);
         this.paw = new MyPaw(this.scene);
         this.eye = new MyUnitCubeQuad(this.scene, UnitCubeEnum.EYE);
@@ -82,14 +83,13 @@ class MyBird extends CGFobject {
       // ---- displaying Wing
 		this.scene.pushMatrix();
 		this.birdMaterial.apply();
-		this.wing.display();
+		this.leftWing.display();
         this.scene.popMatrix();
 
       // ---- displaying wing
 		this.scene.pushMatrix();
-		this.scene.scale(1, 1, -1);
 		this.birdMaterial.apply();
-		this.wing.display();	
+		this.rigthWing.display();	
         this.scene.popMatrix();	
 
 	// --- displaying tail
