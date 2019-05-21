@@ -133,7 +133,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
         
         // activate selected shader
-		this.setActiveShader(this.mountainShader);
+	/*	this.setActiveShader(this.mountainShader);
         this.pushMatrix();
         
         // bind additional texture to texture unit 1
@@ -145,13 +145,13 @@ class MyScene extends CGFscene {
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(30, 30, 1);
         this.plane.display();
-        this.popMatrix();
+        this.popMatrix();*/
 
-        //this.displayHouse();
+        this.displayHouse();
 
-        //this.displayCubeMap();
+        this.displayCubeMap();
 
-        //this.bird.display();
+        this.bird.display();
    
         // ---- END Primitive drawing section
     }
