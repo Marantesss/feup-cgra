@@ -4,17 +4,22 @@ precision highp float;
 
 varying vec2 vTextureCoord;
 
-uniform sampler2D uSampler;
-uniform sampler2D uSampler2;
+uniform sampler2D uSampler;		// original textute
+uniform sampler2D uSampler2;	// heightmap
+uniform sampler2D uSampler3;	// gradient
+
 
 void main() {
+	// ---- original texture
 	vec4 color = texture2D(uSampler, vTextureCoord);
-	/*
-	vec4 filter = texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord);
+	// ---- heightmap
+	vec4 heightmap = texture2D(uSampler2, vTextureCoord);
+	// ---- altimetry
+	vec4 gradient = texture2D(uSampler3, vec2(1.0-heightmap.r, 1.0-heightmap.r));
 
-	if ((filter.r + filter.g + filter.b)/3.0 > 0.5)
-		color=vec4(0.52, 0.18, 0.11, 1.0);
-	*/
+	color.r = (color.r + gradient.r)/2.0;
+	color.g = (color.g + gradient.g)/2.0;
+	color.b = (color.b + gradient.b)/2.0;
 	
 	gl_FragColor = color;
 }

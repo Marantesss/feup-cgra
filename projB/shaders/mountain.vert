@@ -16,7 +16,7 @@ void main() {
 	
 	vTextureCoord = aTextureCoord;
 
-	vec4 filter = texture2D(uSampler2, vec2(0.0,0.0)+vTextureCoord);
+	vec4 filter = texture2D(uSampler2, vTextureCoord);
 
 	offset = aVertexNormal * 6.0 * (filter.r + filter.g + filter.b)/3.0;
 

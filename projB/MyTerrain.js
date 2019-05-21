@@ -18,14 +18,15 @@ class MyTerrain extends CGFobject {
         this.mountainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
         this.mountainMaterial.setShininess(120);
     
-        this.mountainTexture = new CGFtexture(this.scene, "images/terrain.jpg");
+        this.mountainTexture = new CGFtexture(this.scene, "images/terrain_fixed.jpg");
         this.mountainMaterial.setTexture(this.mountainTexture);
         this.mountainMaterial.setTextureWrap('REPEAT', 'REPEAT');
     
-        this.mountainHeightmap = new CGFtexture(this.scene, "images/heightmap.jpg");
-           
+        this.mountainHeightmap = new CGFtexture(this.scene, "images/heightmap_square.jpg");
+        this.mountainGradient = new CGFtexture(this.scene, "images/altimetry.png");
+
         this.mountainShader = new CGFshader(this.scene.gl, "shaders/mountain.vert", "shaders/mountain.frag");
-        this.mountainShader.setUniformsValues({ uSampler2: 1 });
+        this.mountainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2});
 
     }
     
@@ -36,6 +37,7 @@ class MyTerrain extends CGFobject {
 
         // ---- bind additional texture to texture unit 1
         this.mountainHeightmap.bind(1);
+        this.mountainGradient.bind(2);
 
         // ---- display
         this.scene.pushMatrix();
