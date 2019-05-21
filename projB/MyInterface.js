@@ -6,7 +6,7 @@ class MyInterface extends CGFinterface {
     constructor() {
         super();
     }
-  /*  initKeys() {
+    initKeys() {
         // create reference from the scene to the GUI
         this.scene.gui=this;
 
@@ -31,7 +31,7 @@ class MyInterface extends CGFinterface {
      isKeyPressed(keyCode) {
         // returns true if a key is marked as pressed, false otherwise
         return this.activeKeys[keyCode] || false;
-      }*/
+      }
 
     init(application) {
         // call CGFinterface init
@@ -44,7 +44,13 @@ class MyInterface extends CGFinterface {
 
         //Dropdown for environment
         this.gui.add(this.scene, 'selectedMode', this.scene.modeIds).name('Selected Mode').onChange(this.scene.updateAppliedMode.bind(this.scene));
+        
+        //this.gui.add(this.scene, 'speedFactor', 0.1, 3).onChange(this.scene.onSpeedFactorChanged.bind(this.scene));
 
+        //this.gui.add(this.scene, 'scaleFactor', 0.5 , 3).onChange(this.scene.onScaleFactorChanged.bind(this.scene));
+
+        this.initKeys();
+        
         return true;
     }
 }
