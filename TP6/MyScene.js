@@ -25,7 +25,7 @@ class MyScene extends CGFscene {
         this.ruleF = "FF";
         this.ruleX = "F[-X][X]F[-X]+FX";
         this.angle = 30.0;
-        this.iterations = 4;
+        this.iterations = 6;
         this.scaleFactor = 0.5;
         this.lSystem = new MyLSPlant(this);
 

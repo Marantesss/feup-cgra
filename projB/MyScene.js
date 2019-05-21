@@ -54,16 +54,23 @@ class MyScene extends CGFscene {
         this.NightMaterial.setShininess(10.0);
         this.NightMaterial.loadTexture('images/skybox_night.jpg');
 
-        this.grassMaterial = new CGFappearance(this);
-        this.grassMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.grassMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.grassMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.grassMaterial.setShininess(10.0);
-        this.grassMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        this.grassMaterial.loadTexture('images/Tiles/grass_top.png');
+        this.mountainMaterial = new CGFappearance(this);
+		this.mountainMaterial.setAmbient(0.3, 0.3, 0.3, 1);
+		this.mountainMaterial.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.mountainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
+		this.mountainMaterial.setShininess(120);
+
+		this.mountainTexture = new CGFtexture(this, "images/terrain.jpg");
+		this.mountainMaterial.setTexture(this.mountainTexture);
+		this.mountainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.mountainHeightmap = new CGFtexture(this, "images/heightmap.jpg");
+        
+        this.mountainShader = new CGFshader(this.gl, "shaders/mountain.vert", "shaders/mountain.frag");
+		this.mountainShader.setUniformsValues({ uSampler2: 1 });
 
         //Objects connected to MyInterface
-         this.selectedMode = 0;
+        this.selectedMode = 0;
         
         this.modes = [this.dayMaterial, this.NightMaterial];
 
@@ -88,7 +95,8 @@ class MyScene extends CGFscene {
     update(t){
 
     }
-     updateAppliedMode() {
+    
+    updateAppliedMode() {
         this.modes[this.selectedMode].apply();
         this.updateLights();
     }
@@ -121,28 +129,35 @@ class MyScene extends CGFscene {
         // Draw axis
         this.axis.display();
 
-        //Apply default appearance
+        //Apply default appearence
         this.setDefaultAppearance();
-
-
+        
+        // activate selected shader
+		this.setActiveShader(this.mountainShader);
+        this.pushMatrix();
+        
+        // bind additional texture to texture unit 1
+		this.mountainHeightmap.bind(1);
+        
         // ---- BEGIN Primitive drawing section
         this.pushMatrix();
+        this.mountainMaterial.apply();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 1);
+        this.scale(30, 30, 1);
         this.plane.display();
         this.popMatrix();
 
-        this.displayHouse();
+        //this.displayHouse();
 
-        this.displayCubeMap();
+        //this.displayCubeMap();
 
-        this.bird.display();
+        //this.bird.display();
    
-
         // ---- END Primitive drawing section
     }
 
     displayCubeMap() {
+        this.dayMaterial.apply();
         if (this.selectedMode == 0) {
             this.modes[0].apply();
         }
@@ -153,9 +168,9 @@ class MyScene extends CGFscene {
     }
     
     displayHouse(){
-         this.pushMatrix();
-         this.scale(2,2,2);
-         this.house.display();
-         this.popMatrix();
+        this.pushMatrix();
+        this.scale(2,2,2);
+        this.house.display();
+        this.popMatrix();
     }
 }
