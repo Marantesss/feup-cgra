@@ -34,8 +34,8 @@ class MyBird extends CGFobject {
         this.birdTexture = new CGFtexture(this.scene, 'images/bird.jpg');
         this.bicoTexture = new CGFtexture(this.scene, 'images/bico.png');
 	}
+
 	display() {
- 
  		// ---- displaying Texture
         this.birdMaterial.setTexture(this.birdTexture);
         this.birdMaterial.apply();

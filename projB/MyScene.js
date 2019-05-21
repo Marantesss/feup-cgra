@@ -26,7 +26,9 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.plane = new Plane(this, 32);
+
+        // ---- mountains
+        this.terrain = new MyTerrain(this);
 
          // ---- CubeMap
         this.cubeMap = new MyCubeMap(this);
@@ -53,21 +55,6 @@ class MyScene extends CGFscene {
         this.NightMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.NightMaterial.setShininess(10.0);
         this.NightMaterial.loadTexture('images/skybox_night.jpg');
-
-        this.mountainMaterial = new CGFappearance(this);
-		this.mountainMaterial.setAmbient(0.3, 0.3, 0.3, 1);
-		this.mountainMaterial.setDiffuse(0.7, 0.7, 0.7, 1);
-		this.mountainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
-		this.mountainMaterial.setShininess(120);
-
-		this.mountainTexture = new CGFtexture(this, "images/terrain.jpg");
-		this.mountainMaterial.setTexture(this.mountainTexture);
-		this.mountainMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.mountainHeightmap = new CGFtexture(this, "images/heightmap.jpg");
-        
-        this.mountainShader = new CGFshader(this.gl, "shaders/mountain.vert", "shaders/mountain.frag");
-		this.mountainShader.setUniformsValues({ uSampler2: 1 });
 
         //Objects connected to MyInterface
         this.selectedMode = 0;
@@ -131,21 +118,9 @@ class MyScene extends CGFscene {
 
         //Apply default appearence
         this.setDefaultAppearance();
-        
-        // activate selected shader
-		this.setActiveShader(this.mountainShader);
-        this.pushMatrix();
-        
-        // bind additional texture to texture unit 1
-		this.mountainHeightmap.bind(1);
-        
+            
         // ---- BEGIN Primitive drawing section
-        this.pushMatrix();
-        this.mountainMaterial.apply();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(30, 30, 1);
-        this.plane.display();
-        this.popMatrix();
+        this.terrain.display();
 
         //this.displayHouse();
 
