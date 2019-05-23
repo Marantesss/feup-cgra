@@ -73,11 +73,8 @@ class MyBird extends CGFobject {
         this.deltaTime = this.scene.t - this.lastTime;
         this.lastTime = this.scene.t;
 
-		var speed1;
-		speed1 = this.X + Math.cos(this.orientation) * this.speed * this.deltaTime;
-		this.X = speed1;
-		speed1 = this.Z - Math.sin(this.orientation) * this.speed * this.deltaTime;		
-		this.Z = speed1;
+		this.X = this.X + Math.cos(this.orientation) * this.speed * this.deltaTime;
+		this.Z = this.Z - Math.sin(this.orientation) * this.speed * this.deltaTime;		
 
 		if (this.X > 90)
 			this.X = 90;
