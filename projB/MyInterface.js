@@ -6,6 +6,7 @@ class MyInterface extends CGFinterface {
     constructor() {
         super();
     }
+    
     initKeys() {
         // create reference from the scene to the GUI
         this.scene.gui=this;
@@ -47,8 +48,12 @@ class MyInterface extends CGFinterface {
         
         //this.gui.add(this.scene, 'speedFactor', 0.1, 3).onChange(this.scene.onSpeedFactorChanged.bind(this.scene));
 
-        //this.gui.add(this.scene, 'scaleFactor', 0.5 , 3).onChange(this.scene.onScaleFactorChanged.bind(this.scene));
+       // this.gui.add(this.scene, 'scaleFactor', 0.5 , 3).onChange(this.scene.onScaleFactorChanged.bind(this.scene));
 
+       this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
+        
+        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
+        
         this.initKeys();
         
         return true;
