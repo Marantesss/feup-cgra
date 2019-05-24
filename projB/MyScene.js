@@ -47,6 +47,9 @@ class MyScene extends CGFscene {
 		// -- Tree Branch
 		this.treeBranch = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
 
+		// -- Nest
+		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
+
 		/* **** MATERIALS **** */
 		// ---- Applied Material
 		this.dayMaterial = new CGFappearance(this);
@@ -194,13 +197,16 @@ class MyScene extends CGFscene {
 
 		this.displayCubeMap();
 
-		this.displayBird();
-		
-		this.treeBranch.display();
+		//this.displayBird();
 
+		this.nest.display();
+		
+		//this.treeBranch.display();
+		
         // ---- END Primitive drawing section
 
 	}
+
 
 	displayCubeMap() {
 		this.dayMaterial.apply();
