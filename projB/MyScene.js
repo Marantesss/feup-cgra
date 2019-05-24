@@ -44,6 +44,9 @@ class MyScene extends CGFscene {
 		// --- Bird
 		this.bird = new MyBird(this, this.orientation, this.Bspeed, this.BirdX, this.BirdY, this.BirdZ);
 
+		// -- Tree Branch
+		this.treeBranch = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+
 		/* **** MATERIALS **** */
 		// ---- Applied Material
 		this.dayMaterial = new CGFappearance(this);
@@ -191,7 +194,9 @@ class MyScene extends CGFscene {
 
 		this.displayCubeMap();
 
-        this.displayBird();
+		this.displayBird();
+		
+		this.treeBranch.display();
 
         // ---- END Primitive drawing section
 
