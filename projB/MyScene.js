@@ -45,7 +45,13 @@ class MyScene extends CGFscene {
 		this.bird = new MyBird(this, this.orientation, this.Bspeed, this.BirdX, this.BirdY, this.BirdZ);
 
 		// -- Tree Branch
-		this.treeBranch = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+
+		var treesBransh = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
 
 		// -- Nest
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
@@ -197,9 +203,9 @@ class MyScene extends CGFscene {
 
 		this.displayCubeMap();
 
-		//this.displayBird();
+		this.displayBird();
 
-		this.nest.display();
+		this.displayNest();
 		
 		//this.treeBranch.display();
 		
@@ -207,6 +213,14 @@ class MyScene extends CGFscene {
 
 	}
 
+	displayNest(){
+		this.pushMatrix();
+			this.translate(9.5,3.5,8);
+			this.rotate(-Math.PI/4,0,0,1);
+            this.scale(0.5, 0.5, 0.5);
+            this.nest.display();
+        this.popMatrix();
+	}
 
 	displayCubeMap() {
 		this.dayMaterial.apply();
