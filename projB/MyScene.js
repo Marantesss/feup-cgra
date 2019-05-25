@@ -97,6 +97,7 @@ class MyScene extends CGFscene {
 	initCameras() {
 		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
 	}
+
 	setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -199,7 +200,7 @@ class MyScene extends CGFscene {
 
 		//	this.terrain.display(); 
 
-		this.displayHouse();
+		//this.displayHouse();
 
 		this.displayCubeMap();
 
@@ -242,9 +243,9 @@ class MyScene extends CGFscene {
 	
 	displayBird() {
 		this.pushMatrix();			
-			 this.scale(0.5*this.scaleFactor, 0.5*this.scaleFactor, 0.5*this.scaleFactor);
-			 this.bird.display();
-		 this.popMatrix();
+			this.scale(0.5*this.scaleFactor, 0.5*this.scaleFactor, 0.5*this.scaleFactor);
+			this.bird.display();
+		this.popMatrix();
 	 }
  
 }

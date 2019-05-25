@@ -31,9 +31,9 @@ class MyTreeBranch extends CGFobject {
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         
         this.scene.pushMatrix();
-        this.scene.rotate(Math.PI, 1, 1, 0);
-        this.scene.scale(this.trunkRadius, this.trunkHeight, this.trunkRadius);
-        this.treeBranch.display();
+            this.scene.rotate(Math.PI, 1, 1, 0);
+            this.scene.scale(this.trunkRadius, this.trunkHeight, this.trunkRadius);
+            this.treeBranch.display();
         this.scene.popMatrix();
         // ----
     }
