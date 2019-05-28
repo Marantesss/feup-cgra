@@ -24,7 +24,7 @@ class MyScene extends CGFscene {
 		this.enableTextures(true);
 		this.setUpdatePeriod(1000 / FPS);
 
-		//bird moviment
+		// bird movement
 		this.BirdX = 0;
 		this.BirdY = 3;
 		this.BirdZ = 0;
@@ -59,6 +59,9 @@ class MyScene extends CGFscene {
 
 		// ---- Nest
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
+
+		// ---- Tree
+		this.tree = new MyLSPlant(this);
 
 		/* **** MATERIALS **** */
 		// ---- Applied Material
@@ -211,12 +214,12 @@ class MyScene extends CGFscene {
 		// Draw axis
 		this.axis.display();
 
-		//Apply default appearance
+		// Apply default appearance
 		this.setDefaultAppearance();
 
 		// ---- BEGIN Primitive drawing section
 
-		//	this.terrain.display(); 
+		// this.terrain.display(); 
 
 		this.displayHouse();
 
@@ -226,10 +229,11 @@ class MyScene extends CGFscene {
 
 		this.displayNest();
 
-		this.lightning.display();		
+		this.lightning.display();
+		
+		this.tree.display();
 		
         // ---- END Primitive drawing section
-
 	}
 
 	displayTreeBranchs(){
