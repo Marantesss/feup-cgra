@@ -6,6 +6,7 @@ class MyScene extends CGFscene {
 	constructor() {
 		super();
 	}
+
 	init(application) {
 		super.init(application);
 		this.initCameras();
@@ -41,19 +42,22 @@ class MyScene extends CGFscene {
 		// ---- house
 		this.house = new MyHouse(this, 4, 4);
 
-		// --- Bird
+		// ---- Bird
 		this.bird = new MyBird(this, this.orientation, this.Bspeed, this.BirdX, this.BirdY, this.BirdZ);
 
-		// -- Tree Branch
+		// ---- Tree Branch
 		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
 		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
 		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
 		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
 		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
 
-		var treesBransh = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
+		var treeBranches = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
 
-		// -- Nest
+		// ---- Lighting
+		this.lightning = new MyLightning(this);
+
+		// ---- Nest
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
 
 		/* **** MATERIALS **** */
@@ -83,8 +87,6 @@ class MyScene extends CGFscene {
 		this.modeIds = { 'Day': 0, 'Night': 1 };
 
 		this.tanterior = 0;
-
-
 	}
 
 	initLights() {
@@ -173,6 +175,13 @@ class MyScene extends CGFscene {
 			keysPressed = true;
 		}
 
+		if (this.gui.isKeyPressed("KeyL")) {
+			text += " L ";
+
+			this.lightning.startAnimation();
+			keysPressed = true;
+		}
+
 		if (keysPressed)
 			console.log(text);
 	}
@@ -207,6 +216,8 @@ class MyScene extends CGFscene {
 		this.displayBird();
 
 		this.displayNest();
+
+		this.lightning.display();
 		
 		//this.treeBranch.display();
 		

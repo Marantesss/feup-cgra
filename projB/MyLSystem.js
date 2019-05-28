@@ -24,7 +24,7 @@ class MyLSystem extends CGFobject {
     }
 
 
-    // gera o sistema L com os par�metros atuais da cena
+    // gera o sistema L com os parametros atuais da cena
     generate(_axiom, _productions, _angle, _iterations, _scale){
         // copia o axioma da cena para iniciar a sequência de desenvolvimento
         this.axiom = _axiom;
@@ -43,7 +43,7 @@ class MyLSystem extends CGFobject {
 
         // desenvolve a sequencia de desenvolvimento do Sistema L
         this.iterate()
-     }
+    }
 
   
     // desenvolve o axioma ao longo de uma sequência de desenvolvimento com um determinado número de iterações

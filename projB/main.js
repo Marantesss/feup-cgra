@@ -23,6 +23,7 @@ serialInclude(['../lib/CGF.js',
                 'MyCylinder.js',
                 'MyNest.js',
                 'MyLSystem.js',
+                'MyLightning.js',
 
 main=function()
 {
