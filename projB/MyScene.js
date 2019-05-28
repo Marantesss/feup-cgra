@@ -130,7 +130,8 @@ class MyScene extends CGFscene {
 
 	update(t) {
 		this.checkKeys();
-		this.t = t / 200;
+		this.bird.update(t);
+		this.lightning.update(t);
 	}
 
 
@@ -181,7 +182,14 @@ class MyScene extends CGFscene {
 			this.lightning.startAnimation();
 			keysPressed = true;
 		}
-
+		if (this.gui.isKeyPressed("KeyP")) {
+			text += " P ";
+			this.bird.goDown();
+			//this.bird.display();
+			//this.bird.goUP();
+			keysPressed = true;
+		}
+		
 		if (keysPressed)
 			console.log(text);
 	}
@@ -209,7 +217,7 @@ class MyScene extends CGFscene {
 
 		//	this.terrain.display(); 
 
-		//this.displayHouse();
+		this.displayHouse();
 
 		this.displayCubeMap();
 
@@ -219,10 +227,18 @@ class MyScene extends CGFscene {
 
 		this.lightning.display();
 		
-		//this.treeBranch.display();
+		
 		
         // ---- END Primitive drawing section
 
+	}
+
+	displayTreeBranchs(){
+		this.treeBranch0.display();
+		this.treeBranch0.display();
+		this.treeBranch0.display();
+		this.treeBranch0.display();
+		this.treeBranch0.display();
 	}
 
 	displayNest(){

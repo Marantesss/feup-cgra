@@ -41,7 +41,7 @@ class MyLightning extends MyLSystem {
         this.deltaTime = t - this.lastTime;
         this.lastTime = t;
         
-        this.depth += Math.round(this.deltaTime * (axiom.length/1000));
+        this.depth += Math.round(this.deltaTime * (this.axiom.length/1000));
     }
 
     startAnimation(t) {

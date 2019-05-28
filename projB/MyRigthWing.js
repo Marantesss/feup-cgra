@@ -20,14 +20,14 @@ class MyRigthWing extends CGFobject {
 	 // ---- displaying first part of the wing
 		this.scene.pushMatrix();
 		this.scene.translate(0,0.6,-0.7);
-		this.scene.rotate(Math.PI/180*-60, 1, 0, 0);
+		this.scene.rotate(Math.PI/180*-90, 1, 0, 0);
 		this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
 		this.square.display();
         this.scene.popMatrix();
 
 	// --- displaying second part of the wing
 		this.scene.pushMatrix();
-		this.scene.translate(0,0.6,-1.55);
+		this.scene.translate(0,0.35,-1.63);
 		this.scene.rotate(Math.PI/180*-120, 1, 0, 0);
 		this.scene.rotate(Math.PI/180*90, 0, 0, 1);
 		this.scene.rotate(Math.PI, 1, 0, 0);
