@@ -13,6 +13,7 @@ class MyBird extends CGFobject {
 		this.Z = positionZ;
 
 		this.lastTime = 0;
+		this.t = 0;
 
 		this.unitCubeQuad = new MyUnitCubeQuad(this.scene, UnitCubeEnum.BIRD);
 		this.pyramid = new MyPyramid(this.scene, 4, 4);
@@ -39,6 +40,15 @@ class MyBird extends CGFobject {
 		this.birdTexture = new CGFtexture(this.scene, 'images/bird.jpg');
 		this.bicoTexture = new CGFtexture(this.scene, 'images/bico.png');
 
+		this.SizeEnum = {
+			Flying: 1,
+			Down: 2,
+			Up: 3,
+			Peak: 4,
+		};
+
+		this.SizeEnum = 1;
+
 	}
 
 	reset() {
@@ -47,14 +57,27 @@ class MyBird extends CGFobject {
 		this.Z = 0;
 		this.speed = 0;
 		this.orientation = 0;
+		this.SizeEnum = 1;
+	}
+
+	goDown(){
+		if(this.SizeEnum == 1){
+			this.SizeEnum = 2;
+		}
+	}
+
+	goUP(){
+		if(this.SizeEnum == 2 || this.SizeEnum == 4){
+			this.SizeEnum = 3;
+		}
 	}
 
 	accelerate(v) {
 		if (v && this.speed < 5)
-			this.speed++;
+			this.speed = this.speed + 0.1;
 
 		else if( !v && this.speed > -3)
-			this.speed--;
+			this.speed = this.speed - 0.1;
 
 		this.speed = this.speed*this.scene.speedFactor;
 		
@@ -71,11 +94,20 @@ class MyBird extends CGFobject {
 
 	update(t) {
 		this.lastTime = this.lastTime || 0;
-        this.deltaTime = this.scene.t - this.lastTime;
-        this.lastTime = this.scene.t;
+        this.deltaTime = t - this.lastTime;
+        this.lastTime = t;
 
 		this.X = this.X + Math.cos(this.orientation) * this.speed * this.deltaTime;
-		this.Z = this.Z - Math.sin(this.orientation) * this.speed * this.deltaTime;		
+		this.Z = this.Z - Math.sin(this.orientation) * this.speed * this.deltaTime;	
+		
+		if(this.SizeEnum == 2){
+			this.Y = this.Y - this.deltaTime * (3/1000);
+		}
+
+		if(this.SizeEnum == 3){
+			this.Y = this.Y + this.deltaTime * (3/1000);
+		}
+		this.t = t;
 
 		if (this.X > 90)
 			this.X = 90;
@@ -90,19 +122,23 @@ class MyBird extends CGFobject {
 	}
 
 	display() {
-
-		this.update(this.scene.t);
-
 		// ---- displaying Texture
 		this.birdMaterial.setTexture(this.birdTexture);
 		this.birdMaterial.apply();
 		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-			 
+		
+		if(this.Y < 0)
+			this.goUP();
+	
+		if(this.SizeEnum == 3 && this.Y >= 3)
+			this.SizeEnum = 1;
+
 		this.scene.pushMatrix();
 			//mover passaro
 			this.scene.translate(this.X, this.Y, this.Z);
-			this.scene.rotate(this.orientation, 0, 1, 0);
-			this.scene.translate(0, 5 + Math.sin(this.scene.t) * 0.5 * this.scene.speedFactor, 0);
+			this.scene.rotate(this.orientation, 0, 1, 0);		
+			if(this.SizeEnum == 1)
+				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))) * 0.5 * this.scene.speedFactor, 0);
 			// ---- displaying body
 			this.scene.pushMatrix();
 				this.scene.translate(0, 0.5, 0);
@@ -198,7 +234,7 @@ class MyBird extends CGFobject {
 			// ---- displaying Wing
 			this.scene.pushMatrix();
 				this.birdMaterial.apply();
-				this.scene.rotate(-Math.sin(this.scene.t + Math.PI / 6) * 0.25 * this.scene.speedFactor, 1, 0, 0);
+				this.scene.rotate(-Math.sin(this.t/(1000/(2*Math.PI)) + Math.PI / 6) * 0.25 * this.scene.speedFactor, 1, 0, 0);
 				this.leftWing.display();
 			this.scene.popMatrix();
 
@@ -213,7 +249,7 @@ class MyBird extends CGFobject {
 			// ---- displaying wing
 			this.scene.pushMatrix();
 				this.birdMaterial.apply();
-				this.scene.rotate(Math.sin(this.scene.t + Math.PI / 6) * 0.25 * this.scene.speedFactor, 1, 0, 0);
+				this.scene.rotate(Math.sin(this.t/(1000/(2*Math.PI)) + Math.PI / 6) * 0.25 * this.scene.speedFactor, 1, 0, 0);
 				this.rigthWing.display();	
 			this.scene.popMatrix();	
 
