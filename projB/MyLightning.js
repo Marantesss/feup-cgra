@@ -17,6 +17,8 @@ class MyLightning extends MyLSystem {
         this.scale = Math.pow(0.5, this.iterations-1);
 
         this.depth;
+        this.startTime = 0;
+        this.animated = false;
 
         this.lightningMaterial = new CGFappearance(this.scene);
         this.lightningMaterial.setAmbient(0.3, 0.5, 0.5, 1);
@@ -24,8 +26,6 @@ class MyLightning extends MyLSystem {
         this.lightningMaterial.setSpecular(0.3, 0.5, 0.5, 1);
         this.lightningMaterial.setShininess(10.0);
         this.lightningMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.startTime = 0;
     }
 
     // cria o lexico da gramática
@@ -40,14 +40,28 @@ class MyLightning extends MyLSystem {
         this.lastTime = this.lastTime || this.startTime;
         this.deltaTime = t - this.lastTime;
         this.lastTime = t;
-        
+            
         this.depth += Math.round(this.deltaTime * (this.axiom.length/1000));
+
+        if (this.depth >= this.axiom.length)
+            this.stopAnimation();
     }
 
     startAnimation(t) {
+        this.animated = true;
         this.iterate();
+        
         this.startTime = t;
         this.depth = 0;
+    }
+
+    isAnimated() {
+        return this.animated;
+    }
+
+    stopAnimation() {
+        this.axiom = "X";
+        this.animated = false;
     }
 
     display() {

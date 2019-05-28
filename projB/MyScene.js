@@ -179,7 +179,8 @@ class MyScene extends CGFscene {
 		if (this.gui.isKeyPressed("KeyL")) {
 			text += " L ";
 
-			this.lightning.startAnimation();
+			if (!this.lightning.isAnimated())
+				this.lightning.startAnimation();
 			keysPressed = true;
 		}
 		if (this.gui.isKeyPressed("KeyP")) {
@@ -225,9 +226,7 @@ class MyScene extends CGFscene {
 
 		this.displayNest();
 
-		this.lightning.display();
-		
-		
+		this.lightning.display();		
 		
         // ---- END Primitive drawing section
 

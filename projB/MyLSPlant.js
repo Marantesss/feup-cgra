@@ -6,6 +6,24 @@
 class MyLSPlant extends MyLSystem {
 	constructor(scene) {
         super(scene);
+
+        this.axiom;
+        this.productions = {
+            "F": [ "FF" ],
+            "X": [ "F[-X][X]F[-X]+X",
+                    "F[-X][x]+X",
+                    "F[+X]-X",
+                    "F[/X][X]F[\\\\X]+X",
+                    "F[\\X][X]/X",
+                    "F[/X]\\X",
+                    "F[^X][X]F[&X]^X",
+                    "F[^X]&X",
+                    "F[&X]^X"]
+        };
+        this.angle;
+        this.iterations;
+        this.scaleFactor;
+
     }
 
     // cria o lexico da gramática
