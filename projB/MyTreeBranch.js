@@ -11,7 +11,9 @@ class MyTreeBranch extends CGFobject {
         this.trunkRadius = trunkRadius;
         this.trunkTexture = trunkTexture;
         this.x = x;
+        this.y = 0;
         this.z = z;
+        this.visible = true;
 
         // ---- create objects to build a tree Branch
         this.treeBranch = new MyCylinder(this.scene, 6, 0);

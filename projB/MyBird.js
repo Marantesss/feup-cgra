@@ -80,6 +80,7 @@ class MyBird extends CGFobject {
 	pickUP(treeBranch){
 		this.treeBranch = treeBranch;	
 		this.state = 6;	
+		this.goUP();
 	}
 	
 	accelerate(v) {
@@ -88,10 +89,7 @@ class MyBird extends CGFobject {
 		
 		else if( !v && this.speed > -8)
 			this.speed = (this.speed - 1);
-			// (1000/(2*Math.PI));
-		
-		console.log(this.speed);
-		
+
 	}
 
 	turn(v) {
@@ -115,14 +113,14 @@ class MyBird extends CGFobject {
 			this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime ;
 			this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime;	
 		}		
-		if(this.state == 2){
+		if(this.state == 2){ //going down
 			this.Y = this.Y - this.deltaTime * (3/1000);
 		}
 
-		if(this.state == 3){
+		if(this.state == 3 ||  this.state == 5){ //going up
 			this.Y = this.Y + this.deltaTime * (3/1000);
 		}
-		
+
 		this.t = t;
 
 		
@@ -139,12 +137,20 @@ class MyBird extends CGFobject {
 			this.goUP();
 		}
 			
-		if(this.state == 3 && this.Y >= 3)
+		if(this.state == 3  && this.Y >= 3){
+			this.Y = 3;
 			this.state = 1;
+		}
+
+		if(this.state == 5  && this.Y >= 3){
+			this.Y = 6;
+			this.state = 1;
+		}
 
 		if(this.state == 5 || this.state == 6){
 			this.scene.pushMatrix();
 				this.scene.translate(this.X,this.Y- 0.3, this.Z);
+				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);
 				this.treeBranch.display();
 			this.scene.popMatrix();
 		}			
@@ -303,6 +309,7 @@ class MyBird extends CGFobject {
 
 		this.scene.popMatrix();
 
+		
 	}
 
 }
