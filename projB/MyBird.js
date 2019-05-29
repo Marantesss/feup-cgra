@@ -45,11 +45,12 @@ class MyBird extends CGFobject {
 			Flying: 1,
 			Down: 2,
 			Up: 3,
+			DownWithTree: 4,
 			FlyingWithTree: 5 ,
 			UpWithTree : 6,
 		};
 
-		this.state = 1;
+		this.state = 1; //bird starts in state flying
 
 	}
 
@@ -63,23 +64,26 @@ class MyBird extends CGFobject {
 	}
 
 	goDown(){
-		if(this.state == 1 || this.state == 5){
-			this.state = 2;
+		if(this.state == 1 ){
+			this.state = 2; //change state to down
+		}
+		if(this.state == 5){
+			this.state = 4; //change state to DownWithTree
 		}
 	}
 
 	goUP(){
 		if(this.state == 2){
-			this.state = 3;
+			this.state = 3; //change state to up
 		}
-		if(this.state == 6){
-			this.state = 5;
+		if(this.state == 4){
+			this.state = 6; //change state to UpWithTree
 		}
 	}
 
 	pickUP(treeBranch){
 		this.treeBranch = treeBranch;	
-		this.state = 6;	
+		this.state = 4;	
 		this.goUP();
 	}
 	
@@ -113,18 +117,17 @@ class MyBird extends CGFobject {
 			this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime ;
 			this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime;	
 		}		
-		if(this.state == 2){ //going down
+		if(this.state == 2 || this.state == 4){ //going down
 			this.Y = this.Y - this.deltaTime * (3/1000);
 		}
 
-		if(this.state == 3 ||  this.state == 5){ //going up
+		if(this.state == 3 ||  this.state == 6){ //going up
 			this.Y = this.Y + this.deltaTime * (3/1000);
 		}
 
 		this.t = t;
 
 		
-
 	}
 
 	display() {
@@ -137,24 +140,32 @@ class MyBird extends CGFobject {
 			this.goUP();
 		}
 			
-		if(this.state == 3  && this.Y >= 3){
+		if(this.state == 3 && this.Y >= 3){
 			this.Y = 3;
 			this.state = 1;
 		}
 
-		if(this.state == 5  && this.Y >= 3){
-			this.Y = 6;
-			this.state = 1;
+		if(this.state == 6  && this.Y >= 3){
+			this.Y = 3;
+			this.state = 5;
 		}
 
-		if(this.state == 5 || this.state == 6){
+		if(this.state == 4  || this.state == 6){
 			this.scene.pushMatrix();
-				this.scene.translate(this.X,this.Y- 0.3, this.Z);
-				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);
+				this.scene.translate(this.X,this.Y- 0.1, this.Z + 1.5);	
+				this.scene.rotate(Math.PI/2 , 0,1,0);			
 				this.treeBranch.display();
 			this.scene.popMatrix();
 		}			
-
+		if(this.state == 5){
+			this.scene.pushMatrix();
+				this.scene.translate(this.X , this.Y - 0.1, this.Z +1.5 );
+				this.scene.rotate(this.orientation, 0, 1, 0);
+				this.scene.rotate(Math.PI/2 , 0,1,0);	
+				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);				
+				this.treeBranch.display();
+			this.scene.popMatrix();
+		}
 		this.scene.pushMatrix();
 			//mover passaro
 			this.scene.translate(this.X, this.Y, this.Z);
@@ -162,6 +173,7 @@ class MyBird extends CGFobject {
 			//moviment up and down	
 			if(this.state == 1 || this.state == 5)
 				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);
+
 			
 			// ---- displaying body
 			this.scene.pushMatrix();
