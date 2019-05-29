@@ -184,13 +184,17 @@ class MyScene extends CGFscene {
         this.displayHouse();
 
         this.pushMatrix();
-        this.rotate(Math.PI/2, 0, 1, 0);
-        this.farm.display();
+            this.rotate(Math.PI/2, 0, 1, 0);
+            this.farm.display();
         this.popMatrix();
         
         this.fire.display();
         
         // ---- END Primitive drawing section
+    }
+
+    checkPick(){
+        
     }
 
     displayFloor() {

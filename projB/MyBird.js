@@ -6,7 +6,7 @@
 class MyBird extends CGFobject {
 	constructor(scene, orientation, Bspeed, positionX, positionY, positionZ) {
 		super(scene);
-		this.orientation = orientation;
+		this.orientation = orientation; //angle
 		this.speed = Bspeed;
 		this.X = positionX;
 		this.Y = positionY;
@@ -24,7 +24,8 @@ class MyBird extends CGFobject {
 		this.paw = new MyPaw(this.scene);
 		this.eye = new MyUnitCubeQuad(this.scene, UnitCubeEnum.EYE);
 		this.triangle = new MyTriangle(this.scene);
-
+		this.treeBranch;
+		
 		this.birdMaterial = new CGFappearance(this.scene);
 		this.birdMaterial.setAmbient(0.5, 0.5, 0.5, 1);
 		this.birdMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -40,55 +41,68 @@ class MyBird extends CGFobject {
 		this.birdTexture = new CGFtexture(this.scene, 'images/bird.jpg');
 		this.bicoTexture = new CGFtexture(this.scene, 'images/bico.png');
 
-		this.SizeEnum = {
+		this.state = {
 			Flying: 1,
 			Down: 2,
 			Up: 3,
-			Peak: 4,
+			FlyingWithTree: 5 ,
+			UpWithTree : 6,
 		};
 
-		this.SizeEnum = 1;
+		this.state = 1;
 
 	}
 
 	reset() {
 		this.X = 0;
-		this.Y = 3;
+		this.Y = 3; //Bird is 3 units above the ground
 		this.Z = 0;
 		this.speed = 0;
 		this.orientation = 0;
-		this.SizeEnum = 1;
+		this.state = 1;
 	}
 
 	goDown(){
-		if(this.SizeEnum == 1){
-			this.SizeEnum = 2;
+		if(this.state == 1 || this.state == 5){
+			this.state = 2;
 		}
 	}
 
 	goUP(){
-		if(this.SizeEnum == 2 || this.SizeEnum == 4){
-			this.SizeEnum = 3;
+		if(this.state == 2){
+			this.state = 3;
+		}
+		if(this.state == 6){
+			this.state = 5;
 		}
 	}
 
+	pickUP(treeBranch){
+		this.treeBranch = treeBranch;	
+		this.state = 6;	
+	}
+	
 	accelerate(v) {
-		if (v && this.speed < 5)
-			this.speed = this.speed + 0.1;
-
-		else if( !v && this.speed > -3)
-			this.speed = this.speed - 0.1;
-
-		this.speed = this.speed*this.scene.speedFactor;
+		if (v && this.speed < 8)
+			this.speed= this.speed + 1;
+		
+		else if( !v && this.speed > -8)
+			this.speed = (this.speed - 1);
+			// (1000/(2*Math.PI));
+		
+		console.log(this.speed);
 		
 	}
 
 	turn(v) {
-		if (v)
-			this.orientation = this.orientation + Math.PI / 10 * this.scene.speedFactor;
-
-		else
-			this.orientation = this.orientation - Math.PI / 10 * this.scene.speedFactor;
+		if (v){
+			this.orientation = this.orientation -(10 * Math.PI)/180;
+		}
+		else{
+			this.orientation = this.orientation + (10 *Math.PI) /180;
+		}
+		this.orientation = this.orientation * this.scene.speedFactor;
+			
 
 	}
 
@@ -97,27 +111,21 @@ class MyBird extends CGFobject {
         this.deltaTime = t - this.lastTime;
         this.lastTime = t;
 
-		this.X = this.X + Math.cos(this.orientation) * this.speed * this.deltaTime;
-		this.Z = this.Z - Math.sin(this.orientation) * this.speed * this.deltaTime;	
-		
-		if(this.SizeEnum == 2){
+		if( this.state == 1 || this.state == 5){
+			this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime ;
+			this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime;	
+		}		
+		if(this.state == 2){
 			this.Y = this.Y - this.deltaTime * (3/1000);
 		}
 
-		if(this.SizeEnum == 3){
+		if(this.state == 3){
 			this.Y = this.Y + this.deltaTime * (3/1000);
 		}
+		
 		this.t = t;
 
-		if (this.X > 90)
-			this.X = 90;
-		else if (this.X < -90)
-			this.X = -90;
-
-		if (this.Z > 90)
-			this.Z = 90;
-		else if (this.Z < -90)
-			this.Z = -90;
+		
 
 	}
 
@@ -127,18 +135,28 @@ class MyBird extends CGFobject {
 		this.birdMaterial.apply();
 		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 		
-		if(this.Y < 0)
+		if(this.Y < 0 ){ //if get to the ground go up
 			this.goUP();
-	
-		if(this.SizeEnum == 3 && this.Y >= 3)
-			this.SizeEnum = 1;
+		}
+			
+		if(this.state == 3 && this.Y >= 3)
+			this.state = 1;
+
+		if(this.state == 5 || this.state == 6){
+			this.scene.pushMatrix();
+				this.scene.translate(this.X,this.Y- 0.3, this.Z);
+				this.treeBranch.display();
+			this.scene.popMatrix();
+		}			
 
 		this.scene.pushMatrix();
 			//mover passaro
 			this.scene.translate(this.X, this.Y, this.Z);
-			this.scene.rotate(this.orientation, 0, 1, 0);		
-			if(this.SizeEnum == 1)
-				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))) * 0.5 * this.scene.speedFactor, 0);
+			this.scene.rotate(this.orientation, 0, 1, 0);	
+			//moviment up and down	
+			if(this.state == 1 || this.state == 5)
+				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);
+			
 			// ---- displaying body
 			this.scene.pushMatrix();
 				this.scene.translate(0, 0.5, 0);

@@ -5,11 +5,13 @@
  * @param trunkRadius - Radius of the tree's trunk, ...
  */
 class MyTreeBranch extends CGFobject {
-    constructor (scene, trunkHeight, trunkRadius, trunkTexture) {
+    constructor (scene, trunkHeight, trunkRadius, trunkTexture, x , z) {
         super(scene);
         this.trunkHeight = trunkHeight;
         this.trunkRadius = trunkRadius;
         this.trunkTexture = trunkTexture;
+        this.x = x;
+        this.z = z;
 
         // ---- create objects to build a tree Branch
         this.treeBranch = new MyCylinder(this.scene, 6, 0);
@@ -31,6 +33,7 @@ class MyTreeBranch extends CGFobject {
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         
         this.scene.pushMatrix();
+            this.scene.translate(this.x, 0, this.z);
             this.scene.rotate(Math.PI, 1, 1, 0);
             this.scene.scale(this.trunkRadius, this.trunkHeight, this.trunkRadius);
             this.treeBranch.display();

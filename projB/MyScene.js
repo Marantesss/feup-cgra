@@ -23,12 +23,7 @@ class MyScene extends CGFscene {
 		this.enableTextures(true);
 		this.setUpdatePeriod(1000 / FPS);
 
-		//bird moviment
-		this.BirdX = 0;
-		this.BirdY = 3;
-		this.BirdZ = 0;
-		this.Bspeed = 0;
-		this.orientation = 0;
+		//bird moviment	
 		this.count = false;
 		this.turnVar = false;
 		
@@ -41,17 +36,17 @@ class MyScene extends CGFscene {
 		// ---- house
 		this.house = new MyHouse(this, 4, 4);
 
-		// --- Bird
-		this.bird = new MyBird(this, this.orientation, this.Bspeed, this.BirdX, this.BirdY, this.BirdZ);
+		// --- Bird is 3 units above the ground
+		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
 
 		// -- Tree Branch
-		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
-		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
-		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
-		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
-		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6.5, 3.8);
+		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 10, 3.8);
+		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -10, -5);
+		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -8 , 7);
+		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6, 6.5);
 
-		var treesBransh = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
+		this.treesBranchs = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
 
 		// -- Nest
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
@@ -81,9 +76,6 @@ class MyScene extends CGFscene {
 
 		// Labels and ID's for object selection on MyInterface
 		this.modeIds = { 'Day': 0, 'Night': 1 };
-
-		this.tanterior = 0;
-
 
 	}
 
@@ -176,8 +168,6 @@ class MyScene extends CGFscene {
 		if (this.gui.isKeyPressed("KeyP")) {
 			text += " P ";
 			this.bird.goDown();
-			//this.bird.display();
-			//this.bird.goUP();
 			keysPressed = true;
 		}
 		
@@ -217,18 +207,58 @@ class MyScene extends CGFscene {
 
 		this.displayNest();
 		
+		this.displayTreeBranchs();
 		
-		
+		this.checkCollision();
         // ---- END Primitive drawing section
 
 	}
 
+	checkCollision(){
+		if((this.bird.state == 2 || this.bird.state == 3) && this.bird < 1){
+			for( i = 0; i < this.treesBranchs.length; i++){
+				if(((this.bird.X <= this.treesBranchs[i].x + 3) && (this.bird.X >= this.treesBranchs[i].x-3 )) 
+					&& (this.bird.Z <= this.treesBranchs[i].z + 1 && this.bird.Z >= this.treesBranchs[i].z -1)){
+					this.bird.pickUP(this.treesBranchs[i]);
+					
+				}
+			}
+			this.bird.goUP();
+			console.log("in");
+		}
+		//console.log("out");
+	}
+
 	displayTreeBranchs(){
-		this.treeBranch0.display();
-		this.treeBranch0.display();
-		this.treeBranch0.display();
-		this.treeBranch0.display();
-		this.treeBranch0.display();
+		this.pushMatrix();		
+			this.rotate(-Math.PI/4,0,1,0);
+            this.scale(0.5, 0.5, 0.5);
+            this.treeBranch0.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.rotate(Math.PI/4,0,1,0);
+            this.scale(0.5, 0.5, 0.5);
+            this.treeBranch1.display();
+		this.popMatrix();
+		
+		this.pushMatrix();
+			this.rotate(-Math.PI/2,0,1,0);
+            this.scale(0.5, 0.5, 0.5);
+            this.treeBranch2.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.rotate(Math.PI/2,0,1,0);
+            this.scale(0.5, 0.5, 0.5);
+            this.treeBranch3.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.rotate(-Math.PI,0,1,0);
+            this.scale(0.4, 0.4, 0.4);
+            this.treeBranch0.display();
+		this.popMatrix();
 	}
 
 	displayNest(){
