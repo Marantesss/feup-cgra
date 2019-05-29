@@ -42,10 +42,11 @@ class MyScene extends CGFscene {
 
 		// -- Tree Branch
 		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6.5, 3.8);
-		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, 0);
-		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -10, -5);
-		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -8 , 7);
-		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6, 6.5);
+		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, -3);
+		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -10, -7);
+		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -4 , 7);
+		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6, 10.5);
+		this.treeBranch = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, 0);
 
 		this.treesBranchs = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
 			
@@ -170,6 +171,7 @@ class MyScene extends CGFscene {
 			text += " R ";
 
 			this.bird.reset();
+			this.resetTreeBranchs();
 			keysPressed = true;
 		}
 
@@ -226,9 +228,16 @@ class MyScene extends CGFscene {
 		this.displayTreeBranchs();
 		
 		this.checkCollision();
+		
 		this.tree.display();
 		
         // ---- END Primitive drawing section
+	}
+
+	resetTreeBranchs(){
+		for(var i = 0; i < this.treesBranchs.length; i++){
+			this.treesBranchs[i].visible = true;
+		}
 	}
 
 	checkCollision(){
@@ -236,9 +245,9 @@ class MyScene extends CGFscene {
 			for( var i = 0; i < this.treesBranchs.length; i++){
 				if(((this.bird.X <= this.treesBranchs[i].x + 1) && (this.bird.X >= this.treesBranchs[i].x-1 )) 
 					&& (this.bird.Z <= this.treesBranchs[i].z + 1 && this.bird.Z >= this.treesBranchs[i].z -1)){
-					this.bird.pickUP(this.treesBranchs[i]);
+					this.bird.pickUP(this.treeBranch);
 					this.treesBranchs[i].visible = false;
-					console.log("get");
+					break;
 				}
 			}
 			

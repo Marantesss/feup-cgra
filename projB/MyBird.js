@@ -83,6 +83,8 @@ class MyBird extends CGFobject {
 
 	pickUP(treeBranch){
 		this.treeBranch = treeBranch;	
+		this.treeBranch.X = 0;
+		this.treeBranch.Z = 0;
 		this.state = 4;	
 		this.goUP();
 	}
@@ -97,12 +99,11 @@ class MyBird extends CGFobject {
 	}
 
 	turn(v) {
-		if (v){
-			this.orientation = this.orientation -(10 * Math.PI)/180;
-		}
-		else{
-			this.orientation = this.orientation + (10 *Math.PI) /180;
-		}
+		if (v)
+			this.orientation = this.orientation + (10 * Math.PI)/180;
+		else
+			this.orientation = this.orientation - (10 *Math.PI) /180;
+		
 		this.orientation = this.orientation * this.scene.speedFactor;
 			
 
@@ -152,17 +153,18 @@ class MyBird extends CGFobject {
 
 		if(this.state == 4  || this.state == 6){
 			this.scene.pushMatrix();
-				this.scene.translate(this.X,this.Y- 0.1, this.Z + 1.5);	
-				this.scene.rotate(Math.PI/2 , 0,1,0);			
+				this.scene.translate(this.X,this.Y- 0.1, this.Z);					
+				//this.scene.rotate(Math.PI/2 , 0,1,0);	
+				this.scene.rotate(this.orientation, 0, 1, 0);	
 				this.treeBranch.display();
 			this.scene.popMatrix();
 		}			
 		if(this.state == 5){
 			this.scene.pushMatrix();
-				this.scene.translate(this.X , this.Y - 0.1, this.Z +1.5 );
-				this.scene.rotate(this.orientation, 0, 1, 0);
-				this.scene.rotate(Math.PI/2 , 0,1,0);	
-				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);				
+				this.scene.translate(this.X , this.Y - 0.1, this.Z );
+				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);		
+				//this.scene.rotate(Math.PI/2 , 0,1,0);	
+				this.scene.rotate(this.orientation, 0, 1, 0);								
 				this.treeBranch.display();
 			this.scene.popMatrix();
 		}
@@ -294,7 +296,7 @@ class MyBird extends CGFobject {
 				this.scene.translate(0.5,0,0.2);
 				this.scene.rotate(Math.PI/180*90, 1, 0, 0);
 				this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
-				this.scene.scale(0.3,0.3,0.2);
+				this.scene.scale(0.4,0.4,0.3);
 				this.paw.display();
 			this.scene.popMatrix();
 
