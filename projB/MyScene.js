@@ -6,6 +6,7 @@ class MyScene extends CGFscene {
 	constructor() {
 		super();
 	}
+
 	init(application) {
 		super.init(application);
 		this.initCameras();
@@ -23,7 +24,16 @@ class MyScene extends CGFscene {
 		this.enableTextures(true);
 		this.setUpdatePeriod(1000 / FPS);
 
+<<<<<<< HEAD
 		//bird moviment	
+=======
+		// bird movement
+		this.BirdX = 0;
+		this.BirdY = 3;
+		this.BirdZ = 0;
+		this.Bspeed = 0;
+		this.orientation = 0;
+>>>>>>> 6bbee0657cadb919876e819b5698b879f2a690fb
 		this.count = false;
 		this.turnVar = false;
 		
@@ -36,6 +46,7 @@ class MyScene extends CGFscene {
 		// ---- house
 		this.house = new MyHouse(this, 4, 4);
 
+<<<<<<< HEAD
 		// --- Bird is 3 units above the ground
 		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
 
@@ -47,9 +58,28 @@ class MyScene extends CGFscene {
 		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6, 6.5);
 
 		this.treesBranchs = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
+=======
+		// ---- Bird
+		this.bird = new MyBird(this, this.orientation, this.Bspeed, this.BirdX, this.BirdY, this.BirdZ);
 
-		// -- Nest
+		// ---- Tree Branch
+		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg");
+
+		var treeBranches = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
+
+		// ---- Lighting
+		this.lightning = new MyLightning(this);
+>>>>>>> 6bbee0657cadb919876e819b5698b879f2a690fb
+
+		// ---- Nest
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
+
+		// ---- Tree
+		this.tree = new MyLSPlant(this);
 
 		/* **** MATERIALS **** */
 		// ---- Applied Material
@@ -77,6 +107,10 @@ class MyScene extends CGFscene {
 		// Labels and ID's for object selection on MyInterface
 		this.modeIds = { 'Day': 0, 'Night': 1 };
 
+<<<<<<< HEAD
+=======
+		this.tanterior = 0;
+>>>>>>> 6bbee0657cadb919876e819b5698b879f2a690fb
 	}
 
 	initLights() {
@@ -121,6 +155,7 @@ class MyScene extends CGFscene {
 	update(t) {
 		this.checkKeys();
 		this.bird.update(t);
+		this.lightning.update(t);
 	}
 
 
@@ -165,13 +200,19 @@ class MyScene extends CGFscene {
 			keysPressed = true;
 		}
 
+		if (this.gui.isKeyPressed("KeyL")) {
+			text += " L ";
+
+			if (!this.lightning.isAnimated())
+				this.lightning.startAnimation();
+			keysPressed = true;
+		}
 		if (this.gui.isKeyPressed("KeyP")) {
 			text += " P ";
 			this.bird.goDown();
 			keysPressed = true;
 		}
 		
-
 		if (keysPressed)
 			console.log(text);
 	}
@@ -192,12 +233,12 @@ class MyScene extends CGFscene {
 		// Draw axis
 		this.axis.display();
 
-		//Apply default appearance
+		// Apply default appearance
 		this.setDefaultAppearance();
 
 		// ---- BEGIN Primitive drawing section
 
-		//	this.terrain.display(); 
+		// this.terrain.display(); 
 
 		this.displayHouse();
 
@@ -206,12 +247,18 @@ class MyScene extends CGFscene {
 		this.displayBird();
 
 		this.displayNest();
+
+		this.lightning.display();
 		
+<<<<<<< HEAD
 		this.displayTreeBranchs();
 		
 		this.checkCollision();
+=======
+		this.tree.display();
+		
+>>>>>>> 6bbee0657cadb919876e819b5698b879f2a690fb
         // ---- END Primitive drawing section
-
 	}
 
 	checkCollision(){
