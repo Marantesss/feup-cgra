@@ -41,12 +41,12 @@ class MyScene extends CGFscene {
 		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
 
 		// -- Tree Branch
-		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6.5, 3.8);
-		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, -3);
-		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -10, -7);
-		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -4 , 7);
-		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6, 10.5);
-		this.treeBranch = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, 0);
+		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 8.5, 3.8, 0);
+		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, -3, Math.PI/6);
+		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -10, -7, -Math.PI/6);
+		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -4 , 7, Math.PI/5);
+		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6, 15.5, Math.PI / 4);
+		this.treeBranch = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, 0, 0);
 
 		this.treesBranchs = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
 			
@@ -243,8 +243,8 @@ class MyScene extends CGFscene {
 	checkCollision(){
 		if(this.bird.state == 2  && this.bird.Y < 0.5){
 			for( var i = 0; i < this.treesBranchs.length; i++){
-				if(((this.bird.X <= this.treesBranchs[i].x + 1) && (this.bird.X >= this.treesBranchs[i].x-1 )) 
-					&& (this.bird.Z <= this.treesBranchs[i].z + 1 && this.bird.Z >= this.treesBranchs[i].z -1)){
+				if(((this.bird.X <= this.treesBranchs[i].x + 3) && (this.bird.X >= this.treesBranchs[i].x- 3 )) 
+					&& (this.bird.Z <= this.treesBranchs[i].z + 3 && this.bird.Z >= this.treesBranchs[i].z -3 )){
 					this.bird.pickUP(this.treeBranch);
 					this.treesBranchs[i].visible = false;
 					break;
@@ -255,44 +255,9 @@ class MyScene extends CGFscene {
 	}
 
 	displayTreeBranchs(){
-		if(this.treesBranchs[0].visible){
-			this.pushMatrix();		
-			this.rotate(-Math.PI/4,0,1,0);
-            this.scale(0.5, 0.5, 0.5);
-            this.treesBranchs[0].display();
-		this.popMatrix();
-		}
-		
-		if(this.treesBranchs[1].visible){
-			this.pushMatrix();
-				this.rotate(Math.PI/4,0,1,0);
-           		this.scale(0.5, 0.5, 0.5);
-            	this.treesBranchs[1].display();
-			this.popMatrix();
-		}
-		
-		if(this.treesBranchs[2].visible){
-			this.pushMatrix();
-				this.rotate(-Math.PI/2,0,1,0);
-           		this.scale(0.5, 0.5, 0.5);
-            	this.treesBranchs[2].display();
-			this.popMatrix();
-		}
-
-		if(this.treesBranchs[3].visible){
-			this.pushMatrix();
-				this.rotate(Math.PI/2,0,1,0);
-           		this.scale(0.5, 0.5, 0.5);
-            	this.treesBranchs[3].display();
-			this.popMatrix();
-		}
-
-		if(this.treesBranchs[4].visible){
-			this.pushMatrix();
-				this.rotate(-Math.PI,0,1,0);
-            	this.scale(0.4, 0.4, 0.4);
-            	this.treesBranchs[4].display();
-			this.popMatrix();
+		for(var i = 0; i < this.treesBranchs.length; i++){
+			if(this.treesBranchs[i].visible)
+				this.treesBranchs[i].display();
 		}
 	}
 

@@ -5,7 +5,7 @@
  * @param trunkRadius - Radius of the tree's trunk, ...
  */
 class MyTreeBranch extends CGFobject {
-    constructor (scene, trunkHeight, trunkRadius, trunkTexture, x , z) {
+    constructor (scene, trunkHeight, trunkRadius, trunkTexture, x , z, angle) {
         super(scene);
         this.trunkHeight = trunkHeight;
         this.trunkRadius = trunkRadius;
@@ -13,6 +13,7 @@ class MyTreeBranch extends CGFobject {
         this.x = x;
         this.y = 0;
         this.z = z;
+        this.angle = angle;
         this.visible = true;
 
         // ---- create objects to build a tree Branch
@@ -36,6 +37,7 @@ class MyTreeBranch extends CGFobject {
         
         this.scene.pushMatrix();
             this.scene.translate(this.x, 0, this.z);
+            this.scene.rotate(this.angle, 0, 1 ,0);
             this.scene.rotate(Math.PI, 1, 1, 0);
             this.scene.scale(this.trunkRadius, this.trunkHeight, this.trunkRadius);
             this.treeBranch.display();

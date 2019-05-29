@@ -115,8 +115,8 @@ class MyBird extends CGFobject {
         this.lastTime = t;
 
 		if( this.state == 1 || this.state == 5){
-			this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime ;
-			this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime;	
+			this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;
+			this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;	
 		}		
 		if(this.state == 2 || this.state == 4){ //going down
 			this.Y = this.Y - this.deltaTime * (3/1000);
