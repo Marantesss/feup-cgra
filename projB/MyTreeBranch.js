@@ -28,6 +28,10 @@ class MyTreeBranch extends CGFobject {
         this.treeMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         this.treeTrunk = new CGFtexture(this.scene, this.trunkTexture);
+
+        // -- create collision area
+        this.zf = Math.cos(this.angle)*2;
+        this.xf = Math.sin(this.angle)*2;
     }
     display() {
         // ---- displaying the trunk

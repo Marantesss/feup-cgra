@@ -38,15 +38,16 @@ class MyScene extends CGFscene {
 		this.house = new MyHouse(this, 4, 4);
 
 		// --- Bird is 3 units above the ground
-		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
+		this.bird = new MyBird(this, 0, 0, 4, 3, 0); 
 
 		// -- Tree Branch
-		this.treeBranch0 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 8.5, 3.8, 0);
-		this.treeBranch1 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, -3, Math.PI/6);
-		this.treeBranch2 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -10, -7, -Math.PI/6);
-		this.treeBranch3 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", -4 , 7, Math.PI/5);
-		this.treeBranch4 = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 6, 15.5, Math.PI / 4);
-		this.treeBranch = new MyTreeBranch(this, 3, 0.2, "images/tree_trunk.jpg", 0, 0, 0);
+		this.treeBranch0 = new MyTreeBranch(this, 2, 0.1, "images/tree_trunk.jpg", 8.5, 3.8, 0);
+		this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 0, -3, Math.PI/6);
+		this.treeBranch2 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -10, -7, Math.PI/6);
+		this.treeBranch3 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -4 , 7, Math.PI/5);
+		this.treeBranch4 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 6, 15.5, Math.PI /4);
+		this.treeBranch = new MyTreeBranch(this, 1, 0.2, "images/tree_trunk.jpg", 0, 0, 0);
+		this.treeBranch.visible = false;
 
 		this.treesBranchs = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
 			
@@ -219,17 +220,17 @@ class MyScene extends CGFscene {
 
 		this.displayCubeMap();
 
-		this.displayBird();
+		//this.displayBird();
 
 		this.displayNest();
 
 		this.lightning.display();
 		
-		this.displayTreeBranchs();
+		//this.displayTreeBranchs();
 		
-		this.checkCollision();
+		//this.checkCollision();
 		
-		this.tree.display();
+		//this.tree.display();
 		
         // ---- END Primitive drawing section
 	}
@@ -243,8 +244,13 @@ class MyScene extends CGFscene {
 	checkCollision(){
 		if(this.bird.state == 2  && this.bird.Y < 0.5){
 			for( var i = 0; i < this.treesBranchs.length; i++){
-				if(((this.bird.X <= this.treesBranchs[i].x + 3) && (this.bird.X >= this.treesBranchs[i].x- 3 )) 
-					&& (this.bird.Z <= this.treesBranchs[i].z + 3 && this.bird.Z >= this.treesBranchs[i].z -3 )){
+				console.log(this.treeBranch.x);
+				console.log(this.treeBranch.xf);
+				console.log(this.treeBranch.z);
+				console.log(this.treeBranch.zf);
+				if(((this.bird.X <= this.treesBranchs[i].xf + 3) && (this.bird.X >= this.treesBranchs[i].x- 3 )) 
+					&& (this.bird.Z <= this.treesBranchs[i].zf + 3 && this.bird.Z >= this.treesBranchs[i].z -3 )
+					&& this.treesBranchs[i].visible == true){
 					this.bird.pickUP(this.treeBranch);
 					this.treesBranchs[i].visible = false;
 					break;
@@ -259,12 +265,13 @@ class MyScene extends CGFscene {
 			if(this.treesBranchs[i].visible)
 				this.treesBranchs[i].display();
 		}
+
 	}
 
 	displayNest(){
 		this.pushMatrix();
-			this.translate(9.5,3.5,8);
-			this.rotate(-Math.PI/4,0,0,1);
+			this.translate(8,4.2,8);
+			this.rotate(Math.PI/9,0,0,1);
             this.scale(0.5, 0.5, 0.5);
             this.nest.display();
         this.popMatrix();
