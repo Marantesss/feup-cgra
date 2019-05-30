@@ -89,6 +89,11 @@ class MyScene extends CGFscene {
 
 		this.cil = new MyCylinder(this, 20, 20);
 
+		// -- variables to go to the Nest
+		this.NestX = 6.7;
+		this.NestY = 3.3;
+		this.NestZ = 5.2;
+
 	}
 
 	initLights() {
@@ -237,8 +242,7 @@ class MyScene extends CGFscene {
 		
 		// ---- END Primitive drawing section
 		
-		/*this.pushMatrix();
-		this.translate(0,3,1);
+	/*	this.translate(0,3,1);
 		this.scale(0.2,0.2, 0.2);
 		this.cil.display();
 		this.popMatrix();
@@ -274,6 +278,37 @@ class MyScene extends CGFscene {
 			}
 			
 		}
+		this.goToTheNest();
+	}
+
+	goToTheNest(){
+		if(this.bird.state == 5){
+			//if arrived to the nest
+			if(this.bird.X == this.NestX && this.bird.Z == this.NestZ){
+				this.bird.treeBranch.visible = false;
+				this.bird.state = 1;
+			}
+			if(this.bird.X > this.NestX && this.bird.Z > this.NestZ){
+				this.bird.orientation = Math.PI/2;
+			}
+			else if(this.bird.X < this.NestX && this.bird.Z < this.NestZ){
+				this.bird.orientation = Math.PI/4;
+			}
+			else if(this.bird.X > this.NestX){
+				this.bird.orientation = Math.PI;
+			}
+			else if(this.bird.Z > this.NestZ){
+				this.bird.orientation = Math.PI/2;
+			}
+			else if(this.bird.X < this.NestX){
+				this.bird.orientation = Math.PI/2;
+			}
+			else if(this.bird.Z < this.NestZ){
+				this.bird.orientation = -Math.PI/2;
+			}
+		}
+		
+		
 	}
 
 	displayTreeBranchs(){
@@ -291,6 +326,7 @@ class MyScene extends CGFscene {
             this.scale(0.5, 0.5, 0.5);
             this.nest.display();
 		this.popMatrix();
+
 		this.pushMatrix();
 			this.translate(6.7,3.5,5.2);
 			this.rotate(-Math.PI/4,0,0,1);
