@@ -89,6 +89,11 @@ class MyBird extends CGFobject {
 		this.goUP();
 	}
 	
+	putInTheNest(){
+		this.treeBranch.visible = false;
+		this.state = 1;
+	}
+
 	accelerate(v) {
 		if (v && this.speed < 8)
 			this.speed= this.speed + 1;
