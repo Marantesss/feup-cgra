@@ -47,7 +47,7 @@ class MyUnitCubeQuad extends CGFobject {
                                 this.cubeSide = new CGFtexture(this.scene, 'images/window.jpg');
                                 break;
                         case UnitCubeEnum.EYE:
-                                this.cubeSide = new CGFtexture(this.scene, 'images/bird.jpg');
+                                this.cubeSide = new CGFtexture(this.scene, 'images/white.jpg');
                                 this.mineTop = new CGFtexture(this.scene, 'images/eyes.jpg');   
                                 this.mineBottom = new CGFtexture(this.scene, 'images/eyes.jpg');      
                                 break;

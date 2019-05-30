@@ -48,7 +48,7 @@ class MyHouse extends CGFobject {
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         
         this.scene.pushMatrix();
-        this.scene.translate(0 + this.coordx, 0.9 ,0 + this.coordz);
+        this.scene.translate( this.coordx, 0.9 ,this.coordz);
         this.scene.rotate(Math.PI/180*45, 0, 1, 0);
         this.scene.scale(1.5,1.2,1.5);
 		this.pyramid.display();

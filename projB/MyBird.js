@@ -47,7 +47,7 @@ class MyBird extends CGFobject {
 			Up: 3,
 			DownWithTree: 4,
 			FlyingWithTree: 5 ,
-			UpWithTree : 6,
+			UpWithTree : 6
 		};
 
 		this.state = 1; //bird starts in state flying
@@ -114,7 +114,7 @@ class MyBird extends CGFobject {
         this.deltaTime = t - this.lastTime;
         this.lastTime = t;
 
-		if( this.state == 1 || this.state == 5){
+		if( this.state == 1 ){
 			this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;
 			this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;	
 		}		

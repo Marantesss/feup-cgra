@@ -35,10 +35,11 @@ class MyScene extends CGFscene {
 		this.cubeMap = new MyCubeMap(this);
 
 		// ---- house
-		this.house = new MyHouse(this, 4, 4);
+		this.house = new MyHouse(this, 3, 3);
 
 		// --- Bird is 3 units above the ground
-		this.bird = new MyBird(this, 0, 0, 4, 3, 0); 
+		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
+		this.birdInNest = new MyBird(this, 0, 0 ,0,0,0);
 
 		// -- Tree Branch
 		this.treeBranch0 = new MyTreeBranch(this, 2, 0.1, "images/tree_trunk.jpg", 8.5, 3.8, 0);
@@ -85,6 +86,8 @@ class MyScene extends CGFscene {
 
 		// Labels and ID's for object selection on MyInterface
 		this.modeIds = { 'Day': 0, 'Night': 1 };
+
+		this.cil = new MyCylinder(this, 20, 20);
 
 	}
 
@@ -220,19 +223,32 @@ class MyScene extends CGFscene {
 
 		this.displayCubeMap();
 
-		//this.displayBird();
+		this.displayBird();
 
 		this.displayNest();
 
 		this.lightning.display();
 		
-		//this.displayTreeBranchs();
+		this.displayTreeBranchs();
 		
-		//this.checkCollision();
+		this.checkCollision();
 		
-		//this.tree.display();
+		this.tree.display();
 		
-        // ---- END Primitive drawing section
+		// ---- END Primitive drawing section
+		
+		/*this.pushMatrix();
+		this.translate(0,3,1);
+		this.scale(0.2,0.2, 0.2);
+		this.cil.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+		this.translate(0,3,-1);
+		this.scale(0.2,0.2, 0.2);
+		this.cil.display();
+		this.popMatrix();*/
+
 	}
 
 	resetTreeBranchs(){
@@ -270,11 +286,18 @@ class MyScene extends CGFscene {
 
 	displayNest(){
 		this.pushMatrix();
-			this.translate(8,4.2,8);
-			this.rotate(Math.PI/9,0,0,1);
+			this.translate(6.7,3.3,5.2);
+			this.rotate(-Math.PI/4,0,0,1);
             this.scale(0.5, 0.5, 0.5);
             this.nest.display();
-        this.popMatrix();
+		this.popMatrix();
+		this.pushMatrix();
+			this.translate(6.7,3.5,5.2);
+			this.rotate(-Math.PI/4,0,0,1);
+			this.scale(0.2, 0.2, 0.2);
+			this.birdInNest.display();
+		this.popMatrix();
+		
 	}
 
 	displayCubeMap() {
@@ -290,7 +313,7 @@ class MyScene extends CGFscene {
 
 	displayHouse() {
         this.pushMatrix();
-            this.scale(2, 2, 2);
+            this.scale(1.8, 1.8, 1.8);
             this.house.display();
         this.popMatrix();
 	}
