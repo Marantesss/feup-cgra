@@ -282,19 +282,22 @@ class MyScene extends CGFscene {
 	}
 
 	goToTheNest(){
+		
 		if(this.bird.state == 5){
+			this.bird.speed = 3;
 			//if arrived to the nest
 			if(this.bird.X == this.NestX && this.bird.Z == this.NestZ){
 				this.bird.treeBranch.visible = false;
 				this.bird.state = 1;
 			}
-			if(this.bird.X > this.NestX && this.bird.Z > this.NestZ){
-				this.bird.orientation = Math.PI/2;
+			else if(this.bird.X > this.NestX && this.bird.Z > this.NestZ){
+				this.bird.orientation = Math.PI/4;
+				
 			}
 			else if(this.bird.X < this.NestX && this.bird.Z < this.NestZ){
-				this.bird.orientation = Math.PI/4;
+				this.bird.orientation = -Math.PI/4;
 			}
-			else if(this.bird.X > this.NestX){
+			else if(this.bird.X > (this.NestX+1)){
 				this.bird.orientation = Math.PI;
 			}
 			else if(this.bird.Z > this.NestZ){
