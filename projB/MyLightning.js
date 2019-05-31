@@ -72,10 +72,10 @@ class MyLightning extends MyLSystem {
         var i;
 
         // percorre a cadeia de caracteres
-        for (i=0; i<this.depth; ++i){
+        for (i=0; i<this.depth; ++i) {
 
             // verifica se sao caracteres especiais
-            switch(this.axiom[i]){
+            switch(this.axiom[i]) {
                 case "+":
                     // roda a esquerda
                     this.scene.rotate(this.angle, 0, 0, 1);

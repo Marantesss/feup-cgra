@@ -229,7 +229,6 @@ class MyScene extends CGFscene {
 		this.setDefaultAppearance();
 
 		// ---- BEGIN Primitive drawing section
-
 		this.terrain.display(); 
 
 		this.displayHouse();
@@ -245,8 +244,8 @@ class MyScene extends CGFscene {
 		this.checkCollision();
 		
 		this.displayForest();
-
-		this.lightning.display(); // ISTO TEM QUE ESTAR NO FIM PORQUE SENÃO DÁ MERDA :)
+		
+		this.displayLightning(); // ISTO TEM QUE ESTAR NO FIM PORQUE SENÃO DÁ MERDA :)
 			
 		this.pushMatrix();
 			this.translate(this.NestX-3,1,this.NestZ-3);
@@ -259,7 +258,6 @@ class MyScene extends CGFscene {
 			this.scale(0.2,1,0.2);
 			this.cil.display();
 		this.popMatrix();
-
 		// ---- END Primitive drawing section
 	}
 
@@ -296,6 +294,15 @@ class MyScene extends CGFscene {
 				this.bird.putInTheNest();
 		}
 		
+	}
+
+	displayLightning() {
+		this.pushMatrix()
+			this.translate(-30, 30, -30);
+			this.rotate(Math.PI * 2/3, 0, 0, 1);
+			this.scale(2, 10, 2);
+			this.lightning.display();
+		this.popMatrix();
 	}
 
 	displayForest() {
@@ -361,7 +368,6 @@ class MyScene extends CGFscene {
 			this.scale(0.2, 0.2, 0.2);
 			this.birdInNest.display();
 		this.popMatrix();
-		
 	}
 
 	displayCubeMap() {
