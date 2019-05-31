@@ -47,7 +47,7 @@ class MyBird extends CGFobject {
 			Up: 3,
 			DownWithTree: 4,
 			FlyingWithTree: 5 ,
-			UpWithTree : 6
+			UpWithTree : 6,
 		};
 
 		this.state = 1; //bird starts in state flying	
@@ -155,8 +155,6 @@ class MyBird extends CGFobject {
 		}
 
 		if(this.state == 4 || this.state == 6){
-		//if(this.treeBranch.visible){
-			console.log(1);
 			this.scene.pushMatrix();
 				this.scene.translate(this.X,this.Y- 0.3, this.Z);					
 				//this.scene.rotate(Math.PI/2 , 0,1,0);	
@@ -296,22 +294,44 @@ class MyBird extends CGFobject {
 				this.rigthWing.display();	
 			this.scene.popMatrix();	
 
-			//  --- displaying paw
-			this.scene.pushMatrix();
-				this.scene.translate(0.5,0,0.2);
-				this.scene.rotate(Math.PI/180*90, 1, 0, 0);
-				this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
-				this.scene.scale(0.4,0.4,0.3);
-				this.paw.display();
-			this.scene.popMatrix();
+			if(this.state == 4 || this.state == 5 || this.state == 6 || this.state == 2){
+				//  --- displaying paw
+				this.scene.pushMatrix();
+					this.scene.translate(0,0.1,0.2);				
+					this.scene.rotate(-Math.PI, 0, 0, 1);
+					this.scene.scale(0.5,0.5,0.3);
+					this.paw.display();
+				this.scene.popMatrix();
 
-			this.scene.pushMatrix();
-				this.scene.translate(0.5,0,-0.2);
-				this.scene.rotate(Math.PI/180*90, 1, 0, 0);
-				this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
-				this.scene.scale(0.3,0.3,0.2);
-				this.paw.display();
-			this.scene.popMatrix();
+				this.scene.pushMatrix();
+					this.scene.translate(0,0.1,-0.2);
+					this.scene.rotate(-Math.PI, 0, 0, 1);
+					this.scene.scale(0.5,0.5,0.3);
+					this.paw.display();
+				this.scene.popMatrix();
+			} else {
+				//  --- displaying paw flying without tree branch
+				this.scene.pushMatrix();
+					this.scene.translate(0.5,0,0.2);
+					this.scene.rotate(Math.PI/180*90, 1, 0, 0);
+					this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
+					this.scene.scale(0.5,0.5,0.3);
+					this.paw.display();
+				this.scene.popMatrix();
+
+				this.scene.pushMatrix();
+					this.scene.translate(0.5,0,-0.2);
+					this.scene.rotate(Math.PI/180*90, 1, 0, 0);
+					this.scene.rotate(Math.PI/180*-90, 0, 0, 1);
+					this.scene.scale(0.5,0.5,0.3);
+					this.paw.display();
+				this.scene.popMatrix();
+			}
+			
+
+			
+
+			
 
 			this.birdMaterial1.setTexture(this.bicoTexture);
 			this.birdMaterial1.apply();
