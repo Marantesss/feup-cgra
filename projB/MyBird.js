@@ -52,6 +52,7 @@ class MyBird extends CGFobject {
 
 		this.state = 1; //bird starts in state flying
 
+	
 	}
 
 	reset() {

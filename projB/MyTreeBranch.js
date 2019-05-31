@@ -38,29 +38,33 @@ class MyTreeBranch extends CGFobject {
             this.xi = this.x + 3;
         }
         if(this.angle == 0 && this.z > 0){ // 1  ou 4 quadrante
-            this.xf = this.x +  3;   
-            this.zi = this.z + 3;   
-            this.zf = this.z - 3; 
+            this.xf = this.x + 15;   
+            this.zi = this.z - 5;   
+            this.zf = this.z + 15; 
         } else if(this.angle == 0 && this.z < 0){ // 2 ou 3 quadrante
-            this.xf = this.x -  3;   
-            this.zi = this.z - 3;   
-            this.zf = this.z + 3; 
-        }  else if(this.z >0 && this.x >= 0){  // 1 quadrante
+            
+            this.xf = this.x - 3;   
+            this.zi = this.z - 6;   
+            this.zf = this.z + 6; 
+        }  else if(this.z > 0 && this.x >= 0){  // 1 quadrante
             this.xf = this.x +  Math.cos(this.angle)*2 + 3;  
             this.zi = this.z - 3;      
             this.zf = this.z + Math.sin(this.angle)*2 - 1;
         }  else if(this.z > 0 && this.x < 0){ // 4 quadrante
-            this.xf = this.x +  Math.cos(this.angle)*2 - 3;  
-            this.zi = this.z + 3;      
-            this.zf = this.z + Math.sin(this.angle)*2 - 4;
+            this.xf = this.x + 10;
+            this.xi = this.x +  Math.cos(this.angle)*2 -12;  
+            this.zf = this.z + 6;      
+            this.zi = this.z + Math.sin(this.angle)*2 - 6;
         } else if(this.x >= 0 ) { // 2 quadrante
-            this.xf = this.x +  Math.cos(this.angle)*2 + 3;  
-            this.zi = this.z - 3;      
+            this.xi = this.x - 4;
+            this.xf = this.x +  Math.cos(this.angle)*2 + 6;  
+            this.zi = this.z - 7;      
             this.zf = this.z + Math.sin(this.angle)*2 + 1;
         } else { //3 quadrante
-            this.xf = this.x +  Math.cos(this.angle)*2 - 3;  
-            this.zi = this.z + 3;      
-            this.zf = this.z + Math.sin(this.angle)*2 - 5;
+            this.xf = this.x + 8;
+            this.xi = this.x +  Math.cos(this.angle)*2 - 14;  
+            this.zf = this.z + 4;      
+            this.zi = this.z + Math.sin(this.angle)*2 - 12;
         } 
              
     }

@@ -39,13 +39,13 @@ class MyScene extends CGFscene {
 
 		// --- Bird is 3 units above the ground
 		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
-		this.birdInNest = new MyBird(this, 0, 0 ,0,0,0);
+		
 
 		// -- Tree Branch
-		this.treeBranch0 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 10.5, 3.8, 0);
-		this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 0.1, -3, Math.PI/6);
-		this.treeBranch2 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -10, -7, Math.PI/6);
-		this.treeBranch3 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -4 , 7, Math.PI/5);
+		this.treeBranch0 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 8.5, 3.8, 0);
+		this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 5, -3, Math.PI/6);
+		this.treeBranch2 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -10, -9, Math.PI/6);
+		this.treeBranch3 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -9 , 7, Math.PI/5);
 		this.treeBranch4 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 6, 15.5, 0);
 		this.treeBranch = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 0, 0, 0);
 		this.treeBranch.visible = false;
@@ -57,6 +57,9 @@ class MyScene extends CGFscene {
 
 		// ---- Nest
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
+		this.birdInNest = new MyBird(this, 0, 0 ,0,0,0);
+		this.egg = new MyUnitCubeQuad(this,  UnitCubeEnum.EGG);
+
 
 		// ---- Tree
 		this.tree = new MyLSPlant(this);
@@ -233,28 +236,20 @@ class MyScene extends CGFscene {
 		this.displayBird();
 
 		this.displayNest();
-
-		this.lightning.display();
 		
 		this.displayTreeBranchs();
 		
 		this.checkCollision();
-		
+
 		this.tree.display();
-		
+
+		this.lightning.display();
+
 		// ---- END Primitive drawing section
 		
-		this.pushMatrix();
-			this.translate(this.treesBranchs[4].xi,0,this.treesBranchs[4].zi);
-			this.scale(0.2,1, 0.2);
-			this.cil.display();
-		this.popMatrix();
+		
 
-		this.pushMatrix();
-			this.translate(this.treesBranchs[4].xf,0,this.treesBranchs[4].zf);
-			this.scale(0.2,1,0.2);
-			this.cil.display();
-		this.popMatrix();
+		
 
 	}
 
@@ -265,30 +260,20 @@ class MyScene extends CGFscene {
 	}
 
 	checkCollision(){
-		if(this.bird.state == 2  && this.bird.Y < 0.5){
+		if(this.bird.state == 2  && this.bird.Y < 0.3){
 			for( var i = 0; i < this.treesBranchs.length; i++){
-				console.log(this.bird.X);
-				console.log(this.bird.Z);
-				console.log(this.treesBranchs[i].xi);
-				console.log(this.treesBranchs[i].xf);
-				console.log(this.treesBranchs[i].zi);
-				console.log(this.treesBranchs[i].zf);
 				if(((this.bird.X <= this.treesBranchs[i].xf) && (this.bird.X >= this.treesBranchs[i].xi )) 
-					&& (this.bird.Z <= this.treesBranchs[i].zf && this.bird.Z >= this.treesBranchs[i].zi )
-					&& this.treesBranchs[i].visible == true){
-						
-					this.bird.pickUP(this.treeBranch);
-					this.treesBranchs[i].visible = false;
-					break;
+						&& (this.bird.Z <= this.treesBranchs[i].zf && this.bird.Z >= this.treesBranchs[i].zi )
+						&& this.treesBranchs[i].visible == true){						
+						this.bird.pickUP(this.treeBranch);
+						this.treesBranchs[i].visible = false;
+						break;
 				}
+				
 			}
 			
 		}
 		if(this.bird.state == 4  && this.bird.Y < 0.5){
-		/*console.log(this.bird.X-6);
-			console.log(this.NestX);
-			console.log(this.bird.Z+6);
-			console.log(this.NestZ);*/
 			if((this.bird.X-6) < this.NestX+4 && (this.bird.X-6) > this.NestX -4.5 &&
 				(this.bird.Z+ 6) < this.NestZ +4 && (this.bird.Z+6) > this.NestZ -4.5 )
 				this.bird.putInTheNest();
@@ -328,6 +313,18 @@ class MyScene extends CGFscene {
 			this.translate(this.NestX-0.2 ,0,this.NestZ-0.2);
 			this.scale(0.2, 0.2, 0.2);
 			this.birdInNest.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(this.NestX-0.4 ,0.2,this.NestZ+0.6);
+			this.scale(0.2, 0.2, 0.2);
+			this.egg.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(this.NestX ,0.2,this.NestZ+0.4);
+			this.scale(0.2, 0.2, 0.2);
+			this.egg.display();
 		this.popMatrix();
 		
 	}
