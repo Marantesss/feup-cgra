@@ -251,19 +251,7 @@ class MyScene extends CGFscene {
 		this.displayLightning();
 		
 		// ---- END Primitive drawing section		
-		 // ISTO TEM QUE ESTAR NO FIM PORQUE SENÃO DÁ MERDA :)
-			
-	/*	this.pushMatrix();
-			this.translate(this.treesBranchs[4].xi,0,this.treesBranchs[4].zi);
-			this.scale(0.2,1, 0.2);
-			this.cil.display();
-		this.popMatrix();
-
-		this.pushMatrix();
-			this.translate(this.treesBranchs[4].xf,0,this.treesBranchs[4].zf);
-			this.scale(0.2,1,0.2);
-			this.cil.display();
-		this.popMatrix();*/
+	
 		
 	}
 

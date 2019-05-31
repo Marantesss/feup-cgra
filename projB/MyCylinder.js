@@ -38,13 +38,7 @@ class MyCylinder extends CGFobject {
             this.texCoords.push(i/this.slices, 1, i/this.slices, 0);
             ang+=alphaAng;
         }
-        /*
-        // ---- only works for even slice cylinders, need to find another way
-        for(var i = 0; i < this.slices; i++) {
-            this.texCoords.push(0, 0, 0, 1, 1, 1, 1, 0);
-        }
-        */
-       
+        
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }

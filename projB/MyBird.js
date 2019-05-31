@@ -50,9 +50,7 @@ class MyBird extends CGFobject {
 			UpWithTree : 6
 		};
 
-		this.state = 1; //bird starts in state flying
-
-	
+		this.state = 1; //bird starts in state flying	
 	}
 
 	reset() {
@@ -156,10 +154,11 @@ class MyBird extends CGFobject {
 			this.state = 5;
 		}
 
-		if((this.state == 4 || this.state == 6 || this.state == 5) && this.treeBranch.visible){
+		if(this.state == 4 || this.state == 6){
 		//if(this.treeBranch.visible){
+			console.log(1);
 			this.scene.pushMatrix();
-				this.scene.translate(this.X,this.Y- 0.1, this.Z);					
+				this.scene.translate(this.X,this.Y- 0.3, this.Z);					
 				//this.scene.rotate(Math.PI/2 , 0,1,0);	
 				this.scene.rotate(this.orientation, 0, 1, 0);	
 				this.treeBranch.display();
