@@ -41,6 +41,9 @@ class MyScene extends CGFscene {
 		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
 		this.birdInNest = new MyBird(this, 0, 0 ,0,0,0);
 
+		// ---- mountains
+        this.terrain = new MyTerrain(this);
+
 		// -- Tree Branch
 		this.treeBranch0 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 10.5, 3.8, 0);
 		this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 0, -3, Math.PI/6);
@@ -59,7 +62,11 @@ class MyScene extends CGFscene {
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
 
 		// ---- Tree
-		this.tree = new MyLSPlant(this);
+		this.trees = [
+			new MyLSPlant(this),
+			new MyLSPlant(this),
+			new MyLSPlant(this)
+		];
 
 		/* **** MATERIALS **** */
 		// ---- Applied Material
@@ -92,7 +99,6 @@ class MyScene extends CGFscene {
 		// -- variables to go to the Nest
 		this.NestX = 7;
 		this.NestZ = -7;
-
 	}
 
 	initLights() {
@@ -224,7 +230,7 @@ class MyScene extends CGFscene {
 
 		// ---- BEGIN Primitive drawing section
 
-		// this.terrain.display(); 
+		this.terrain.display(); 
 
 		this.displayHouse();
 
@@ -233,29 +239,28 @@ class MyScene extends CGFscene {
 		this.displayBird();
 
 		this.displayNest();
-
-		this.lightning.display();
 		
 		this.displayTreeBranchs();
 		
 		this.checkCollision();
 		
-		this.tree.display();
-		
+		this.displayForest();
+
+		this.lightning.display(); // ISTO TEM QUE ESTAR NO FIM PORQUE SENÃO DÁ MERDA :)
+			
+		this.pushMatrix();
+			this.translate(this.NestX-3,1,this.NestZ-3);
+			this.scale(0.2,1, 0.2);
+			this.cil.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(this.NestX+3,1,this.NestZ+3);
+			this.scale(0.2,1,0.2);
+			this.cil.display();
+		this.popMatrix();
+
 		// ---- END Primitive drawing section
-		
-		this.pushMatrix();
-		this.translate(this.NestX-3,1,this.NestZ-3);
-		this.scale(0.2,1, 0.2);
-		this.cil.display();
-		this.popMatrix();
-
-		this.pushMatrix();
-		this.translate(this.NestX+3,1,this.NestZ+3);
-		this.scale(0.2,1,0.2);
-		this.cil.display();
-		this.popMatrix();
-
 	}
 
 	resetTreeBranchs(){
@@ -293,13 +298,33 @@ class MyScene extends CGFscene {
 		
 	}
 
+	displayForest() {
+		this.pushMatrix();
+			this.translate(5, 0, 3);
+			this.trees[0].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(-5, 0, -3);
+			this.trees[1].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(-2, 0, 3);
+			this.trees[1].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(7, 0, -2);
+			this.trees[2].display();
+		this.popMatrix();
+	}
 	
 	displayTreeBranchs(){
 		for(var i = 0; i < this.treesBranchs.length; i++){
 			if(this.treesBranchs[i].visible)
 				this.treesBranchs[i].display();
 		}
-
 	}
 
 	displayNest(){

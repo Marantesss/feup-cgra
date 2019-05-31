@@ -27,26 +27,30 @@ class MyTerrain extends CGFobject {
 
         this.mountainShader = new CGFshader(this.scene.gl, "shaders/mountain.vert", "shaders/mountain.frag");
         this.mountainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2});
-
     }
     
 	display() {
 		// ---- activate selected shader
-        this.scene.setActiveShader(this.mountainShader);
         this.scene.pushMatrix();
 
-        // ---- bind additional texture to texture unit 1
-        this.mountainHeightmap.bind(1);
-        this.mountainGradient.bind(2);
+            // ---- set mountain shader as active shader
+            this.scene.setActiveShader(this.mountainShader);
 
-        // ---- display
-        this.scene.pushMatrix();
-        this.mountainMaterial.apply();
-        this.scene.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scene.scale(30, 30, 1);
-        this.plane.display();
+            // ---- bind additional texture to texture unit 1
+            this.mountainHeightmap.bind(1);
+            this.mountainGradient.bind(2);
+
+            // ---- display
+            this.mountainMaterial.apply();
+            this.scene.rotate(-0.5*Math.PI, 1, 0, 0);
+            this.scene.translate(0, -3, -3.5);
+            this.scene.scale(60, 60, 2);
+            this.plane.display();
+            
+            // ---- set default shader as active shader
+            this.scene.setActiveShader(this.scene.defaultShader);
+
         this.scene.popMatrix();
-	
 	}
 }
 
