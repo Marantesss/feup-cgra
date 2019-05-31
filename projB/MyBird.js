@@ -157,7 +157,7 @@ class MyBird extends CGFobject {
 		if(this.state == 4 || this.state == 6){
 			this.scene.pushMatrix();
 				this.scene.translate(this.X,this.Y- 0.3, this.Z);					
-				//this.scene.rotate(Math.PI/2 , 0,1,0);	
+				this.scene.rotate(Math.PI/2 , 0,1,0);	
 				this.scene.rotate(this.orientation, 0, 1, 0);	
 				this.treeBranch.display();
 			this.scene.popMatrix();
@@ -166,7 +166,7 @@ class MyBird extends CGFobject {
 			this.scene.pushMatrix();
 				this.scene.translate(this.X , this.Y - 0.1, this.Z );
 				this.scene.translate(0, Math.sin(this.t/(1000/(2*Math.PI))), 0);		
-				//this.scene.rotate(Math.PI/2 , 0,1,0);	
+				this.scene.rotate(Math.PI/2 , 0,1,0);	
 				this.scene.rotate(this.orientation, 0, 1, 0);								
 				this.treeBranch.display();
 			this.scene.popMatrix();
