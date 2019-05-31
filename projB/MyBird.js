@@ -91,7 +91,8 @@ class MyBird extends CGFobject {
 	
 	putInTheNest(){
 		this.treeBranch.visible = false;
-		this.state = 1;
+		this.state = 3;
+		console.log(this.state);
 	}
 
 	accelerate(v) {
@@ -119,10 +120,9 @@ class MyBird extends CGFobject {
         this.deltaTime = t - this.lastTime;
         this.lastTime = t;
 
-		if( this.state == 1 || this.state == 5){
-			this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;
-			this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;	
-		}		
+		this.X = this.X + Math.cos(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;
+		this.Z = this.Z - Math.sin(this.orientation) * (this.speed / 500) * this.deltaTime * this.scene.speedFactor ;	
+				
 		if(this.state == 2 || this.state == 4){ //going down
 			this.Y = this.Y - this.deltaTime * (3/1000);
 		}
@@ -156,7 +156,7 @@ class MyBird extends CGFobject {
 			this.state = 5;
 		}
 
-		if(this.state == 4  || this.state == 6){
+		if((this.state == 4  || this.state == 6 || this.state == 5) && this.treeBranch.visible){
 			this.scene.pushMatrix();
 				this.scene.translate(this.X,this.Y- 0.1, this.Z);					
 				//this.scene.rotate(Math.PI/2 , 0,1,0);	

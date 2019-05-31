@@ -42,12 +42,12 @@ class MyScene extends CGFscene {
 		this.birdInNest = new MyBird(this, 0, 0 ,0,0,0);
 
 		// -- Tree Branch
-		this.treeBranch0 = new MyTreeBranch(this, 2, 0.1, "images/tree_trunk.jpg", 8.5, 3.8, 0);
+		this.treeBranch0 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 10.5, 3.8, 0);
 		this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 0, -3, Math.PI/6);
 		this.treeBranch2 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -10, -7, Math.PI/6);
 		this.treeBranch3 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -4 , 7, Math.PI/5);
 		this.treeBranch4 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 6, 15.5, Math.PI /4);
-		this.treeBranch = new MyTreeBranch(this, 1, 0.2, "images/tree_trunk.jpg", 0, 0, 0);
+		this.treeBranch = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 0, 0, 0);
 		this.treeBranch.visible = false;
 
 		this.treesBranchs = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
@@ -90,9 +90,8 @@ class MyScene extends CGFscene {
 		this.cil = new MyCylinder(this, 20, 20);
 
 		// -- variables to go to the Nest
-		this.NestX = 6.7;
-		this.NestY = 3.3;
-		this.NestZ = 5.2;
+		this.NestX = 7;
+		this.NestZ = -7;
 
 	}
 
@@ -245,16 +244,17 @@ class MyScene extends CGFscene {
 		
 		// ---- END Primitive drawing section
 		
-	/*	this.translate(0,3,1);
-		this.scale(0.2,0.2, 0.2);
+		this.pushMatrix();
+		this.translate(this.NestX-3,1,this.NestZ-3);
+		this.scale(0.2,1, 0.2);
 		this.cil.display();
 		this.popMatrix();
 
 		this.pushMatrix();
-		this.translate(0,3,-1);
-		this.scale(0.2,0.2, 0.2);
+		this.translate(this.NestX+3,1,this.NestZ+3);
+		this.scale(0.2,1,0.2);
 		this.cil.display();
-		this.popMatrix();*/
+		this.popMatrix();
 
 	}
 
@@ -267,10 +267,10 @@ class MyScene extends CGFscene {
 	checkCollision(){
 		if(this.bird.state == 2  && this.bird.Y < 0.5){
 			for( var i = 0; i < this.treesBranchs.length; i++){
-				console.log(this.treeBranch.x);
+				/*console.log(this.treeBranch.x);
 				console.log(this.treeBranch.xf);
 				console.log(this.treeBranch.z);
-				console.log(this.treeBranch.zf);
+				console.log(this.treeBranch.zf);*/
 				if(((this.bird.X <= this.treesBranchs[i].xf + 3) && (this.bird.X >= this.treesBranchs[i].x- 3 )) 
 					&& (this.bird.Z <= this.treesBranchs[i].zf + 3 && this.bird.Z >= this.treesBranchs[i].z -3 )
 					&& this.treesBranchs[i].visible == true){
@@ -280,6 +280,15 @@ class MyScene extends CGFscene {
 				}
 			}
 			
+		}
+		if(this.bird.state == 4  && this.bird.Y < 0.5){
+			console.log(this.bird.X-6);
+			console.log(this.NestX);
+			console.log(this.bird.Z+6);
+			console.log(this.NestZ);
+			if((this.bird.X-6) < this.NestX+4 && (this.bird.X-6) > this.NestX -4.5 &&
+				(this.bird.Z+ 6) < this.NestZ +4 && (this.bird.Z+6) > this.NestZ -4.5 )
+				this.bird.putInTheNest();
 		}
 		
 	}
@@ -295,15 +304,25 @@ class MyScene extends CGFscene {
 
 	displayNest(){
 		this.pushMatrix();
-			this.translate(6.7,3.3,5.2);
-			this.rotate(-Math.PI/4,0,0,1);
-            this.scale(0.5, 0.5, 0.5);
+			this.translate(this.NestX,0,this.NestZ);
+			this.scale(0.8, 0.8, 0.8);
             this.nest.display();
 		this.popMatrix();
 
 		this.pushMatrix();
-			this.translate(6.7,3.5,5.2);
-			this.rotate(-Math.PI/4,0,0,1);
+			this.translate(this.NestX,0,this.NestZ);
+			this.scale(0.2, 0.2, 0.2);
+			this.birdInNest.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(this.NestX+0.2,0,this.NestZ+0.2);
+			this.scale(0.2, 0.2, 0.2);
+			this.birdInNest.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(this.NestX-0.2 ,0,this.NestZ-0.2);
 			this.scale(0.2, 0.2, 0.2);
 			this.birdInNest.display();
 		this.popMatrix();
