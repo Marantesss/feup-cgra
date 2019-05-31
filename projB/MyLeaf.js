@@ -13,13 +13,14 @@ class MyLeaf extends CGFobject {
         this.leafMaterial.setDiffuse(0.1, 0.9, 0.1, 1);
         this.leafMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.leafMaterial.setShininess(10.0);
+        this.leafMaterial.loadTexture("images/Tiles/leaves.png");
         this.leafMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
         this.leafMaterial.apply(),
         this.scene.pushMatrix();
-        this.scene.scale(2, 2, 2);
+        this.scene.scale(8, 8, 8);
         this.triangle.display();
         this.scene.popMatrix();
     }

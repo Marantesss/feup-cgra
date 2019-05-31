@@ -41,6 +41,9 @@ class MyScene extends CGFscene {
 		this.bird = new MyBird(this, 0, 0, 0, 3, 0); 
 		
 
+		// ---- mountains
+        this.terrain = new MyTerrain(this);
+
 		// -- Tree Branch
 		this.treeBranch0 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 8.5, 3.8, 0);
 		this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 5, -3, Math.PI/6);
@@ -62,7 +65,11 @@ class MyScene extends CGFscene {
 
 
 		// ---- Tree
-		this.tree = new MyLSPlant(this);
+		this.trees = [
+			new MyLSPlant(this),
+			new MyLSPlant(this),
+			new MyLSPlant(this)
+		];
 
 		/* **** MATERIALS **** */
 		// ---- Applied Material
@@ -95,7 +102,6 @@ class MyScene extends CGFscene {
 		// -- variables to go to the Nest
 		this.NestX = 7;
 		this.NestZ = -7;
-
 	}
 
 	initLights() {
@@ -226,8 +232,7 @@ class MyScene extends CGFscene {
 		this.setDefaultAppearance();
 
 		// ---- BEGIN Primitive drawing section
-
-		// this.terrain.display(); 
+		this.terrain.display(); 
 
 		this.displayHouse();
 
@@ -241,16 +246,25 @@ class MyScene extends CGFscene {
 		
 		this.checkCollision();
 
-		this.tree.display();
-
-		this.lightning.display();
-
-		// ---- END Primitive drawing section
+		this.displayForest();
 		
+		this.displayLightning();
 		
+		// ---- END Primitive drawing section		
+		 // ISTO TEM QUE ESTAR NO FIM PORQUE SENÃO DÁ MERDA :)
+			
+	/*	this.pushMatrix();
+			this.translate(this.treesBranchs[4].xi,0,this.treesBranchs[4].zi);
+			this.scale(0.2,1, 0.2);
+			this.cil.display();
+		this.popMatrix();
 
+		this.pushMatrix();
+			this.translate(this.treesBranchs[4].xf,0,this.treesBranchs[4].zf);
+			this.scale(0.2,1,0.2);
+			this.cil.display();
+		this.popMatrix();*/
 		
-
 	}
 
 	resetTreeBranchs(){
@@ -281,13 +295,52 @@ class MyScene extends CGFscene {
 		
 	}
 
+	displayLightning() {
+		this.pushMatrix()
+			this.translate(-30, 30, -30);
+			this.rotate(Math.PI * 2/3, 0, 0, 1);
+			this.scale(2, 10, 2);
+			this.lightning.display();
+		this.popMatrix();
+	}
+
+	displayForest() {
+		this.pushMatrix();
+			this.translate(20, 0, 6);
+			this.trees[0].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(0, 0, 20);
+			this.trees[0].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(-10, 0, -10);
+			this.trees[1].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(-12, 0, 6);
+			this.trees[1].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(24, 2, -4);
+			this.trees[2].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(8, 2, -15);
+			this.trees[2].display();
+		this.popMatrix();
+	}
 	
 	displayTreeBranchs(){
 		for(var i = 0; i < this.treesBranchs.length; i++){
 			if(this.treesBranchs[i].visible)
 				this.treesBranchs[i].display();
 		}
-
 	}
 
 	displayNest(){

@@ -15,7 +15,6 @@ class MyNest extends CGFobject {
 
     }
     display() {
-
         // -- ground brach tree
         this.scene.pushMatrix();
         this.scene.translate(0, 0.2, 0.7);
