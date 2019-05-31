@@ -300,22 +300,32 @@ class MyScene extends CGFscene {
 
 	displayForest() {
 		this.pushMatrix();
-			this.translate(5, 0, 3);
+			this.translate(20, 0, 6);
 			this.trees[0].display();
 		this.popMatrix();
 
 		this.pushMatrix();
-			this.translate(-5, 0, -3);
+			this.translate(0, 0, 20);
+			this.trees[0].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(-10, 0, -10);
 			this.trees[1].display();
 		this.popMatrix();
 
 		this.pushMatrix();
-			this.translate(-2, 0, 3);
+			this.translate(-12, 0, 6);
 			this.trees[1].display();
 		this.popMatrix();
 
 		this.pushMatrix();
-			this.translate(7, 0, -2);
+			this.translate(24, 2, -4);
+			this.trees[2].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.translate(8, 2, -15);
 			this.trees[2].display();
 		this.popMatrix();
 	}

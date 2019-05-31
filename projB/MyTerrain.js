@@ -43,8 +43,8 @@ class MyTerrain extends CGFobject {
             // ---- display
             this.mountainMaterial.apply();
             this.scene.rotate(-0.5*Math.PI, 1, 0, 0);
-            this.scene.translate(0, -3, -3.5);
-            this.scene.scale(60, 60, 2);
+            this.scene.translate(0, -8, -7);
+            this.scene.scale(100, 100, 4);
             this.plane.display();
             
             // ---- set default shader as active shader
