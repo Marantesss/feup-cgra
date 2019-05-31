@@ -38,11 +38,11 @@ class MyTreeBranch extends CGFobject {
             this.xi = this.x + 3;
         }
         if(this.angle == 0 && this.z > 0){ // 1  ou 4 quadrante
+            this.y = 0.1;
             this.xf = this.x + 15;   
             this.zi = this.z - 5;   
             this.zf = this.z + 15; 
-        } else if(this.angle == 0 && this.z < 0){ // 2 ou 3 quadrante
-            
+        } else if(this.angle == 0 && this.z < 0){ // 2 ou 3 quadrante            
             this.xf = this.x - 3;   
             this.zi = this.z - 6;   
             this.zf = this.z + 6; 

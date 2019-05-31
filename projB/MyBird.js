@@ -294,8 +294,9 @@ class MyBird extends CGFobject {
 				this.rigthWing.display();	
 			this.scene.popMatrix();	
 
+			// if with the tree branch or going down to get the tree branch
 			if(this.state == 4 || this.state == 5 || this.state == 6 || this.state == 2){
-				//  --- displaying paw
+				//  --- displaying paw turned to the ground
 				this.scene.pushMatrix();
 					this.scene.translate(0,0.1,0.2);				
 					this.scene.rotate(-Math.PI, 0, 0, 1);
@@ -327,11 +328,6 @@ class MyBird extends CGFobject {
 					this.paw.display();
 				this.scene.popMatrix();
 			}
-			
-
-			
-
-			
 
 			this.birdMaterial1.setTexture(this.bicoTexture);
 			this.birdMaterial1.apply();

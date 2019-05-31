@@ -45,16 +45,16 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this);
 
 		// -- Tree Branch
-		this.treeBranch0 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 8.5, 3.8, 0);
-		this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 5, -3, Math.PI/6);
-		this.treeBranch2 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -10, -9, Math.PI/6);
-		this.treeBranch3 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -9 , 7, Math.PI/5);
-		this.treeBranch4 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 6, 15.5, 0);
+		this.treesBranchs = [ 
+			this.treeBranch0 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 8.5, 3.8, 0),
+			this.treeBranch1 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 5, -3, Math.PI/6),
+			this.treeBranch2 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -10, -9, Math.PI/6),
+			this.treeBranch3 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", -9 , 7, Math.PI/5),
+			this.treeBranch4 = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 6, 15.5, 0)
+		];
 		this.treeBranch = new MyTreeBranch(this, 2, 0.2, "images/tree_trunk.jpg", 0, 0, 0);
 		this.treeBranch.visible = false;
 
-		this.treesBranchs = [ this.treeBranch0, this.treeBranch1, this.treeBranch2, this.treeBranch3, this.treeBranch4];
-			
 		// ---- Lighting
 		this.lightning = new MyLightning(this);
 
@@ -62,7 +62,6 @@ class MyScene extends CGFscene {
 		this.nest = new MyNest(this, 3, 0.2, "images/tree_trunk.jpg");
 		this.birdInNest = new MyBird(this, 0, 0 ,0,0,0);
 		this.egg = new MyUnitCubeQuad(this,  UnitCubeEnum.EGG);
-
 
 		// ---- Tree
 		this.trees = [
@@ -186,7 +185,6 @@ class MyScene extends CGFscene {
 
 		if (this.gui.isKeyPressed("KeyR")) {
 			text += " R ";
-
 			this.bird.reset();
 			this.resetTreeBranchs();
 			keysPressed = true;
@@ -251,7 +249,10 @@ class MyScene extends CGFscene {
 		this.displayLightning();
 		
 		// ---- END Primitive drawing section		
-	
+
+		
+		
+		
 		
 	}
 
@@ -275,7 +276,7 @@ class MyScene extends CGFscene {
 			}
 			
 		}
-		if(this.bird.state == 4  && this.bird.Y < 0.5){
+		if(this.bird.state == 4  && this.bird.Y < 0.3){
 			if((this.bird.X-6) < this.NestX+4 && (this.bird.X-6) > this.NestX -4.5 &&
 				(this.bird.Z+ 6) < this.NestZ +4 && (this.bird.Z+6) > this.NestZ -4.5 )
 				this.bird.putInTheNest();
