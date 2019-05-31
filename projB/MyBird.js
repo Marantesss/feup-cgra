@@ -92,7 +92,6 @@ class MyBird extends CGFobject {
 	putInTheNest(){
 		this.treeBranch.visible = false;
 		this.state = 3;
-		console.log(this.state);
 	}
 
 	accelerate(v) {
@@ -156,7 +155,8 @@ class MyBird extends CGFobject {
 			this.state = 5;
 		}
 
-		if((this.state == 4  || this.state == 6 || this.state == 5) && this.treeBranch.visible){
+		if((this.state == 4 || this.state == 6 || this.state == 5) && this.treeBranch.visible){
+		//if(this.treeBranch.visible){
 			this.scene.pushMatrix();
 				this.scene.translate(this.X,this.Y- 0.1, this.Z);					
 				//this.scene.rotate(Math.PI/2 , 0,1,0);	

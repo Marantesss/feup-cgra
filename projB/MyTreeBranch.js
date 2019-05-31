@@ -15,6 +15,8 @@ class MyTreeBranch extends CGFobject {
         this.z = z;
         this.angle = angle;
         this.visible = true;
+        this.xi = 0;
+        this.zi = 0;
 
         // ---- create objects to build a tree Branch
         this.treeBranch = new MyCylinder(this.scene, 6, 0);
@@ -30,8 +32,37 @@ class MyTreeBranch extends CGFobject {
         this.treeTrunk = new CGFtexture(this.scene, this.trunkTexture);
 
         // -- create collision area
-        this.zf = Math.cos(this.angle)*2;
-        this.xf = Math.sin(this.angle)*2;
+        if(this.x >= 0){ // 1 ou 2 quadrante
+            this.xi = this.x - 3;
+        } else { //3 ou 4 quadrante
+            this.xi = this.x + 3;
+        }
+        if(this.angle == 0 && this.z > 0){ // 1  ou 4 quadrante
+            this.xf = this.x +  3;   
+            this.zi = this.z + 3;   
+            this.zf = this.z - 3; 
+        } else if(this.angle == 0 && this.z < 0){ // 2 ou 3 quadrante
+            this.xf = this.x -  3;   
+            this.zi = this.z - 3;   
+            this.zf = this.z + 3; 
+        }  else if(this.z >0 && this.x >= 0){  // 1 quadrante
+            this.xf = this.x +  Math.cos(this.angle)*2 + 3;  
+            this.zi = this.z - 3;      
+            this.zf = this.z + Math.sin(this.angle)*2 - 1;
+        }  else if(this.z > 0 && this.x < 0){ // 4 quadrante
+            this.xf = this.x +  Math.cos(this.angle)*2 - 3;  
+            this.zi = this.z + 3;      
+            this.zf = this.z + Math.sin(this.angle)*2 - 4;
+        } else if(this.x >= 0 ) { // 2 quadrante
+            this.xf = this.x +  Math.cos(this.angle)*2 + 3;  
+            this.zi = this.z - 3;      
+            this.zf = this.z + Math.sin(this.angle)*2 + 1;
+        } else { //3 quadrante
+            this.xf = this.x +  Math.cos(this.angle)*2 - 3;  
+            this.zi = this.z + 3;      
+            this.zf = this.z + Math.sin(this.angle)*2 - 5;
+        } 
+             
     }
     display() {
         // ---- displaying the trunk
