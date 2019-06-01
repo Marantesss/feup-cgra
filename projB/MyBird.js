@@ -294,6 +294,11 @@ class MyBird extends CGFobject {
 				this.rigthWing.display();	
 			this.scene.popMatrix();	
 
+			this.birdMaterial1.setTexture(this.bicoTexture);
+			this.birdMaterial1.apply();
+			this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+
+
 			// if with the tree branch or going down to get the tree branch
 			if(this.state == 4 || this.state == 5 || this.state == 6 || this.state == 2){
 				//  --- displaying paw turned to the ground
@@ -319,7 +324,7 @@ class MyBird extends CGFobject {
 					this.scene.scale(0.5,0.5,0.3);
 					this.paw.display();
 				this.scene.popMatrix();
-
+				
 				this.scene.pushMatrix();
 					this.scene.translate(0.5,0,-0.2);
 					this.scene.rotate(Math.PI/180*90, 1, 0, 0);
@@ -329,9 +334,6 @@ class MyBird extends CGFobject {
 				this.scene.popMatrix();
 			}
 
-			this.birdMaterial1.setTexture(this.bicoTexture);
-			this.birdMaterial1.apply();
-			this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 
 			// --- displaying nose
 			this.scene.pushMatrix();

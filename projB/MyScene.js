@@ -96,8 +96,6 @@ class MyScene extends CGFscene {
 		// Labels and ID's for object selection on MyInterface
 		this.modeIds = { 'Day': 0, 'Night': 1 };
 
-		this.cil = new MyCylinder(this, 20, 20);
-
 		// -- variables to go to the Nest
 		this.NestX = 7;
 		this.NestZ = -7;
@@ -249,11 +247,6 @@ class MyScene extends CGFscene {
 		this.displayLightning();
 		
 		// ---- END Primitive drawing section		
-
-		
-		
-		
-		
 	}
 
 	resetTreeBranchs(){
